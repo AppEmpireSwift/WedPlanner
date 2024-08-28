@@ -11,6 +11,7 @@
 		5732D9CA2C7F125200ACD609 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C92C7F125200ACD609 /* ContentView.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
+		5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5763A51B2C7F25A400B36190 /* Colors.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		5732D9C92C7F125200ACD609 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5763A51B2C7F25A400B36190 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +53,13 @@
 		5732D9C62C7F125200ACD609 /* WedPlanner */ = {
 			isa = PBXGroup;
 			children = (
-				5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */,
+				5732D9D52C7F126C00ACD609 /* Application */,
+				5732D9D72C7F128300ACD609 /* Extensions */,
+				5732D9D82C7F129300ACD609 /* Models */,
+				5732D9D92C7F12A100ACD609 /* Scenes */,
+				5732D9DA2C7F12AB00ACD609 /* UIComponents */,
+				5732D9DB2C7F12B600ACD609 /* Resources */,
 				5732D9C92C7F125200ACD609 /* ContentView.swift */,
-				5732D9CB2C7F125300ACD609 /* Assets.xcassets */,
 				5732D9CD2C7F125300ACD609 /* Preview Content */,
 			);
 			path = WedPlanner;
@@ -65,6 +71,51 @@
 				5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5732D9D52C7F126C00ACD609 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		5732D9D72C7F128300ACD609 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5732D9D82C7F129300ACD609 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5732D9D92C7F12A100ACD609 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		5732D9DA2C7F12AB00ACD609 /* UIComponents */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIComponents;
+			sourceTree = "<group>";
+		};
+		5732D9DB2C7F12B600ACD609 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5732D9CB2C7F125300ACD609 /* Assets.xcassets */,
+				5763A51B2C7F25A400B36190 /* Colors.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */,
 				5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */,
 				5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */,
 			);
