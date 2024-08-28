@@ -8,19 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */; };
-		5732D9CA2C7F125200ACD609 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C92C7F125200ACD609 /* ContentView.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
 		5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5763A51B2C7F25A400B36190 /* Colors.xcassets */; };
+		5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */; };
+		5763A5222C7F500300B36190 /* WPButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5212C7F500300B36190 /* WPButtonView.swift */; };
+		5763A5252C7F50CE00B36190 /* WPTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5242C7F50CE00B36190 /* WPTextView.swift */; };
+		5763A5292C7F53F500B36190 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5282C7F53F500B36190 /* OnboardingView.swift */; };
+		5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A52A2C7F549400B36190 /* View+ Extensions.swift */; };
+		5763A52D2C7F565100B36190 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A52C2C7F565100B36190 /* OnboardingViewModel.swift */; };
+		5763A52F2C7F572B00B36190 /* LicenseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A52E2C7F572B00B36190 /* LicenseTextView.swift */; };
+		5763A5312C7F576600B36190 /* LicenseTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5302C7F576600B36190 /* LicenseTextModel.swift */; };
+		5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5322C7F8CAC00B36190 /* InitialView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5732D9C42C7F125200ACD609 /* WedPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WedPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WedPlannerApp.swift; sourceTree = "<group>"; };
-		5732D9C92C7F125200ACD609 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5763A51B2C7F25A400B36190 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardinItemModel.swift; sourceTree = "<group>"; };
+		5763A5212C7F500300B36190 /* WPButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPButtonView.swift; sourceTree = "<group>"; };
+		5763A5242C7F50CE00B36190 /* WPTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextView.swift; sourceTree = "<group>"; };
+		5763A5282C7F53F500B36190 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		5763A52A2C7F549400B36190 /* View+ Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+ Extensions.swift"; sourceTree = "<group>"; };
+		5763A52C2C7F565100B36190 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		5763A52E2C7F572B00B36190 /* LicenseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTextView.swift; sourceTree = "<group>"; };
+		5763A5302C7F576600B36190 /* LicenseTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTextModel.swift; sourceTree = "<group>"; };
+		5763A5322C7F8CAC00B36190 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +75,6 @@
 				5732D9D92C7F12A100ACD609 /* Scenes */,
 				5732D9DA2C7F12AB00ACD609 /* UIComponents */,
 				5732D9DB2C7F12B600ACD609 /* Resources */,
-				5732D9C92C7F125200ACD609 /* ContentView.swift */,
 				5732D9CD2C7F125300ACD609 /* Preview Content */,
 			);
 			path = WedPlanner;
@@ -77,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */,
+				5763A5322C7F8CAC00B36190 /* InitialView.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -84,6 +100,7 @@
 		5732D9D72C7F128300ACD609 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				5763A52A2C7F549400B36190 /* View+ Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -91,6 +108,8 @@
 		5732D9D82C7F129300ACD609 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */,
+				5763A5302C7F576600B36190 /* LicenseTextModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -98,6 +117,7 @@
 		5732D9D92C7F12A100ACD609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5763A51D2C7F4E5A00B36190 /* Onboarding */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -105,6 +125,8 @@
 		5732D9DA2C7F12AB00ACD609 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				5763A5232C7F50C100B36190 /* Views */,
+				5763A5202C7F4FF600B36190 /* Buttons */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -116,6 +138,32 @@
 				5763A51B2C7F25A400B36190 /* Colors.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		5763A51D2C7F4E5A00B36190 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5282C7F53F500B36190 /* OnboardingView.swift */,
+				5763A52C2C7F565100B36190 /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		5763A5202C7F4FF600B36190 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5212C7F500300B36190 /* WPButtonView.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		5763A5232C7F50C100B36190 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5242C7F50CE00B36190 /* WPTextView.swift */,
+				5763A52E2C7F572B00B36190 /* LicenseTextView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,8 +237,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5732D9CA2C7F125200ACD609 /* ContentView.swift in Sources */,
+				5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */,
+				5763A5252C7F50CE00B36190 /* WPTextView.swift in Sources */,
+				5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */,
+				5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */,
+				5763A52D2C7F565100B36190 /* OnboardingViewModel.swift in Sources */,
+				5763A52F2C7F572B00B36190 /* LicenseTextView.swift in Sources */,
+				5763A5292C7F53F500B36190 /* OnboardingView.swift in Sources */,
 				5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */,
+				5763A5312C7F576600B36190 /* LicenseTextModel.swift in Sources */,
+				5763A5222C7F500300B36190 /* WPButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,8 +386,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,6 +396,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IvanBiriukov.WedPlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -359,8 +420,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -368,6 +430,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.IvanBiriukov.WedPlanner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
