@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "contact.png",
+      "filename" : "contact-removebg-preview.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "contact@2x.png",
+      "filename" : "contact_2x-removebg-preview.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "contact@3x.png",
+      "filename" : "contact_3x-removebg-preview.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

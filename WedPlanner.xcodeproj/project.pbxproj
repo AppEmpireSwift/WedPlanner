@@ -20,6 +20,26 @@
 		5763A52F2C7F572B00B36190 /* LicenseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A52E2C7F572B00B36190 /* LicenseTextView.swift */; };
 		5763A5312C7F576600B36190 /* LicenseTextModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5302C7F576600B36190 /* LicenseTextModel.swift */; };
 		5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5322C7F8CAC00B36190 /* InitialView.swift */; };
+		5763A5352C7FC7EA00B36190 /* WPTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5342C7FC7EA00B36190 /* WPTabBar.swift */; };
+		5763A5392C7FC98B00B36190 /* WPTabbarItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5382C7FC98B00B36190 /* WPTabbarItemModel.swift */; };
+		5763A53B2C7FD8E400B36190 /* UINavigationController + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A53A2C7FD8E400B36190 /* UINavigationController + Extensions.swift */; };
+		5763A53F2C7FDA7600B36190 /* WPNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A53E2C7FDA7600B36190 /* WPNavBarView.swift */; };
+		5763A5422C805F2E00B36190 /* TabBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5412C805F2E00B36190 /* TabBarModifier.swift */; };
+		5763A5442C805F5800B36190 /* UIApplication + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5432C805F5800B36190 /* UIApplication + Extensions.swift */; };
+		5763A5462C805F7800B36190 /* UIView + Extenisons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5452C805F7800B36190 /* UIView + Extenisons.swift */; };
+		5763A54C2C80639700B36190 /* WeddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A54B2C80639700B36190 /* WeddingView.swift */; };
+		5763A5502C8063D200B36190 /* ContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A54F2C8063D200B36190 /* ContactsView.swift */; };
+		5763A5552C80640F00B36190 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5542C80640F00B36190 /* CalendarView.swift */; };
+		5763A5582C80643700B36190 /* IdeasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5572C80643700B36190 /* IdeasView.swift */; };
+		5763A55C2C80646500B36190 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A55B2C80646500B36190 /* SettingsView.swift */; };
+		5763A55E2C80661000B36190 /* WPEmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A55D2C80661000B36190 /* WPEmptyDataView.swift */; };
+		5763A5602C80877F00B36190 /* WPImagedButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A55F2C80877F00B36190 /* WPImagedButtonView.swift */; };
+		5763A5622C808EB900B36190 /* WeddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5612C808EB900B36190 /* WeddingViewModel.swift */; };
+		5763A5642C80906900B36190 /* AddNewWeddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5632C80906900B36190 /* AddNewWeddingView.swift */; };
+		5763A5672C8096E200B36190 /* SubNavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5662C8096E200B36190 /* SubNavBarView.swift */; };
+		5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5682C80CA8400B36190 /* LineSeparaterView.swift */; };
+		5763A56B2C80CBB700B36190 /* NoticeBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */; };
+		5763A56E2C80D32C00B36190 /* WPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A56D2C80D32C00B36190 /* WPTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +57,26 @@
 		5763A52E2C7F572B00B36190 /* LicenseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTextView.swift; sourceTree = "<group>"; };
 		5763A5302C7F576600B36190 /* LicenseTextModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTextModel.swift; sourceTree = "<group>"; };
 		5763A5322C7F8CAC00B36190 /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
+		5763A5342C7FC7EA00B36190 /* WPTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTabBar.swift; sourceTree = "<group>"; };
+		5763A5382C7FC98B00B36190 /* WPTabbarItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTabbarItemModel.swift; sourceTree = "<group>"; };
+		5763A53A2C7FD8E400B36190 /* UINavigationController + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController + Extensions.swift"; sourceTree = "<group>"; };
+		5763A53E2C7FDA7600B36190 /* WPNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPNavBarView.swift; sourceTree = "<group>"; };
+		5763A5412C805F2E00B36190 /* TabBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarModifier.swift; sourceTree = "<group>"; };
+		5763A5432C805F5800B36190 /* UIApplication + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication + Extensions.swift"; sourceTree = "<group>"; };
+		5763A5452C805F7800B36190 /* UIView + Extenisons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extenisons.swift"; sourceTree = "<group>"; };
+		5763A54B2C80639700B36190 /* WeddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingView.swift; sourceTree = "<group>"; };
+		5763A54F2C8063D200B36190 /* ContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsView.swift; sourceTree = "<group>"; };
+		5763A5542C80640F00B36190 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		5763A5572C80643700B36190 /* IdeasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeasView.swift; sourceTree = "<group>"; };
+		5763A55B2C80646500B36190 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5763A55D2C80661000B36190 /* WPEmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPEmptyDataView.swift; sourceTree = "<group>"; };
+		5763A55F2C80877F00B36190 /* WPImagedButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPImagedButtonView.swift; sourceTree = "<group>"; };
+		5763A5612C808EB900B36190 /* WeddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingViewModel.swift; sourceTree = "<group>"; };
+		5763A5632C80906900B36190 /* AddNewWeddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWeddingView.swift; sourceTree = "<group>"; };
+		5763A5662C8096E200B36190 /* SubNavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubNavBarView.swift; sourceTree = "<group>"; };
+		5763A5682C80CA8400B36190 /* LineSeparaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSeparaterView.swift; sourceTree = "<group>"; };
+		5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBubbleView.swift; sourceTree = "<group>"; };
+		5763A56D2C80D32C00B36190 /* WPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +141,9 @@
 			isa = PBXGroup;
 			children = (
 				5763A52A2C7F549400B36190 /* View+ Extensions.swift */,
+				5763A53A2C7FD8E400B36190 /* UINavigationController + Extensions.swift */,
+				5763A5432C805F5800B36190 /* UIApplication + Extensions.swift */,
+				5763A5452C805F7800B36190 /* UIView + Extenisons.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -110,6 +153,7 @@
 			children = (
 				5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */,
 				5763A5302C7F576600B36190 /* LicenseTextModel.swift */,
+				5763A5382C7FC98B00B36190 /* WPTabbarItemModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -118,6 +162,12 @@
 			isa = PBXGroup;
 			children = (
 				5763A51D2C7F4E5A00B36190 /* Onboarding */,
+				5763A5492C80635600B36190 /* Tabbar */,
+				5763A54A2C80638500B36190 /* Wedding */,
+				5763A54E2C8063C300B36190 /* Contacts */,
+				5763A5522C8063F700B36190 /* Calendar */,
+				5763A5562C80642600B36190 /* Ideas */,
+				5763A55A2C80645000B36190 /* Settings */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -125,6 +175,8 @@
 		5732D9DA2C7F12AB00ACD609 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				5763A56C2C80D32200B36190 /* Fields */,
+				5763A5402C805F1700B36190 /* Modifiers */,
 				5763A5232C7F50C100B36190 /* Views */,
 				5763A5202C7F4FF600B36190 /* Buttons */,
 			);
@@ -153,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				5763A5212C7F500300B36190 /* WPButtonView.swift */,
+				5763A55F2C80877F00B36190 /* WPImagedButtonView.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -160,10 +213,121 @@
 		5763A5232C7F50C100B36190 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5763A5652C8096CA00B36190 /* NavigationBar */,
 				5763A5242C7F50CE00B36190 /* WPTextView.swift */,
 				5763A52E2C7F572B00B36190 /* LicenseTextView.swift */,
+				5763A55D2C80661000B36190 /* WPEmptyDataView.swift */,
+				5763A5682C80CA8400B36190 /* LineSeparaterView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		5763A5402C805F1700B36190 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5412C805F2E00B36190 /* TabBarModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		5763A5492C80635600B36190 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5342C7FC7EA00B36190 /* WPTabBar.swift */,
+			);
+			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		5763A54A2C80638500B36190 /* Wedding */ = {
+			isa = PBXGroup;
+			children = (
+				5763A54B2C80639700B36190 /* WeddingView.swift */,
+				5763A54D2C8063A500B36190 /* Subviews */,
+				5763A5612C808EB900B36190 /* WeddingViewModel.swift */,
+			);
+			path = Wedding;
+			sourceTree = "<group>";
+		};
+		5763A54D2C8063A500B36190 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5632C80906900B36190 /* AddNewWeddingView.swift */,
+				5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		5763A54E2C8063C300B36190 /* Contacts */ = {
+			isa = PBXGroup;
+			children = (
+				5763A54F2C8063D200B36190 /* ContactsView.swift */,
+				5763A5512C8063E000B36190 /* Subviews */,
+			);
+			path = Contacts;
+			sourceTree = "<group>";
+		};
+		5763A5512C8063E000B36190 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		5763A5522C8063F700B36190 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5542C80640F00B36190 /* CalendarView.swift */,
+				5763A5532C80640400B36190 /* Subviews */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		5763A5532C80640400B36190 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		5763A5562C80642600B36190 /* Ideas */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5572C80643700B36190 /* IdeasView.swift */,
+				5763A5592C80644500B36190 /* Subviews */,
+			);
+			path = Ideas;
+			sourceTree = "<group>";
+		};
+		5763A5592C80644500B36190 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		5763A55A2C80645000B36190 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5763A55B2C80646500B36190 /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5763A5652C8096CA00B36190 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				5763A53E2C7FDA7600B36190 /* WPNavBarView.swift */,
+				5763A5662C8096E200B36190 /* SubNavBarView.swift */,
+			);
+			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		5763A56C2C80D32200B36190 /* Fields */ = {
+			isa = PBXGroup;
+			children = (
+				5763A56D2C80D32C00B36190 /* WPTextField.swift */,
+			);
+			path = Fields;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,16 +401,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5763A5602C80877F00B36190 /* WPImagedButtonView.swift in Sources */,
+				5763A55E2C80661000B36190 /* WPEmptyDataView.swift in Sources */,
+				5763A5622C808EB900B36190 /* WeddingViewModel.swift in Sources */,
 				5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */,
 				5763A5252C7F50CE00B36190 /* WPTextView.swift in Sources */,
+				5763A53B2C7FD8E400B36190 /* UINavigationController + Extensions.swift in Sources */,
+				5763A5442C805F5800B36190 /* UIApplication + Extensions.swift in Sources */,
 				5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */,
 				5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */,
+				5763A5462C805F7800B36190 /* UIView + Extenisons.swift in Sources */,
+				5763A53F2C7FDA7600B36190 /* WPNavBarView.swift in Sources */,
 				5763A52D2C7F565100B36190 /* OnboardingViewModel.swift in Sources */,
+				5763A56E2C80D32C00B36190 /* WPTextField.swift in Sources */,
+				5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */,
+				5763A54C2C80639700B36190 /* WeddingView.swift in Sources */,
+				5763A5672C8096E200B36190 /* SubNavBarView.swift in Sources */,
+				5763A5552C80640F00B36190 /* CalendarView.swift in Sources */,
+				5763A5642C80906900B36190 /* AddNewWeddingView.swift in Sources */,
+				5763A5392C7FC98B00B36190 /* WPTabbarItemModel.swift in Sources */,
 				5763A52F2C7F572B00B36190 /* LicenseTextView.swift in Sources */,
+				5763A5422C805F2E00B36190 /* TabBarModifier.swift in Sources */,
+				5763A5582C80643700B36190 /* IdeasView.swift in Sources */,
 				5763A5292C7F53F500B36190 /* OnboardingView.swift in Sources */,
+				5763A56B2C80CBB700B36190 /* NoticeBubbleView.swift in Sources */,
 				5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */,
+				5763A5502C8063D200B36190 /* ContactsView.swift in Sources */,
+				5763A5352C7FC7EA00B36190 /* WPTabBar.swift in Sources */,
 				5763A5312C7F576600B36190 /* LicenseTextModel.swift in Sources */,
 				5763A5222C7F500300B36190 /* WPButtonView.swift in Sources */,
+				5763A55C2C80646500B36190 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

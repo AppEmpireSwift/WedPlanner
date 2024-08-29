@@ -8,8 +8,7 @@ struct InitialView: View {
             if !isOnboardingDone {
                 OnboardingView()
             } else {
-                //TODO: - поменять на TabBarView
-                EmptyView()
+                WPTabBar()
             }
         }
         .animation(.bouncy, value: isOnboardingDone)
