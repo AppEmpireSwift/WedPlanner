@@ -6,6 +6,14 @@ extension View {
         UIDevice.current.userInterfaceIdiom == .phone
     }
     
+    var hPaddings: CGFloat {
+        if isiPhone {
+            16
+        } else {
+            85
+        }
+    }
+    
     func requestReview() {
         DispatchQueue.main.async {
             if let scene = UIApplication.shared.connectedScenes
@@ -30,10 +38,25 @@ extension View {
             .frame(maxWidth: .infinity, alignment: alignment)
     }
     
-    
     @ViewBuilder
     func vSpacing(_ alignment: Alignment) -> some View {
         self
             .frame(maxHeight: .infinity, alignment: alignment)
+    }
+    
+    /// Модификатор для того, чтобы убрать цвет фона у сложных элементов
+    func transparentScrolling() -> some View {
+        if #available(iOS 16.0, *) {
+            return scrollContentBackground(.hidden)
+        } else {
+            return onAppear {
+                UITextView.appearance().backgroundColor = .clear
+            }
+        }
+    }
+    
+    ///Модификатор для скрытия клавиатуры / resignFirstResponder у всех филдов
+    func dismissKeyboardOnTap() -> some View {
+        modifier(DismissingKeyboardOnTap())
     }
 }

@@ -4,17 +4,20 @@ struct AddNewWeddingViewStates {
     var titleText: String = ""
     var locationText: String = ""
     var budgetText: String = ""
+    var selectedCoverImage: UIImage? = nil
+    var notesText: String = ""
+    var weddingDate: Date = Date()
 }
 
 struct AddNewWeddingView: View {
     @StateObject private var viewModel = WeddingViewModel()
     @State private var states = AddNewWeddingViewStates()
     
-    private var hPaddings: CGFloat {
-        if isiPhone {
-            16
+    private var isContinueEnabled: Bool {
+        if states.titleText.isEmpty || states.locationText.isEmpty || states.budgetText.isEmpty {
+            return false
         } else {
-            85
+            return true
         }
     }
     
@@ -23,13 +26,8 @@ struct AddNewWeddingView: View {
             Color.mainBG.ignoresSafeArea()
             
             VStack {
-                SubNavBarView(
-                    type: .backTitleTitledButton,
-                    title: "Add Wedding",
-                    rightBtnTitle: "Save",
-                    isRightBtnEnabled: false) {
-                        
-                    }
+                SubNavBarView(type: .backAndTitle, title: "Add Wedding")
+                
                 LineSeparaterView()
                 
                 VStack {
@@ -49,19 +47,44 @@ struct AddNewWeddingView: View {
                         }
                     }
                     
-                    ContentView(
-                        titleText: $states.titleText,
-                        locationText: $states.locationText, 
-                        budgetText: $states.budgetText
-                    )
+                    ScrollView(showsIndicators: false) {
+                        ContentView(
+                            titleText: $states.titleText,
+                            locationText: $states.locationText,
+                            budgetText: $states.budgetText,
+                            selectedImg: $states.selectedCoverImage,
+                            notesText: $states.notesText,
+                            selectedDate: $states.weddingDate
+                        )
+                        .padding(.bottom)
+                    }
                         .padding(.top, 24)
-                    
                 }
                 .padding(.horizontal, hPaddings)
                 .padding(.vertical)
+                
+                NavigationLink(destination: AddNewWeddingTaskView()) {
+                    RoundedRectangle(cornerRadius: 12)
+                        .frame(height: 50)
+                        .foregroundColor(isContinueEnabled ? Color.accentColor : .fieldsBG)
+                        .overlay {
+                            WPTextView(
+                                text: "Continue",
+                                color: isContinueEnabled ? .mainBG : .tbUnselected,
+                                size: 17,
+                                weight: .regular
+                            )
+                        }
+                }
+                .padding(.horizontal, hPaddings)
+                .padding(.bottom, 33)
+                .disabled(!isContinueEnabled)
             }
         }
+        .ignoresSafeArea(.container, edges: .bottom)
         .animation(.easeInOut(duration: 0.5), value: viewModel.isWedDetailsClosed)
+        .animation(.easeInOut, value: isContinueEnabled)
+        .dismissKeyboardOnTap()
     }
 }
 
@@ -69,6 +92,9 @@ fileprivate struct ContentView: View {
     @Binding var titleText: String
     @Binding var locationText: String
     @Binding var budgetText: String
+    @Binding var selectedImg: UIImage?
+    @Binding var notesText: String
+    @Binding var selectedDate: Date
     
     var body: some View {
         VStack(spacing: 12) {
@@ -82,9 +108,8 @@ fileprivate struct ContentView: View {
             VStack(spacing: 7) {
                 WPTextView(text: "DATE", color: .standartDarkText, size: 15, weight: .regular)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                HStack(spacing: 12) {
-                    
-                }
+                
+                WPDatePickerView(selectedDate: $selectedDate)
             }
             
             VStack(spacing: 7) {
@@ -99,6 +124,20 @@ fileprivate struct ContentView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 WPTextField(text: $budgetText, type: .bujet, placeholder: "Total Budget")
+            }
+            
+            VStack(spacing: 7) {
+                WPTextView(text: "COVER PHOTO", color: .standartDarkText, size: 15, weight: .regular)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                WPImagePickerView(selectedImage: $selectedImg)
+            }
+            
+            VStack(spacing: 7) {
+                WPTextView(text: "NOTES", color: .standartDarkText, size: 15, weight: .regular)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                WPTextEditor(text: $notesText, placeholder: "Enter some text, if needed")
             }
         }
     }

@@ -2,6 +2,7 @@ import SwiftUI
 
 enum SubNavBarViewType {
     case backTitleTitledButton
+    case backAndTitle
 }
 
 struct SubNavBarView: View {
@@ -19,6 +20,7 @@ struct SubNavBarView: View {
             HStack {
                 WPImagedButtonView(type: .arrowBack, action: dismiss.callAsFunction)
                 
+                Spacer()
                 Spacer()
                 
                 WPTextView(
@@ -41,6 +43,21 @@ struct SubNavBarView: View {
                     )
                 })
                 .disabled(!isRightBtnEnabled)
+            }
+            .padding(.horizontal)
+        case .backAndTitle:
+            HStack {
+                WPImagedButtonView(type: .arrowBack, action: dismiss.callAsFunction)
+                                
+                WPTextView(
+                    text: title,
+                    color: .standartDarkText,
+                    size: 17,
+                    weight: .semibold
+                )
+                .hSpacing(.center)
+                
+                Spacer()
             }
             .padding(.horizontal)
         }

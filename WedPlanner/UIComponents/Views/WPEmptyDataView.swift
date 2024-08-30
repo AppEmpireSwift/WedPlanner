@@ -19,7 +19,7 @@ struct WPEmptyDataView<Content>: View where Content : View {
         VStack(spacing: 8) {
             Image(image)
                 .resizable()
-                .frame(width: 140, height: 145.6)
+                .frame(width: 140, height: 130.9)
             
             WPTextView(
                 text: title,

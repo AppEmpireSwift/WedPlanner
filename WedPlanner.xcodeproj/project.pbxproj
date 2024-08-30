@@ -40,6 +40,12 @@
 		5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5682C80CA8400B36190 /* LineSeparaterView.swift */; };
 		5763A56B2C80CBB700B36190 /* NoticeBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */; };
 		5763A56E2C80D32C00B36190 /* WPTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A56D2C80D32C00B36190 /* WPTextField.swift */; };
+		5763A5712C81BA4C00B36190 /* WPImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5702C81BA4C00B36190 /* WPImagePickerView.swift */; };
+		5763A5762C81C8AA00B36190 /* WPTextEdditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5752C81C8AA00B36190 /* WPTextEdditor.swift */; };
+		5763A5782C81EBBE00B36190 /* AddNewWeddingTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5772C81EBBE00B36190 /* AddNewWeddingTaskView.swift */; };
+		5763A57A2C81F80800B36190 /* WPDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5792C81F80800B36190 /* WPDatePickerView.swift */; };
+		5763A57C2C820B0000B36190 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A57B2C820B0000B36190 /* Date + Extensions.swift */; };
+		5763A57E2C820E6300B36190 /* DismissingKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A57D2C820E6300B36190 /* DismissingKeyboardOnTap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +83,13 @@
 		5763A5682C80CA8400B36190 /* LineSeparaterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineSeparaterView.swift; sourceTree = "<group>"; };
 		5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeBubbleView.swift; sourceTree = "<group>"; };
 		5763A56D2C80D32C00B36190 /* WPTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextField.swift; sourceTree = "<group>"; };
+		5763A5702C81BA4C00B36190 /* WPImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPImagePickerView.swift; sourceTree = "<group>"; };
+		5763A5722C81C1AF00B36190 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		5763A5752C81C8AA00B36190 /* WPTextEdditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTextEdditor.swift; sourceTree = "<group>"; };
+		5763A5772C81EBBE00B36190 /* AddNewWeddingTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewWeddingTaskView.swift; sourceTree = "<group>"; };
+		5763A5792C81F80800B36190 /* WPDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPDatePickerView.swift; sourceTree = "<group>"; };
+		5763A57B2C820B0000B36190 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
+		5763A57D2C820E6300B36190 /* DismissingKeyboardOnTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboardOnTap.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +122,7 @@
 		5732D9C62C7F125200ACD609 /* WedPlanner */ = {
 			isa = PBXGroup;
 			children = (
+				5763A5722C81C1AF00B36190 /* Info.plist */,
 				5732D9D52C7F126C00ACD609 /* Application */,
 				5732D9D72C7F128300ACD609 /* Extensions */,
 				5732D9D82C7F129300ACD609 /* Models */,
@@ -144,6 +158,7 @@
 				5763A53A2C7FD8E400B36190 /* UINavigationController + Extensions.swift */,
 				5763A5432C805F5800B36190 /* UIApplication + Extensions.swift */,
 				5763A5452C805F7800B36190 /* UIView + Extenisons.swift */,
+				5763A57B2C820B0000B36190 /* Date + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -175,6 +190,7 @@
 		5732D9DA2C7F12AB00ACD609 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				5763A56F2C81BA3C00B36190 /* Pickers */,
 				5763A56C2C80D32200B36190 /* Fields */,
 				5763A5402C805F1700B36190 /* Modifiers */,
 				5763A5232C7F50C100B36190 /* Views */,
@@ -218,6 +234,7 @@
 				5763A52E2C7F572B00B36190 /* LicenseTextView.swift */,
 				5763A55D2C80661000B36190 /* WPEmptyDataView.swift */,
 				5763A5682C80CA8400B36190 /* LineSeparaterView.swift */,
+				5763A5752C81C8AA00B36190 /* WPTextEdditor.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				5763A5412C805F2E00B36190 /* TabBarModifier.swift */,
+				5763A57D2C820E6300B36190 /* DismissingKeyboardOnTap.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -252,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				5763A5632C80906900B36190 /* AddNewWeddingView.swift */,
+				5763A5772C81EBBE00B36190 /* AddNewWeddingTaskView.swift */,
 				5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */,
 			);
 			path = Subviews;
@@ -330,6 +349,15 @@
 			path = Fields;
 			sourceTree = "<group>";
 		};
+		5763A56F2C81BA3C00B36190 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5702C81BA4C00B36190 /* WPImagePickerView.swift */,
+				5763A5792C81F80800B36190 /* WPDatePickerView.swift */,
+			);
+			path = Pickers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -406,7 +434,10 @@
 				5763A5622C808EB900B36190 /* WeddingViewModel.swift in Sources */,
 				5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */,
 				5763A5252C7F50CE00B36190 /* WPTextView.swift in Sources */,
+				5763A5762C81C8AA00B36190 /* WPTextEdditor.swift in Sources */,
 				5763A53B2C7FD8E400B36190 /* UINavigationController + Extensions.swift in Sources */,
+				5763A57A2C81F80800B36190 /* WPDatePickerView.swift in Sources */,
+				5763A5782C81EBBE00B36190 /* AddNewWeddingTaskView.swift in Sources */,
 				5763A5442C805F5800B36190 /* UIApplication + Extensions.swift in Sources */,
 				5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */,
 				5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */,
@@ -424,10 +455,13 @@
 				5763A5422C805F2E00B36190 /* TabBarModifier.swift in Sources */,
 				5763A5582C80643700B36190 /* IdeasView.swift in Sources */,
 				5763A5292C7F53F500B36190 /* OnboardingView.swift in Sources */,
+				5763A57C2C820B0000B36190 /* Date + Extensions.swift in Sources */,
 				5763A56B2C80CBB700B36190 /* NoticeBubbleView.swift in Sources */,
 				5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */,
+				5763A57E2C820E6300B36190 /* DismissingKeyboardOnTap.swift in Sources */,
 				5763A5502C8063D200B36190 /* ContactsView.swift in Sources */,
 				5763A5352C7FC7EA00B36190 /* WPTabBar.swift in Sources */,
+				5763A5712C81BA4C00B36190 /* WPImagePickerView.swift in Sources */,
 				5763A5312C7F576600B36190 /* LicenseTextModel.swift in Sources */,
 				5763A5222C7F500300B36190 /* WPButtonView.swift in Sources */,
 				5763A55C2C80646500B36190 /* SettingsView.swift in Sources */,
@@ -567,6 +601,7 @@
 				DEVELOPMENT_TEAM = 8RR26756PN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WedPlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -601,6 +636,7 @@
 				DEVELOPMENT_TEAM = 8RR26756PN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WedPlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
