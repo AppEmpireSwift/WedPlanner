@@ -2,6 +2,9 @@ import SwiftUI
 
 struct AddNewWeddingTaskView: View {
     @StateObject private var viewModel = WeddingViewModel()
+    @State private var isSelected: Bool = false
+    @State private var tasks: [WeddingTaskItemModel] = WeddingTaskItemModel.defaultTasks
+    @State private var isAddAlertShown: Bool = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -13,7 +16,9 @@ struct AddNewWeddingTaskView: View {
                     title: "Add Wedding",
                     rightBtnTitle: "Add Task",
                     isRightBtnEnabled: true) {
-                        
+                        withAnimation {
+                            isAddAlertShown.toggle()
+                        }
                     }
                 
                 LineSeparaterView()
@@ -34,6 +39,42 @@ struct AddNewWeddingTaskView: View {
                             viewModel.closeWeddingTasks()
                         }
                     }
+                    
+                    List {
+                        ForEach($tasks) { $itemTask in
+                            WPTaskSelecteionView(
+                                model: itemTask,
+                                spendText: $itemTask.spendText,
+                                totalText: $itemTask.totalText) {
+                                    itemTask.isSelected.toggle()
+                                }
+                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                                    //TODO: - Разобраться, почему удаляется только по полному свайпу
+                                    if !itemTask.isDefaultTask {
+                                        Button(role: .destructive) {
+                                            withAnimation {
+                                                deleteTask(item: $itemTask)
+                                            }
+                                        } label: {
+                                            Image(systemName: "trash")
+                                                .foregroundColor(.white)
+                                            
+                                        }
+                                        .tint(Color.redBG)
+                                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    }
+                                }
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .background(Color.clear)
+                    
+                    WPButtonView(title: "Save") {
+                        
+                    }
+                    .padding(.bottom)
                 }
                 .padding(.horizontal, hPaddings)
                 .padding(.vertical)
@@ -43,6 +84,14 @@ struct AddNewWeddingTaskView: View {
         .ignoresSafeArea(.container, edges: .bottom)
         .animation(.easeInOut(duration: 0.5), value: viewModel.isWedTasksClosed)
         .dismissKeyboardOnTap()
+        .wpAlert(
+            isPresented: $isAddAlertShown,
+            action: {}
+        )
+    }
+    
+    private func deleteTask(item: Binding<WeddingTaskItemModel>) {
+        tasks.removeAll { $0.id == item.id }
     }
 }
 

@@ -16,4 +16,6 @@ final class WeddingViewModel: ObservableObject {
     func closeWeddingTasks() {
         isWedTasksClosed = true
     }
+    
+    
 }

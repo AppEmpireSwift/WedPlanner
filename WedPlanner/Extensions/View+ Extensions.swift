@@ -59,4 +59,14 @@ extension View {
     func dismissKeyboardOnTap() -> some View {
         modifier(DismissingKeyboardOnTap())
     }
+    
+    /// Модификатор кастомного алерта по добавлению Task
+    func wpAlert(isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
+        self.modifier(WPAlertViewModifier(isPresented: isPresented, action: action))
+    }
+    
+    /// Модификатор, который позволяет закруглять выбранные углы
+    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+        clipShape( RoundedCorner(radius: radius, corners: corners) )
+    }
 }
