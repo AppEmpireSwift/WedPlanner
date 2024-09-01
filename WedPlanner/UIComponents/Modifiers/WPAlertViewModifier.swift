@@ -4,7 +4,7 @@ struct WPAlertViewModifier: ViewModifier {
     @Binding var isPresented: Bool
     @State private var taskName: String = ""
     @State private var isBudgetIncluded: Bool = false
-    let action: () -> Void
+    @StateObject private var viewModel = WeddingViewModel()
     
     func body(content: Content) -> some View {
         ZStack {
@@ -36,6 +36,10 @@ struct WPAlertViewModifier: ViewModifier {
                         Spacer()
                         
                         WPImagedButtonView(type: .close) {
+                            viewModel.addNewTaskType(
+                                name: taskName,
+                                isStandartType: isBudgetIncluded
+                            )
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 isPresented = false
                             }

@@ -85,8 +85,7 @@ struct AddNewWeddingTaskView: View {
         .animation(.easeInOut(duration: 0.5), value: viewModel.isWedTasksClosed)
         .dismissKeyboardOnTap()
         .wpAlert(
-            isPresented: $isAddAlertShown,
-            action: {}
+            isPresented: $isAddAlertShown
         )
     }
     

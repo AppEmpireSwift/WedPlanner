@@ -50,6 +50,8 @@
 		5763A5842C830FB000B36190 /* WeddingTaskItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5832C830FB000B36190 /* WeddingTaskItemModel.swift */; };
 		5763A5892C83AEB500B36190 /* WPAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5882C83AEB500B36190 /* WPAlertViewModifier.swift */; };
 		5763A58C2C83BB3700B36190 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A58B2C83BB3700B36190 /* RoundedCorner.swift */; };
+		5763A5992C8468AC00B36190 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5982C8468AC00B36190 /* CoreDataManager.swift */; };
+		5763A59C2C84698500B36190 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5763A59A2C84698500B36190 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		5763A5832C830FB000B36190 /* WeddingTaskItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingTaskItemModel.swift; sourceTree = "<group>"; };
 		5763A5882C83AEB500B36190 /* WPAlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPAlertViewModifier.swift; sourceTree = "<group>"; };
 		5763A58B2C83BB3700B36190 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		5763A5982C8468AC00B36190 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		5763A59B2C84698500B36190 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +138,7 @@
 				5732D9D52C7F126C00ACD609 /* Application */,
 				5732D9D72C7F128300ACD609 /* Extensions */,
 				5732D9D82C7F129300ACD609 /* Models */,
+				5763A5972C84689800B36190 /* Services */,
 				5732D9D92C7F12A100ACD609 /* Scenes */,
 				5732D9DA2C7F12AB00ACD609 /* UIComponents */,
 				5732D9DB2C7F12B600ACD609 /* Resources */,
@@ -178,6 +183,7 @@
 				5763A5302C7F576600B36190 /* LicenseTextModel.swift */,
 				5763A5382C7FC98B00B36190 /* WPTabbarItemModel.swift */,
 				5763A5832C830FB000B36190 /* WeddingTaskItemModel.swift */,
+				5763A59A2C84698500B36190 /* Model.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -378,6 +384,14 @@
 			path = Shapes;
 			sourceTree = "<group>";
 		};
+		5763A5972C84689800B36190 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				5763A5982C8468AC00B36190 /* CoreDataManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -461,10 +475,12 @@
 				5763A57A2C81F80800B36190 /* WPDatePickerView.swift in Sources */,
 				5763A5782C81EBBE00B36190 /* AddNewWeddingTaskView.swift in Sources */,
 				5763A5442C805F5800B36190 /* UIApplication + Extensions.swift in Sources */,
+				5763A5992C8468AC00B36190 /* CoreDataManager.swift in Sources */,
 				5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */,
 				5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */,
 				5763A5462C805F7800B36190 /* UIView + Extenisons.swift in Sources */,
 				5763A53F2C7FDA7600B36190 /* WPNavBarView.swift in Sources */,
+				5763A59C2C84698500B36190 /* Model.xcdatamodeld in Sources */,
 				5763A52D2C7F565100B36190 /* OnboardingViewModel.swift in Sources */,
 				5763A56E2C80D32C00B36190 /* WPTextField.swift in Sources */,
 				5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */,
@@ -706,6 +722,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		5763A59A2C84698500B36190 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				5763A59B2C84698500B36190 /* Model.xcdatamodel */,
+			);
+			currentVersion = 5763A59B2C84698500B36190 /* Model.xcdatamodel */;
+			name = Model.xcdatamodeld;
+			path = "/Users/ivanbirukov/Desktop/Aezakmi/Подписочные с июля/WedPlanner/WedPlanner/Models/Model.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5732D9BC2C7F125200ACD609 /* Project object */;
 }

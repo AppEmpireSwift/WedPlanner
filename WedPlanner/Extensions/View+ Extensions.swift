@@ -61,8 +61,8 @@ extension View {
     }
     
     /// Модификатор кастомного алерта по добавлению Task
-    func wpAlert(isPresented: Binding<Bool>, action: @escaping () -> Void) -> some View {
-        self.modifier(WPAlertViewModifier(isPresented: isPresented, action: action))
+    func wpAlert(isPresented: Binding<Bool>) -> some View {
+        self.modifier(WPAlertViewModifier(isPresented: isPresented))
     }
     
     /// Модификатор, который позволяет закруглять выбранные углы
