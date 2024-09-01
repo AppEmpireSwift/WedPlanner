@@ -31,26 +31,26 @@ final class CoreDataManager: NSObject, ObservableObject {
         let context = container.viewContext
         
         let defaultTasks = [
-            ("Define a Wedding Budget", true, true, true, "", ""),
-            ("Book a Wedding Venue", true, true, true, "", ""),
-            ("Make a Guest List for the Bride's Side", true, true, true, "", ""),
-            ("Make a Guest List for the Groom's Side", true, true, true, "", ""),
-            ("Send Save-the-Dates and Invitations", true, true, true, "", ""),
-            ("Create a Wedding Timeline", true, true, true, "", ""),
-            ("Plan the Ceremony", true, true, true, "", ""),
-            ("Hire a Caterer", true, true, true, "", ""),
-            ("Purchase Wedding Attire", true, true, true, "", ""),
-            ("Hire a Photographer/Videographer", true, true, true, "", ""),
-            ("Arrange Entertainment", true, true, true, "", ""),
-            ("Order Invitations and Stationery", true, true, true, "", ""),
-            ("Book Transportation", true, true, true, "", ""),
-            ("Order Wedding Cake", true, true, true, "", ""),
-            ("Decorations and Flowers", true, true, true, "", ""),
-            ("Coordinate with Wedding Party", true, true, true, "", ""),
-            ("Plan the Reception Program", true, true, true, "", ""),
-            ("Create a Seating Chart", true, true, true, "", ""),
-            ("Write Thank You Notes", true, true, true, "", ""),
-            ("Plan Pre-Wedding Events", true, true, true, "", "")
+            ("Define a Wedding Budget", false, false, true, "", ""),
+            ("Book a Wedding Venue", false, false, true, "", ""),
+            ("Make a Guest List for the Bride's Side", false, true, true, "", ""),
+            ("Make a Guest List for the Groom's Side", false, true, true, "", ""),
+            ("Send Save-the-Dates and Invitations", false, true, true, "", ""),
+            ("Create a Wedding Timeline", false, true, true, "", ""),
+            ("Plan the Ceremony", false, true, true, "", ""),
+            ("Hire a Caterer", false, false, true, "", ""),
+            ("Purchase Wedding Attire", false, false, true, "", ""),
+            ("Hire a Photographer/Videographer", false, false, true, "", ""),
+            ("Arrange Entertainment", false, false, true, "", ""),
+            ("Order Invitations and Stationery", false, false, true, "", ""),
+            ("Book Transportation", false, false, true, "", ""),
+            ("Order Wedding Cake", false, false, true, "", ""),
+            ("Decorations and Flowers", false, false, true, "", ""),
+            ("Coordinate with Wedding Party", false, true, true, "", ""),
+            ("Plan the Reception Program", false, true, true, "", ""),
+            ("Create a Seating Chart", false, true, true, "", ""),
+            ("Write Thank You Notes", false, true, true, "", ""),
+            ("Plan Pre-Wedding Events", false, true, true, "", "")
         ]
         
         for task in defaultTasks {
@@ -76,6 +76,22 @@ final class CoreDataManager: NSObject, ObservableObject {
         } catch {
             print("Error fetching tasks: \(error)")
         }
+    }
+    
+    func addTask(name: String, isStandartType: Bool) {
+        let context = container.viewContext
+        
+        let newTask = WedTaskType(context: context)
+        newTask.id = UUID()
+        newTask.name = name
+        newTask.isSelected = false
+        newTask.isStandartType = isStandartType
+        newTask.isTaskDefault = false
+        newTask.spendText = ""
+        newTask.totalText = ""
+        
+        saveContext()
+        fetchTasks()
     }
     
     func updateTask(task: WedTaskType, name: String, isSelected: Bool, isStandartType: Bool, isTaskDefault: Bool, spendText: String, totalText: String) {

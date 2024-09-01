@@ -10,9 +10,10 @@ final class WeddingViewModel: ObservableObject {
     @AppStorage("wedding_Tasks") var isWedTasksClosed = false
     @Published var states = WeddingViewModelStates()
     
-    private var coreDataManager: CoreDataManager = CoreDataManager()
+    private var coreDataManager: CoreDataManager
     
-    init() {
+    init(coreDataManager: CoreDataManager = CoreDataManager()) {
+        self.coreDataManager = coreDataManager
         self.states.tasks = coreDataManager.existingTasks
     }
     
@@ -22,10 +23,9 @@ final class WeddingViewModel: ObservableObject {
         isWedDetailsClosed = true
     }
     
-    
     // MARK: - AddWeddingTasks Section
     
-    private func fetchTasks() {
+    func fetchTasks() {
         coreDataManager.fetchTasks()
         self.states.tasks = coreDataManager.existingTasks
     }
@@ -34,28 +34,8 @@ final class WeddingViewModel: ObservableObject {
         isWedTasksClosed = true
     }
     
-    func convertTaskModel(from old: WedTaskType) -> WeddingTaskItemModel {
-        WeddingTaskItemModel(
-            id: old.id!,
-            name: old.name!,
-            taskType: old.isStandartType ? .standart : .withFields,
-            isSelected: old.isSelected,
-            spendText: old.spendText!,
-            totalText: old.totalText!,
-            isDefaultTask: old.isTaskDefault
-        )
-    }
-    
-    func addNewTaskType(name: String, isStandartType: Bool) {
-        let newTask = WedTaskType(context: coreDataManager.container.viewContext)
-        newTask.id = UUID()
-        newTask.name = name
-        newTask.isSelected = false
-        newTask.isStandartType = isStandartType
-        newTask.isTaskDefault = false
-        newTask.spendText = ""
-        newTask.totalText = ""
-        
+    func addNewTask(name: String, isStandartType: Bool) {
+        coreDataManager.addTask(name: name, isStandartType: isStandartType)
         fetchTasks()
     }
     
@@ -68,5 +48,4 @@ final class WeddingViewModel: ObservableObject {
         coreDataManager.deleteTask(task: task)
         fetchTasks()
     }
-    
 }

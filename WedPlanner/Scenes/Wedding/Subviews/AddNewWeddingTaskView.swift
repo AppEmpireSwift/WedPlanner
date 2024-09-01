@@ -3,7 +3,6 @@ import SwiftUI
 struct AddNewWeddingTaskView: View {
     @StateObject private var viewModel = WeddingViewModel()
     @State private var isSelected: Bool = false
-    @State private var tasks: [WeddingTaskItemModel] = WeddingTaskItemModel.defaultTasks
     @State private var isAddAlertShown: Bool = false
     
     var body: some View {
@@ -41,19 +40,13 @@ struct AddNewWeddingTaskView: View {
                     }
                     
                     List {
-                        ForEach($tasks) { $itemTask in
-                            WPTaskSelecteionView(
-                                model: itemTask,
-                                spendText: $itemTask.spendText,
-                                totalText: $itemTask.totalText) {
-                                    itemTask.isSelected.toggle()
-                                }
+                        ForEach(viewModel.states.tasks) { taskItem in
+                            WPTaskSelecteionView(model: taskItem)
                                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    //TODO: - Разобраться, почему удаляется только по полному свайпу
-                                    if !itemTask.isDefaultTask {
+                                    if !taskItem.isTaskDefault {
                                         Button(role: .destructive) {
                                             withAnimation {
-                                                deleteTask(item: $itemTask)
+                                                viewModel.deleteTask(task: taskItem)
                                             }
                                         } label: {
                                             Image(systemName: "trash")
@@ -72,7 +65,7 @@ struct AddNewWeddingTaskView: View {
                     .background(Color.clear)
                     
                     WPButtonView(title: "Save") {
-                        
+        
                     }
                     .padding(.bottom)
                 }
@@ -87,10 +80,6 @@ struct AddNewWeddingTaskView: View {
         .wpAlert(
             isPresented: $isAddAlertShown
         )
-    }
-    
-    private func deleteTask(item: Binding<WeddingTaskItemModel>) {
-        tasks.removeAll { $0.id == item.id }
     }
 }
 

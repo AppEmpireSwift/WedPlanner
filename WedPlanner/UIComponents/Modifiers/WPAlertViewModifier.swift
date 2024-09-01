@@ -36,10 +36,6 @@ struct WPAlertViewModifier: ViewModifier {
                         Spacer()
                         
                         WPImagedButtonView(type: .close) {
-                            viewModel.addNewTaskType(
-                                name: taskName,
-                                isStandartType: isBudgetIncluded
-                            )
                             withAnimation(.easeInOut(duration: 0.3)) {
                                 isPresented = false
                             }
@@ -85,6 +81,7 @@ struct WPAlertViewModifier: ViewModifier {
                     Spacer()
                     
                     Button(action: {
+                        viewModel.addNewTask(name: taskName, isStandartType: !isBudgetIncluded)
                         withAnimation(.easeInOut(duration: 0.3)) {
                             isPresented = false
                         }

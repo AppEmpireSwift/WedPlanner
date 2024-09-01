@@ -47,7 +47,6 @@
 		5763A57C2C820B0000B36190 /* Date + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A57B2C820B0000B36190 /* Date + Extensions.swift */; };
 		5763A57E2C820E6300B36190 /* DismissingKeyboardOnTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A57D2C820E6300B36190 /* DismissingKeyboardOnTap.swift */; };
 		5763A5822C83052800B36190 /* WPTaskSelecteionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5812C83052800B36190 /* WPTaskSelecteionView.swift */; };
-		5763A5842C830FB000B36190 /* WeddingTaskItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5832C830FB000B36190 /* WeddingTaskItemModel.swift */; };
 		5763A5892C83AEB500B36190 /* WPAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5882C83AEB500B36190 /* WPAlertViewModifier.swift */; };
 		5763A58C2C83BB3700B36190 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A58B2C83BB3700B36190 /* RoundedCorner.swift */; };
 		5763A5992C8468AC00B36190 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5982C8468AC00B36190 /* CoreDataManager.swift */; };
@@ -97,7 +96,6 @@
 		5763A57B2C820B0000B36190 /* Date + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extensions.swift"; sourceTree = "<group>"; };
 		5763A57D2C820E6300B36190 /* DismissingKeyboardOnTap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissingKeyboardOnTap.swift; sourceTree = "<group>"; };
 		5763A5812C83052800B36190 /* WPTaskSelecteionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTaskSelecteionView.swift; sourceTree = "<group>"; };
-		5763A5832C830FB000B36190 /* WeddingTaskItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingTaskItemModel.swift; sourceTree = "<group>"; };
 		5763A5882C83AEB500B36190 /* WPAlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPAlertViewModifier.swift; sourceTree = "<group>"; };
 		5763A58B2C83BB3700B36190 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		5763A5982C8468AC00B36190 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -182,7 +180,6 @@
 				5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */,
 				5763A5302C7F576600B36190 /* LicenseTextModel.swift */,
 				5763A5382C7FC98B00B36190 /* WPTabbarItemModel.swift */,
-				5763A5832C830FB000B36190 /* WeddingTaskItemModel.swift */,
 				5763A59A2C84698500B36190 /* Model.xcdatamodeld */,
 			);
 			path = Models;
@@ -465,7 +462,6 @@
 			files = (
 				5763A5602C80877F00B36190 /* WPImagedButtonView.swift in Sources */,
 				5763A55E2C80661000B36190 /* WPEmptyDataView.swift in Sources */,
-				5763A5842C830FB000B36190 /* WeddingTaskItemModel.swift in Sources */,
 				5763A5622C808EB900B36190 /* WeddingViewModel.swift in Sources */,
 				5763A5892C83AEB500B36190 /* WPAlertViewModifier.swift in Sources */,
 				5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */,
