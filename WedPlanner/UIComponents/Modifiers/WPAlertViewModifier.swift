@@ -81,7 +81,7 @@ struct WPAlertViewModifier: ViewModifier {
                     Spacer()
                     
                     Button(action: {
-                        viewModel.addNewTask(name: taskName, isStandartType: !isBudgetIncluded)
+                        viewModel.addNewTaskWith(name: taskName, isStandartType: !isBudgetIncluded)
                         withAnimation(.easeInOut(duration: 0.3)) {
                             isPresented = false
                         }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BF15F2DF49C4D5902A0083D /* Pods_WedPlanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBFE90D6525ED190CF085D9 /* Pods_WedPlanner.framework */; };
 		5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
@@ -49,11 +50,12 @@
 		5763A5822C83052800B36190 /* WPTaskSelecteionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5812C83052800B36190 /* WPTaskSelecteionView.swift */; };
 		5763A5892C83AEB500B36190 /* WPAlertViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5882C83AEB500B36190 /* WPAlertViewModifier.swift */; };
 		5763A58C2C83BB3700B36190 /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A58B2C83BB3700B36190 /* RoundedCorner.swift */; };
-		5763A5992C8468AC00B36190 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5982C8468AC00B36190 /* CoreDataManager.swift */; };
-		5763A59C2C84698500B36190 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5763A59A2C84698500B36190 /* Model.xcdatamodeld */; };
+		5763A59E2C85A61400B36190 /* WeddingTaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A59D2C85A61400B36190 /* WeddingTaskModel.swift */; };
+		5763A5A12C85A78900B36190 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5A02C85A78900B36190 /* RealmManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		10BEED09C4E3D2F4E200F7C2 /* Pods-WedPlanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WedPlanner.debug.xcconfig"; path = "Target Support Files/Pods-WedPlanner/Pods-WedPlanner.debug.xcconfig"; sourceTree = "<group>"; };
 		5732D9C42C7F125200ACD609 /* WedPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WedPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WedPlannerApp.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,8 +100,10 @@
 		5763A5812C83052800B36190 /* WPTaskSelecteionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPTaskSelecteionView.swift; sourceTree = "<group>"; };
 		5763A5882C83AEB500B36190 /* WPAlertViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPAlertViewModifier.swift; sourceTree = "<group>"; };
 		5763A58B2C83BB3700B36190 /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
-		5763A5982C8468AC00B36190 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		5763A59B2C84698500B36190 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		5763A59D2C85A61400B36190 /* WeddingTaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingTaskModel.swift; sourceTree = "<group>"; };
+		5763A5A02C85A78900B36190 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		BEBFE90D6525ED190CF085D9 /* Pods_WedPlanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WedPlanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBF8F012DD97F1C8861AFC4B /* Pods-WedPlanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WedPlanner.release.xcconfig"; path = "Target Support Files/Pods-WedPlanner/Pods-WedPlanner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BF15F2DF49C4D5902A0083D /* Pods_WedPlanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +123,8 @@
 			children = (
 				5732D9C62C7F125200ACD609 /* WedPlanner */,
 				5732D9C52C7F125200ACD609 /* Products */,
+				A98AEBEE0D5F99A9F4F53114 /* Pods */,
+				6A222CB2ABD57B85CE3A074D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,10 +184,10 @@
 		5732D9D82C7F129300ACD609 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5763A59F2C85A77100B36190 /* Realm */,
 				5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */,
 				5763A5302C7F576600B36190 /* LicenseTextModel.swift */,
 				5763A5382C7FC98B00B36190 /* WPTabbarItemModel.swift */,
-				5763A59A2C84698500B36190 /* Model.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,9 +391,34 @@
 		5763A5972C84689800B36190 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5763A5982C8468AC00B36190 /* CoreDataManager.swift */,
+				5763A5A02C85A78900B36190 /* RealmManager.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5763A59F2C85A77100B36190 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				5763A59D2C85A61400B36190 /* WeddingTaskModel.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
+		6A222CB2ABD57B85CE3A074D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BEBFE90D6525ED190CF085D9 /* Pods_WedPlanner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A98AEBEE0D5F99A9F4F53114 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				10BEED09C4E3D2F4E200F7C2 /* Pods-WedPlanner.debug.xcconfig */,
+				EBF8F012DD97F1C8861AFC4B /* Pods-WedPlanner.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,9 +428,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5732D9D22C7F125300ACD609 /* Build configuration list for PBXNativeTarget "WedPlanner" */;
 			buildPhases = (
+				324FB4D8DF5E9DABE6EAC3D4 /* [CP] Check Pods Manifest.lock */,
 				5732D9C02C7F125200ACD609 /* Sources */,
 				5732D9C12C7F125200ACD609 /* Frameworks */,
 				5732D9C22C7F125200ACD609 /* Resources */,
+				403F2511710A16A0CDD0F8D8 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -455,6 +489,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		324FB4D8DF5E9DABE6EAC3D4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WedPlanner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		403F2511710A16A0CDD0F8D8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WedPlanner/Pods-WedPlanner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WedPlanner/Pods-WedPlanner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WedPlanner/Pods-WedPlanner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5732D9C02C7F125200ACD609 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -471,13 +547,13 @@
 				5763A57A2C81F80800B36190 /* WPDatePickerView.swift in Sources */,
 				5763A5782C81EBBE00B36190 /* AddNewWeddingTaskView.swift in Sources */,
 				5763A5442C805F5800B36190 /* UIApplication + Extensions.swift in Sources */,
-				5763A5992C8468AC00B36190 /* CoreDataManager.swift in Sources */,
 				5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */,
 				5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */,
 				5763A5462C805F7800B36190 /* UIView + Extenisons.swift in Sources */,
 				5763A53F2C7FDA7600B36190 /* WPNavBarView.swift in Sources */,
-				5763A59C2C84698500B36190 /* Model.xcdatamodeld in Sources */,
+				5763A59E2C85A61400B36190 /* WeddingTaskModel.swift in Sources */,
 				5763A52D2C7F565100B36190 /* OnboardingViewModel.swift in Sources */,
+				5763A5A12C85A78900B36190 /* RealmManager.swift in Sources */,
 				5763A56E2C80D32C00B36190 /* WPTextField.swift in Sources */,
 				5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */,
 				5763A54C2C80639700B36190 /* WeddingView.swift in Sources */,
@@ -628,6 +704,7 @@
 		};
 		5732D9D32C7F125300ACD609 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10BEED09C4E3D2F4E200F7C2 /* Pods-WedPlanner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -636,6 +713,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WedPlanner/Preview Content\"";
 				DEVELOPMENT_TEAM = 8RR26756PN;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WedPlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -663,6 +741,7 @@
 		};
 		5732D9D42C7F125300ACD609 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBF8F012DD97F1C8861AFC4B /* Pods-WedPlanner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -671,6 +750,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"WedPlanner/Preview Content\"";
 				DEVELOPMENT_TEAM = 8RR26756PN;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WedPlanner/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -718,20 +798,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		5763A59A2C84698500B36190 /* Model.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				5763A59B2C84698500B36190 /* Model.xcdatamodel */,
-			);
-			currentVersion = 5763A59B2C84698500B36190 /* Model.xcdatamodel */;
-			name = Model.xcdatamodeld;
-			path = "/Users/ivanbirukov/Desktop/Aezakmi/Подписочные с июля/WedPlanner/WedPlanner/Models/Model.xcdatamodeld";
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 5732D9BC2C7F125200ACD609 /* Project object */;
 }
