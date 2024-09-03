@@ -80,7 +80,7 @@ final class RealmManager: ObservableObject {
         do {
             try realm.write {
                 realm.add(newTask)
-                weddingTasks.append(newTask)
+                //weddingTasks.append(newTask)
             }
         } catch {
             print("Ошибка при добавлении задачи: \(error.localizedDescription)")
@@ -100,6 +100,24 @@ final class RealmManager: ObservableObject {
             }
         } catch {
             print("Ошибка при удалении задачи: \(error.localizedDescription)")
+        }
+    }
+    
+    func deleteTask(at indexSet: IndexSet) {
+        guard let realm = realm else { return }
+        
+        indexSet.forEach { index in
+            let task = weddingTasks[index]
+            if task.isTaskCanBeDeleted {
+                do {
+                    try realm.write {
+                        weddingTasks.remove(at: index)
+                        realm.delete(task)
+                    }
+                } catch {
+                    print("Ошибка при удалении задачи по индексу: \(error.localizedDescription)")
+                }
+            }
         }
     }
     

@@ -5,6 +5,7 @@ struct WPAlertViewModifier: ViewModifier {
     @State private var taskName: String = ""
     @State private var isBudgetIncluded: Bool = false
     @StateObject private var viewModel = WeddingViewModel()
+    @EnvironmentObject private var realmManager: RealmManager
     
     func body(content: Content) -> some View {
         ZStack {
@@ -81,7 +82,7 @@ struct WPAlertViewModifier: ViewModifier {
                     Spacer()
                     
                     Button(action: {
-                        viewModel.addNewTaskWith(name: taskName, isStandartType: !isBudgetIncluded)
+                        realmManager.addTaskWith(name: taskName, isStandartType: !isBudgetIncluded, isTaskCanBeDeleted: true)
                         withAnimation(.easeInOut(duration: 0.3)) {
                             isPresented = false
                         }

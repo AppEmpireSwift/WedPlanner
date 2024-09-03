@@ -9,8 +9,7 @@ final class WeddingViewModel: ObservableObject {
     @AppStorage("wedding_Details") var isWedDetailsClosed = false
     @AppStorage("wedding_Tasks") var isWedTasksClosed = false
     @Published var states = WeddingViewModelStates()
-    @ObservedResults(WeddingTaskModel.self) var existingTasks
-    private let realmManager = RealmManager()
+    @EnvironmentObject private var realmManager: RealmManager
     
     // MARK: - AddNewWedding Section
     
@@ -22,13 +21,5 @@ final class WeddingViewModel: ObservableObject {
     
     func closeWeddingTasks() {
         isWedTasksClosed = true
-    }
-    
-    func addNewTaskWith(name: String, isStandartType: Bool) {
-        realmManager.addTaskWith(name: name, isStandartType: isStandartType, isTaskCanBeDeleted: true)
-    }
-    
-    func deleteWeddingTask(for objcID: ObjectId) {
-        realmManager.deleteTask(by: objcID)
     }
 }

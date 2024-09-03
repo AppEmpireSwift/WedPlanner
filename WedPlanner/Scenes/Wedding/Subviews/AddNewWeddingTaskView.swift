@@ -1,9 +1,11 @@
 import SwiftUI
+import RealmSwift
 
 struct AddNewWeddingTaskView: View {
     @StateObject private var viewModel = WeddingViewModel()
     @State private var isSelected: Bool = false
     @State private var isAddAlertShown: Bool = false
+    @EnvironmentObject private var realmManager: RealmManager
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -40,32 +42,18 @@ struct AddNewWeddingTaskView: View {
                     }
                     
                     List {
-                        ForEach(viewModel.states.tasks) { taskItem in
-                            WPTaskSelecteionView(model: taskItem)
-                                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                                    if !taskItem.isTaskDefault {
-                                        Button(role: .destructive) {
-                                            withAnimation {
-                                                viewModel.deleteTask(task: taskItem)
-                                            }
-                                        } label: {
-                                            Image(systemName: "trash")
-                                                .foregroundColor(.white)
-                                            
-                                        }
-                                        .tint(Color.redBG)
-                                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                                    }
-                                }
+                        ForEach(realmManager.weddingTasks) { wedTask in
+                            WPTaskSelecteionView(model: wedTask)
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                         }
+                        .onDelete(perform: deleteTask)
                     }
                     .listStyle(.plain)
                     .background(Color.clear)
                     
                     WPButtonView(title: "Save") {
-        
+                        
                     }
                     .padding(.bottom)
                 }
@@ -81,8 +69,8 @@ struct AddNewWeddingTaskView: View {
             isPresented: $isAddAlertShown
         )
     }
-}
-
-#Preview {
-    AddNewWeddingTaskView()
+    
+    private func deleteTask(at offsets: IndexSet) {
+        realmManager.deleteTask(at: offsets)
+    }
 }
