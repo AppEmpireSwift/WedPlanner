@@ -2,7 +2,7 @@ import SwiftUI
 import RealmSwift
 
 struct AddNewWeddingTaskView: View {
-    @StateObject private var viewModel = WeddingViewModel()
+    @EnvironmentObject var viewModel: WeddingViewModel
     @State private var isSelected: Bool = false
     @State private var isAddAlertShown: Bool = false
     @EnvironmentObject private var realmManager: RealmManager
@@ -59,7 +59,14 @@ struct AddNewWeddingTaskView: View {
                     .background(Color.clear)
                     
                     WPButtonView(title: "Save") {
-                        
+                        realmManager.addWeddingWith(
+                            title: viewModel.states.firstCreationScreen.titleText,
+                            date: viewModel.states.firstCreationScreen.weddingDate,
+                            location: viewModel.states.firstCreationScreen.locationText,
+                            budget: viewModel.states.firstCreationScreen.budgetText,
+                            coverPhoto: viewModel.convertToData(from: viewModel.states.firstCreationScreen.selectedCoverImage),
+                            notes: viewModel.states.firstCreationScreen.notesText
+                        )
                     }
                     .padding(.bottom)
                 }

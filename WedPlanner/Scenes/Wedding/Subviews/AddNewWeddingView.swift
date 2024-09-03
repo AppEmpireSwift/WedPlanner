@@ -1,20 +1,10 @@
 import SwiftUI
 
-struct AddNewWeddingViewStates {
-    var titleText: String = ""
-    var locationText: String = ""
-    var budgetText: String = ""
-    var selectedCoverImage: UIImage? = nil
-    var notesText: String = ""
-    var weddingDate: Date = Date()
-}
-
 struct AddNewWeddingView: View {
-    @StateObject private var viewModel = WeddingViewModel()
-    @State private var states = AddNewWeddingViewStates()
+    @EnvironmentObject var viewModel: WeddingViewModel
     
     private var isContinueEnabled: Bool {
-        if states.titleText.isEmpty || states.locationText.isEmpty || states.budgetText.isEmpty {
+        if viewModel.states.firstCreationScreen.titleText.isEmpty || viewModel.states.firstCreationScreen.locationText.isEmpty || viewModel.states.firstCreationScreen.budgetText.isEmpty {
             return false
         } else {
             return true
@@ -49,12 +39,12 @@ struct AddNewWeddingView: View {
                     
                     ScrollView(showsIndicators: false) {
                         ContentView(
-                            titleText: $states.titleText,
-                            locationText: $states.locationText,
-                            budgetText: $states.budgetText,
-                            selectedImg: $states.selectedCoverImage,
-                            notesText: $states.notesText,
-                            selectedDate: $states.weddingDate
+                            titleText: $viewModel.states.firstCreationScreen.titleText,
+                            locationText: $viewModel.states.firstCreationScreen.locationText,
+                            budgetText: $viewModel.states.firstCreationScreen.budgetText,
+                            selectedImg: $viewModel.states.firstCreationScreen.selectedCoverImage,
+                            notesText: $viewModel.states.firstCreationScreen.notesText,
+                            selectedDate: $viewModel.states.firstCreationScreen.weddingDate
                         )
                         .padding(.bottom)
                     }
@@ -63,7 +53,10 @@ struct AddNewWeddingView: View {
                 .padding(.horizontal, hPaddings)
                 .padding(.vertical)
                 
-                NavigationLink(destination: AddNewWeddingTaskView()) {
+                NavigationLink(
+                    destination: AddNewWeddingTaskView()
+                        .environmentObject(viewModel)
+                ) {
                     RoundedRectangle(cornerRadius: 12)
                         .frame(height: 50)
                         .foregroundColor(isContinueEnabled ? Color.accentColor : .fieldsBG)

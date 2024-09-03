@@ -2,6 +2,7 @@ import SwiftUI
 
 struct WeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
+    @EnvironmentObject private var realmManager: RealmManager
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -9,16 +10,30 @@ struct WeddingView: View {
             
             VStack {
                 NavView(isDataEmpty: viewModel.states.isDataEmpty)
+                    .environmentObject(viewModel)
                 
-                if viewModel.states.isDataEmpty {
+                if realmManager.weddings.isEmpty {
                     WPEmptyDataView(
                         image: "EmptyDataRingImg",
                         title: "Nothing here yet",
                         discr: "Add your Wedding",
                         buttonTitle: "Add Wedding",
                         destinationView: AddNewWeddingView()
+                            .environmentObject(viewModel)
                     )
                         .vSpacing(.center)
+                } else {
+                    List {
+                        ForEach(realmManager.weddings) { wedModel in
+                            WeddingItemCellView(model: wedModel)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .padding(.top, 12)
+                        }
+                    }
+                    .listStyle(.plain)
+                    .listRowSpacing(12)
+                    .background(Color.clear)
                 }
             }
         }
@@ -33,6 +48,7 @@ struct WeddingView: View {
 }
 
 fileprivate struct NavView: View {
+    @EnvironmentObject var viewModel: WeddingViewModel
     let isDataEmpty: Bool
     
     var body: some View {
@@ -63,6 +79,7 @@ fileprivate struct NavView: View {
                                     .onAppear {
                                         hiddenTabBar()
                                     }
+                                    .environmentObject(viewModel)
                             ) {
                                     Color.clear
                                 }

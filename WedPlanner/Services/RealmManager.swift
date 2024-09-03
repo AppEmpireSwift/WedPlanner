@@ -3,19 +3,21 @@ import RealmSwift
 
 final class RealmManager: ObservableObject {
     @Published var weddingTasks: [WeddingTaskModel] = []
+    @Published var weddings: [WeddingItemModel] = []
     var realm: Realm?
 
     init() {
         let realm = try? Realm()
         self.realm = realm
         
-        fetchData()        
+        fetchTasksData()
+        fetchWeddingsData()
     }
     
     // MARK: - Wedding Tasks Section CRUD
     
     // R - Read
-    private func fetchData() {
+    private func fetchTasksData() {
         guard let realm = realm else { return }
         
         if weddingTasks.isEmpty {
@@ -69,13 +71,25 @@ final class RealmManager: ObservableObject {
                         weddingTask.totalText = task.4
                         realm.add(weddingTask)
                         
-                        fetchData()
+                        fetchTasksData()
                     }
                 }
             } catch {
                 print("Ошибка при добавлении задач по умолчанию: \(error.localizedDescription)")
             }
         }
+    }
+    
+    private func getSelectedTasks() -> List<WeddingTaskModel> {
+        guard let realm = realm else { return List<WeddingTaskModel>() }
+        
+        let results = realm.objects(WeddingTaskModel.self).filter("isSelected == true")
+        
+        let selectedTasksList = List<WeddingTaskModel>()
+        for task in results {
+            selectedTasksList.append(task)
+        }
+        return selectedTasksList
     }
     
     //C - Create
@@ -93,13 +107,12 @@ final class RealmManager: ObservableObject {
         do {
             try realm.write {
                 realm.add(newTask)
-                fetchData()
+                fetchTasksData()
             }
         } catch {
             print("Ошибка при добавлении задачи: \(error.localizedDescription)")
         }
     }
-    
     
     //D - Delete
     func deleteTask(object: WeddingTaskModel) {
@@ -107,11 +120,12 @@ final class RealmManager: ObservableObject {
         do {
             try realm.write {
                 realm.delete(object)
-                fetchData()
             }
         } catch {
             print("Ошибка при удалении задачи: \(error.localizedDescription)")
+            return
         }
+        fetchTasksData()
     }
     
     //U - Update
@@ -126,10 +140,46 @@ final class RealmManager: ObservableObject {
                     task.totalText = ""
                 }
                 
-                fetchData()
+                fetchTasksData()
             }
         } catch {
             print("Ошибка при сбросе задач: \(error.localizedDescription)")
         }
+    }
+    
+    // MARK: - WeddingItem Scetion CRUD
+    
+    //C - Create
+    func addWeddingWith(title: String, date: Date, location: String, budget: String, coverPhoto: Data, notes: String) {
+        guard let realm = realm else { return }
+        
+        let newWedding = WeddingItemModel()
+        newWedding.title = title
+        newWedding.date = date
+        newWedding.location = location
+        newWedding.budget = budget
+        newWedding.coverPhoto = coverPhoto
+        newWedding.notes = notes
+        newWedding.tasks = getSelectedTasks()
+        
+        do {
+            try realm.write {
+                realm.add(newWedding)
+                fetchWeddingsData()
+            }
+        } catch {
+            print("Ошибка при добавлении задачи: \(error.localizedDescription)")
+        }
+    }
+    
+    // R - Read
+    private func fetchWeddingsData() {
+        guard let realm = realm else { return }
+        
+        let results = realm.objects(WeddingItemModel.self)
+        
+        self.weddings = results.compactMap({ (wedTask) -> WeddingItemModel? in
+            return wedTask
+        })
     }
 }
