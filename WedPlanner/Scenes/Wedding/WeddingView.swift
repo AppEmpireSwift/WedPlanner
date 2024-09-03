@@ -51,6 +51,7 @@ struct WeddingView: View {
             }
         }
         .animation(.snappy, value: viewModel.states.isDataEmpty)
+        .animation(.snappy, value: states.isNowEdditing)
     }
     
     private func deleteItems(at offsets: IndexSet) {
