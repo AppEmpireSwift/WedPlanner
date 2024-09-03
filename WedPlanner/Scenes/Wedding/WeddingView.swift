@@ -1,15 +1,25 @@
 import SwiftUI
 
+struct WeddingViewStates {
+    var isNowEdditing: Bool = false
+}
+
 struct WeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
     @EnvironmentObject private var realmManager: RealmManager
+    @State private var states = WeddingViewStates()
     
     var body: some View {
         ZStack(alignment: .top) {
             Color.mainBG.ignoresSafeArea()
             
             VStack {
-                NavView(isDataEmpty: viewModel.states.isDataEmpty)
+                NavView(
+                    isNowEditing: $states.isNowEdditing,
+                    isDataEmpty: realmManager.weddings.isEmpty
+                ) {
+                    
+                }
                     .environmentObject(viewModel)
                 
                 if realmManager.weddings.isEmpty {
@@ -49,17 +59,23 @@ struct WeddingView: View {
 
 fileprivate struct NavView: View {
     @EnvironmentObject var viewModel: WeddingViewModel
+    @Binding var isNowEditing: Bool
     let isDataEmpty: Bool
+    let editAction: () -> Void
     
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                WPImagedButtonView(
-                    type: .itemList,
-                    disabled: true
-                ) {
-                    
-                }
+                Button(action: {
+                    editTaped()
+                }, label: {
+                    WPTextView(
+                        text: isNowEditing ? "Done" : "Edit",
+                        color: isDataEmpty ? .lbQuaternary : .standartDarkText,
+                        size: 17,
+                        weight: .regular
+                    )
+                })
                 
                 Spacer()
                 
@@ -96,6 +112,12 @@ fileprivate struct NavView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(.horizontal)
+        .animation(.easeIn, value: isNowEditing)
+    }
+    
+    private func editTaped() {
+        isNowEditing.toggle()
+        editAction()
     }
 }
 

@@ -10,6 +10,7 @@
 		0BF15F2DF49C4D5902A0083D /* Pods_WedPlanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEBFE90D6525ED190CF085D9 /* Pods_WedPlanner.framework */; };
 		571021C32C871A9800FEAA24 /* WeddingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C22C871A9800FEAA24 /* WeddingItemModel.swift */; };
 		571021C62C871D7E00FEAA24 /* WeddingItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C52C871D7E00FEAA24 /* WeddingItemCellView.swift */; };
+		571021C82C875D2800FEAA24 /* DiagonalCutShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C72C875D2800FEAA24 /* DiagonalCutShape.swift */; };
 		5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
@@ -60,6 +61,7 @@
 		10BEED09C4E3D2F4E200F7C2 /* Pods-WedPlanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WedPlanner.debug.xcconfig"; path = "Target Support Files/Pods-WedPlanner/Pods-WedPlanner.debug.xcconfig"; sourceTree = "<group>"; };
 		571021C22C871A9800FEAA24 /* WeddingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingItemModel.swift; sourceTree = "<group>"; };
 		571021C52C871D7E00FEAA24 /* WeddingItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingItemCellView.swift; sourceTree = "<group>"; };
+		571021C72C875D2800FEAA24 /* DiagonalCutShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagonalCutShape.swift; sourceTree = "<group>"; };
 		5732D9C42C7F125200ACD609 /* WedPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WedPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WedPlannerApp.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 			isa = PBXGroup;
 			children = (
 				5763A58B2C83BB3700B36190 /* RoundedCorner.swift */,
+				571021C72C875D2800FEAA24 /* DiagonalCutShape.swift */,
 			);
 			path = Shapes;
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				5763A5622C808EB900B36190 /* WeddingViewModel.swift in Sources */,
 				5763A5892C83AEB500B36190 /* WPAlertViewModifier.swift in Sources */,
 				5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */,
+				571021C82C875D2800FEAA24 /* DiagonalCutShape.swift in Sources */,
 				571021C62C871D7E00FEAA24 /* WeddingItemCellView.swift in Sources */,
 				5763A5252C7F50CE00B36190 /* WPTextView.swift in Sources */,
 				5763A5762C81C8AA00B36190 /* WPTextEdditor.swift in Sources */,

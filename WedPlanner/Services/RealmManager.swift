@@ -160,6 +160,7 @@ final class RealmManager: ObservableObject {
         newWedding.budget = budget
         newWedding.coverPhoto = coverPhoto
         newWedding.notes = notes
+        newWedding.order = self.weddings.count + 1
         newWedding.tasks = getSelectedTasks()
         
         do {
@@ -181,5 +182,40 @@ final class RealmManager: ObservableObject {
         self.weddings = results.compactMap({ (wedTask) -> WeddingItemModel? in
             return wedTask
         })
+    }
+    
+    // D - Delete
+    func delete(_ wedding: WeddingItemModel) {
+        guard let realm = realm else { return }
+        
+        do {
+            try realm.write {
+                if let objectToDelete = realm.objects(WeddingItemModel.self).filter("id == %@", wedding.id).first {
+                    realm.delete(objectToDelete)
+                    fetchWeddingsData()
+                }
+            }
+        } catch {
+            print("Ошибка при удалении задачи: \(error.localizedDescription)")
+        }
+    }
+
+    // Update - Update order of objects in the database
+    func updateWeddingsOrder(_ weddings: [WeddingItemModel]) {
+        guard let realm = realm else { return }
+        
+        do {
+            try realm.write {
+                // Обновляем порядок объектов в базе данных, присваивая каждому объекту новый индекс
+                for (index, wedding) in weddings.enumerated() {
+                    if let weddingToUpdate = realm.objects(WeddingItemModel.self).filter("id == %@", wedding.id).first {
+                        weddingToUpdate.order = index
+                    }
+                }
+                fetchWeddingsData() 
+            }
+        } catch {
+            print("Ошибка при обновлении порядка задач: \(error.localizedDescription)")
+        }
     }
 }
