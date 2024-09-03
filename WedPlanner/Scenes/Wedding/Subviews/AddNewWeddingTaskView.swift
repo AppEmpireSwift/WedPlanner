@@ -44,10 +44,16 @@ struct AddNewWeddingTaskView: View {
                     List {
                         ForEach(realmManager.weddingTasks) { wedTask in
                             WPTaskSelecteionView(model: wedTask)
+                                .swipeActions {
+                                    Button(action: {
+                                        realmManager.deleteTask(object: wedTask)
+                                    }, label: {
+                                        Text("Delete")
+                                    })
+                                }
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                         }
-                        .onDelete(perform: deleteTask)
                     }
                     .listStyle(.plain)
                     .background(Color.clear)
@@ -68,9 +74,5 @@ struct AddNewWeddingTaskView: View {
         .wpAlert(
             isPresented: $isAddAlertShown
         )
-    }
-    
-    private func deleteTask(at offsets: IndexSet) {
-        realmManager.deleteTask(at: offsets)
     }
 }
