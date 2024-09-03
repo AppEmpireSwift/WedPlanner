@@ -2,7 +2,6 @@ import Foundation
 import RealmSwift
 
 final class WeddingItemModel: Object, ObjectKeyIdentifiable {
-   // @objc dynamic var _id = ObjectId.generate()
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var title: String = ""
     @objc dynamic var date: Date = Date()
@@ -13,10 +12,6 @@ final class WeddingItemModel: Object, ObjectKeyIdentifiable {
     @objc dynamic var order: Int = 0
     
     var tasks = List<WeddingTaskModel>()
-    
-//    override class func primaryKey() -> String? {
-//        "_id"
-//    }
     
     override static func primaryKey() -> String? {
         return "id"

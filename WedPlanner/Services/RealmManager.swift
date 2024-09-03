@@ -5,7 +5,7 @@ final class RealmManager: ObservableObject {
     @Published var weddingTasks: [WeddingTaskModel] = []
     @Published var weddings: [WeddingItemModel] = []
     var realm: Realm?
-
+    
     init() {
         let realm = try? Realm()
         self.realm = realm
@@ -33,7 +33,7 @@ final class RealmManager: ObservableObject {
     
     private func initializeDefaultTasks() {
         guard let realm = realm else { return }
-
+        
         let existingTasks = realm.objects(WeddingTaskModel.self)
         if existingTasks.isEmpty {
             let defaultTasks = [
@@ -58,7 +58,7 @@ final class RealmManager: ObservableObject {
                 ("Write Thank You Notes", false, true, "", ""),
                 ("Plan Pre-Wedding Events", false, true, "", "")
             ]
-
+            
             do {
                 try realm.write {
                     for task in defaultTasks {
@@ -115,17 +115,19 @@ final class RealmManager: ObservableObject {
     }
     
     //D - Delete
-    func deleteTask(object: WeddingTaskModel) {
+    func deleteTask(_ wedTask: WeddingTaskModel) {
         guard let realm = realm else { return }
+        
         do {
             try realm.write {
-                realm.delete(object)
+                if realm.objects(WeddingTaskModel.self).contains(where: { $0.id == wedTask.id }) {
+                    realm.delete(wedTask)
+                    fetchWeddingsData()
+                }
             }
         } catch {
             print("Ошибка при удалении задачи: \(error.localizedDescription)")
-            return
         }
-        fetchTasksData()
     }
     
     //U - Update
@@ -147,9 +149,9 @@ final class RealmManager: ObservableObject {
         }
     }
     
-    // MARK: - WeddingItem Scetion CRUD
+    // MARK: - WeddingItem Section CRUD
     
-    //C - Create
+    // C - Create
     func addWeddingWith(title: String, date: Date, location: String, budget: String, coverPhoto: Data, notes: String) {
         guard let realm = realm else { return }
         
@@ -160,7 +162,7 @@ final class RealmManager: ObservableObject {
         newWedding.budget = budget
         newWedding.coverPhoto = coverPhoto
         newWedding.notes = notes
-        newWedding.order = self.weddings.count + 1
+        newWedding.order = weddings.count + 1
         newWedding.tasks = getSelectedTasks()
         
         do {
@@ -177,21 +179,19 @@ final class RealmManager: ObservableObject {
     private func fetchWeddingsData() {
         guard let realm = realm else { return }
         
-        let results = realm.objects(WeddingItemModel.self)
+        let results = realm.objects(WeddingItemModel.self).sorted(byKeyPath: "order")
         
-        self.weddings = results.compactMap({ (wedTask) -> WeddingItemModel? in
-            return wedTask
-        })
+        self.weddings = Array(results)
     }
     
     // D - Delete
-    func delete(_ wedding: WeddingItemModel) {
+    func deleteWedding(_ wedding: WeddingItemModel) {
         guard let realm = realm else { return }
         
         do {
             try realm.write {
-                if let objectToDelete = realm.objects(WeddingItemModel.self).filter("id == %@", wedding.id).first {
-                    realm.delete(objectToDelete)
+                if realm.objects(WeddingItemModel.self).contains(where: { $0.id == wedding.id }) {
+                    realm.delete(wedding)
                     fetchWeddingsData()
                 }
             }
@@ -199,20 +199,19 @@ final class RealmManager: ObservableObject {
             print("Ошибка при удалении задачи: \(error.localizedDescription)")
         }
     }
-
-    // Update - Update order of objects in the database
+    
+    // U - Update
     func updateWeddingsOrder(_ weddings: [WeddingItemModel]) {
         guard let realm = realm else { return }
         
         do {
             try realm.write {
-                // Обновляем порядок объектов в базе данных, присваивая каждому объекту новый индекс
                 for (index, wedding) in weddings.enumerated() {
                     if let weddingToUpdate = realm.objects(WeddingItemModel.self).filter("id == %@", wedding.id).first {
                         weddingToUpdate.order = index
                     }
                 }
-                fetchWeddingsData() 
+                fetchWeddingsData()
             }
         } catch {
             print("Ошибка при обновлении порядка задач: \(error.localizedDescription)")

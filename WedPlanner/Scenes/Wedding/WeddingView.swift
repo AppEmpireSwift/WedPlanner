@@ -40,20 +40,30 @@ struct WeddingView: View {
                                 .listRowSeparator(.hidden)
                                 .padding(.top, 12)
                         }
+                        .onDelete(perform: deleteItems)
+                        .onMove(perform: moveItems)
                     }
                     .listStyle(.plain)
                     .listRowSpacing(12)
                     .background(Color.clear)
+                    .environment(\.editMode, .constant(self.states.isNowEdditing ? EditMode.active : EditMode.inactive))
                 }
             }
         }
         .animation(.snappy, value: viewModel.states.isDataEmpty)
     }
     
-    private func showAddView() -> some View {
-        NavigationLink(destination: AddNewWeddingView()) {
-            
+    private func deleteItems(at offsets: IndexSet) {
+        let weddingsToDelete = offsets.map { realmManager.weddings[$0] }
+        
+        for wedding in weddingsToDelete {
+            realmManager.deleteWedding(wedding)
         }
+    }
+    
+    private func moveItems(from source: IndexSet, to destination: Int) {
+        realmManager.weddings.move(fromOffsets: source, toOffset: destination)
+        realmManager.updateWeddingsOrder(realmManager.weddings)
     }
 }
 

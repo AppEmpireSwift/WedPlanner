@@ -46,7 +46,7 @@ struct AddNewWeddingTaskView: View {
                             WPTaskSelecteionView(model: wedTask)
                                 .swipeActions {
                                     Button(action: {
-                                        realmManager.deleteTask(object: wedTask)
+                                        //realmManager.deleteTask(object: wedTask)
                                     }, label: {
                                         Text("Delete")
                                     })
