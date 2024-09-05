@@ -65,6 +65,11 @@ extension View {
         self.modifier(WPAlertViewModifier(isPresented: isPresented))
     }
     
+    /// Модификатор кастомного алерта по добавлению Гостей
+    func wpGuestAlert(isPresented: Binding<Bool>, guestName: Binding<String>, guestNote: Binding<String>, addAction: @escaping () -> Void) -> some View {
+        self.modifier(WPGuestAlertViewModifier(isPresented: isPresented, guestName: guestName, guestNote: guestNote, addAction: addAction))
+    }
+    
     /// Модификатор, который позволяет закруглять выбранные углы
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )

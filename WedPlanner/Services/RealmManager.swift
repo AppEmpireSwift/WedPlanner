@@ -217,4 +217,50 @@ final class RealmManager: ObservableObject {
             print("Ошибка при обновлении порядка задач: \(error.localizedDescription)")
         }
     }
+    
+    // MARK: - GuestListSection Section CRUD
+    
+    func deleteGuest(_ guest: WeddingGestListModel, from wedding: WeddingItemModel) {
+        guard let realm = realm else { return }
+
+        do {
+            try realm.write {
+                if let index = wedding.guests.firstIndex(where: { $0.id == guest.id }) {
+                    wedding.guests.remove(at: index)
+                }
+            }
+        } catch {
+            print("Ошибка при удалении гостя: \(error.localizedDescription)")
+        }
+    }
+
+    func updateGuestsOrder(in wedding: WeddingItemModel, with reorderedGuests: [WeddingGestListModel]) {
+        guard let realm = realm else { return }
+
+        do {
+            try realm.write {
+                wedding.guests.removeAll()
+                wedding.guests.append(objectsIn: reorderedGuests)
+            }
+        } catch {
+            print("Ошибка при обновлении порядка гостей: \(error.localizedDescription)")
+        }
+    }
+    
+    func addGuest(name: String, role: String, to wedding: WeddingItemModel) {
+        guard let realm = realm else { return }
+
+        let newGuest = WeddingGestListModel()
+        newGuest.name = name
+        newGuest.role = role
+        newGuest.order = wedding.guests.count + 1
+
+        do {
+            try realm.write {
+                wedding.guests.append(newGuest)
+            }
+        } catch {
+            print("Ошибка при добавлении гостя: \(error.localizedDescription)")
+        }
+    }
 }
