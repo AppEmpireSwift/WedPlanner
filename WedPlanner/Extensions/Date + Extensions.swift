@@ -62,4 +62,28 @@ extension Date {
             }
         }
     }
+    
+    ///  Return stringed Data with givven patter
+    func stringFormateDateWith(_ pattern: String = "d MMMM yyyy" ) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = pattern
+        dateFormatter.locale = Locale(identifier: "en_US")
+        return dateFormatter.string(from: self)
+    }
+    
+    /// Returns String day difference between now and given date
+    func daysUntil() -> String {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: Date())
+        let targetDate = calendar.startOfDay(for: self)
+
+        if targetDate <= today {
+            return "0"
+        }
+
+        let components = calendar.dateComponents([.day], from: today, to: targetDate)
+        let days = components.day ?? 0
+
+        return String(days)
+    }
 }

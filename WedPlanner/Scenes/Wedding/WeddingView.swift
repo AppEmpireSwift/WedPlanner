@@ -20,7 +20,7 @@ struct WeddingView: View {
                 ) {
                     
                 }
-                    .environmentObject(viewModel)
+                .environmentObject(viewModel)
                 
                 if realmManager.weddings.isEmpty {
                     WPEmptyDataView(
@@ -31,14 +31,25 @@ struct WeddingView: View {
                         destinationView: AddNewWeddingView()
                             .environmentObject(viewModel)
                     )
-                        .vSpacing(.center)
+                    .vSpacing(.center)
                 } else {
                     List {
                         ForEach(realmManager.weddings) { wedModel in
-                            WeddingItemCellView(model: wedModel)
-                                .listRowBackground(Color.clear)
-                                .listRowSeparator(.hidden)
-                                .padding(.top, 12)
+                            Group {
+                                NavigationLink {
+                                    WeddingDetailView(weddingModel: wedModel)
+                                        .onAppear {
+                                            hiddenTabBar()
+                                        }
+                                } label: {
+                                    WeddingItemCellView(model: wedModel)
+                                }
+                                
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .padding(.top, 12)
                         }
                         .onDelete(perform: deleteItems)
                         .onMove(perform: moveItems)

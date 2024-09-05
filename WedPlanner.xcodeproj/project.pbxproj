@@ -11,6 +11,11 @@
 		571021C32C871A9800FEAA24 /* WeddingItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C22C871A9800FEAA24 /* WeddingItemModel.swift */; };
 		571021C62C871D7E00FEAA24 /* WeddingItemCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C52C871D7E00FEAA24 /* WeddingItemCellView.swift */; };
 		571021C82C875D2800FEAA24 /* DiagonalCutShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C72C875D2800FEAA24 /* DiagonalCutShape.swift */; };
+		571021CA2C87A6AF00FEAA24 /* WeddingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021C92C87A6AF00FEAA24 /* WeddingDetailView.swift */; };
+		571021CD2C88D77000FEAA24 /* CustomProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021CC2C88D77000FEAA24 /* CustomProgressViewStyle.swift */; };
+		571021CF2C88DBF600FEAA24 /* WeddingGestListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021CE2C88DBF600FEAA24 /* WeddingGestListModel.swift */; };
+		571021D12C88FACC00FEAA24 /* GuestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021D02C88FACC00FEAA24 /* GuestListView.swift */; };
+		571021D32C88FF9A00FEAA24 /* WPSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 571021D22C88FF9A00FEAA24 /* WPSearchField.swift */; };
 		5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
@@ -62,6 +67,11 @@
 		571021C22C871A9800FEAA24 /* WeddingItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingItemModel.swift; sourceTree = "<group>"; };
 		571021C52C871D7E00FEAA24 /* WeddingItemCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingItemCellView.swift; sourceTree = "<group>"; };
 		571021C72C875D2800FEAA24 /* DiagonalCutShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagonalCutShape.swift; sourceTree = "<group>"; };
+		571021C92C87A6AF00FEAA24 /* WeddingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingDetailView.swift; sourceTree = "<group>"; };
+		571021CC2C88D77000FEAA24 /* CustomProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressViewStyle.swift; sourceTree = "<group>"; };
+		571021CE2C88DBF600FEAA24 /* WeddingGestListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingGestListModel.swift; sourceTree = "<group>"; };
+		571021D02C88FACC00FEAA24 /* GuestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestListView.swift; sourceTree = "<group>"; };
+		571021D22C88FF9A00FEAA24 /* WPSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPSearchField.swift; sourceTree = "<group>"; };
 		5732D9C42C7F125200ACD609 /* WedPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WedPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WedPlannerApp.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +140,14 @@
 				571021C52C871D7E00FEAA24 /* WeddingItemCellView.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		571021CB2C88D76500FEAA24 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				571021CC2C88D77000FEAA24 /* CustomProgressViewStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 		5732D9BB2C7F125200ACD609 = {
@@ -223,6 +241,7 @@
 		5732D9DA2C7F12AB00ACD609 /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				571021CB2C88D76500FEAA24 /* Styles */,
 				571021C42C871D6800FEAA24 /* Cells */,
 				5763A58A2C83BB1200B36190 /* Shapes */,
 				5763A56F2C81BA3C00B36190 /* Pickers */,
@@ -266,6 +285,7 @@
 			children = (
 				5763A5652C8096CA00B36190 /* NavigationBar */,
 				5763A5242C7F50CE00B36190 /* WPTextView.swift */,
+				5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */,
 				5763A52E2C7F572B00B36190 /* LicenseTextView.swift */,
 				5763A55D2C80661000B36190 /* WPEmptyDataView.swift */,
 				5763A5682C80CA8400B36190 /* LineSeparaterView.swift */,
@@ -308,7 +328,8 @@
 			children = (
 				5763A5632C80906900B36190 /* AddNewWeddingView.swift */,
 				5763A5772C81EBBE00B36190 /* AddNewWeddingTaskView.swift */,
-				5763A56A2C80CBB700B36190 /* NoticeBubbleView.swift */,
+				571021C92C87A6AF00FEAA24 /* WeddingDetailView.swift */,
+				571021D02C88FACC00FEAA24 /* GuestListView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -382,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				5763A56D2C80D32C00B36190 /* WPTextField.swift */,
+				571021D22C88FF9A00FEAA24 /* WPSearchField.swift */,
 			);
 			path = Fields;
 			sourceTree = "<group>";
@@ -417,6 +439,7 @@
 			children = (
 				5763A59D2C85A61400B36190 /* WeddingTaskModel.swift */,
 				571021C22C871A9800FEAA24 /* WeddingItemModel.swift */,
+				571021CE2C88DBF600FEAA24 /* WeddingGestListModel.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -570,9 +593,11 @@
 				5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */,
 				5763A5332C7F8CAC00B36190 /* InitialView.swift in Sources */,
 				5763A5462C805F7800B36190 /* UIView + Extenisons.swift in Sources */,
+				571021D32C88FF9A00FEAA24 /* WPSearchField.swift in Sources */,
 				5763A53F2C7FDA7600B36190 /* WPNavBarView.swift in Sources */,
 				5763A59E2C85A61400B36190 /* WeddingTaskModel.swift in Sources */,
 				5763A52D2C7F565100B36190 /* OnboardingViewModel.swift in Sources */,
+				571021CF2C88DBF600FEAA24 /* WeddingGestListModel.swift in Sources */,
 				5763A5A12C85A78900B36190 /* RealmManager.swift in Sources */,
 				5763A56E2C80D32C00B36190 /* WPTextField.swift in Sources */,
 				5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */,
@@ -581,12 +606,15 @@
 				5763A5552C80640F00B36190 /* CalendarView.swift in Sources */,
 				5763A5642C80906900B36190 /* AddNewWeddingView.swift in Sources */,
 				5763A5392C7FC98B00B36190 /* WPTabbarItemModel.swift in Sources */,
+				571021D12C88FACC00FEAA24 /* GuestListView.swift in Sources */,
 				5763A52F2C7F572B00B36190 /* LicenseTextView.swift in Sources */,
 				5763A5422C805F2E00B36190 /* TabBarModifier.swift in Sources */,
 				5763A5582C80643700B36190 /* IdeasView.swift in Sources */,
 				5763A5292C7F53F500B36190 /* OnboardingView.swift in Sources */,
 				5763A57C2C820B0000B36190 /* Date + Extensions.swift in Sources */,
 				5763A56B2C80CBB700B36190 /* NoticeBubbleView.swift in Sources */,
+				571021CD2C88D77000FEAA24 /* CustomProgressViewStyle.swift in Sources */,
+				571021CA2C87A6AF00FEAA24 /* WeddingDetailView.swift in Sources */,
 				5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */,
 				5763A57E2C820E6300B36190 /* DismissingKeyboardOnTap.swift in Sources */,
 				5763A58C2C83BB3700B36190 /* RoundedCorner.swift in Sources */,

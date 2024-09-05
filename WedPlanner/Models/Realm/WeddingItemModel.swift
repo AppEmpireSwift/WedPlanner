@@ -12,6 +12,7 @@ final class WeddingItemModel: Object, ObjectKeyIdentifiable {
     @objc dynamic var order: Int = 0
     
     var tasks = List<WeddingTaskModel>()
+    var guests = List<WeddingGestListModel>()
     
     override static func primaryKey() -> String? {
         return "id"

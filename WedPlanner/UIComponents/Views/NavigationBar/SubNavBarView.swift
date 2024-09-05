@@ -3,6 +3,7 @@ import SwiftUI
 enum SubNavBarViewType {
     case backTitleTitledButton
     case backAndTitle
+    case backTitleImageBtn (rtBtnType: WPImagedButtonViewType)
 }
 
 struct SubNavBarView: View {
@@ -20,17 +21,13 @@ struct SubNavBarView: View {
             HStack {
                 WPImagedButtonView(type: .arrowBack, action: dismiss.callAsFunction)
                 
-                Spacer()
-                Spacer()
-                
                 WPTextView(
                     text: title,
                     color: .standartDarkText,
                     size: 17,
                     weight: .semibold
                 )
-                
-                Spacer()
+                .frame(maxWidth: .infinity)
                 
                 Button(action: {
                     rightBtnAction?()
@@ -58,6 +55,24 @@ struct SubNavBarView: View {
                 .hSpacing(.center)
                 
                 Spacer()
+            }
+            .padding(.horizontal)
+        case .backTitleImageBtn (let rtBtnType):
+            HStack {
+                WPImagedButtonView(type: .arrowBack, action: dismiss.callAsFunction)
+                                
+                WPTextView(
+                    text: title,
+                    color: .standartDarkText,
+                    size: 17,
+                    weight: .semibold
+                )
+                .frame(maxWidth: .infinity)
+                
+                WPImagedButtonView(type: rtBtnType) {
+                    rightBtnAction?()
+                }
+                
             }
             .padding(.horizontal)
         }
