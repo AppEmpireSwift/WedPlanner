@@ -44,7 +44,6 @@ struct WeddingView: View {
                                 } label: {
                                     WeddingItemCellView(model: wedModel)
                                 }
-                                
                             }
                             .buttonStyle(PlainButtonStyle())
                             .listRowBackground(Color.clear)

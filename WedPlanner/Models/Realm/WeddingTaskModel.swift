@@ -2,7 +2,6 @@ import Foundation
 import RealmSwift
 
 final class WeddingTaskModel: Object, ObjectKeyIdentifiable {
-//    @objc dynamic var _id = ObjectId.generate()
     @objc dynamic var id: String = UUID().uuidString
     @objc dynamic var name: String = ""
     @objc dynamic var isSelected: Bool = false
@@ -11,9 +10,6 @@ final class WeddingTaskModel: Object, ObjectKeyIdentifiable {
     @objc dynamic var spendText: String = ""
     @objc dynamic var totalText: String = ""
     
-//    override class func primaryKey() -> String? {
-//        "_id"
-//    }
     override static func primaryKey() -> String? {
         return "id"
     }

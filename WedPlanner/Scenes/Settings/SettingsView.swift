@@ -49,8 +49,8 @@ struct SettingsView: View {
                             )
                     }
                 }
+                .padding(.horizontal, hPaddings)
             }
-            .padding(.horizontal, hPaddings)
         }
         //TODO: - Поменять ID приложения
         .sheet(isPresented: $states.isContentShareViewShown) {

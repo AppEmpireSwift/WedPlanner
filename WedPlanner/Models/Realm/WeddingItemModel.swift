@@ -13,6 +13,7 @@ final class WeddingItemModel: Object, ObjectKeyIdentifiable {
     
     var tasks = List<WeddingTaskModel>()
     var guests = List<WeddingGestListModel>()
+    var contacts = List<WeddingContactsModel>()
     
     override static func primaryKey() -> String? {
         return "id"

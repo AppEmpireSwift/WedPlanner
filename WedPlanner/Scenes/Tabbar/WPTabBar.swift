@@ -1,3 +1,4 @@
+
 import SwiftUI
 
 struct WPTabBar: View {
@@ -10,7 +11,7 @@ struct WPTabBar: View {
     var body: some View {
         TabView(selection: $selection) {
             ForEach(WPTabbarItemModel.allCases) { tab in
-                tab.view
+                tab.view(selection: tab == .cont ? $selection : nil)
                     .tabItem {
                         TabBarItemView(itemModel: tab)
                     }
@@ -33,7 +34,6 @@ fileprivate struct TabBarItemView: View {
                 .resizable()
                 .frame(width: 32, height: 32)
             
-            
             WPTextView(
                 text: itemModel.rawValue,
                 color: .tbUnselected,
@@ -42,8 +42,4 @@ fileprivate struct TabBarItemView: View {
             )
         }
     }
-}
-
-#Preview {
-    WPTabBar()
 }
