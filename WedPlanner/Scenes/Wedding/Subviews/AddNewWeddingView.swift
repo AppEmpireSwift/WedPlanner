@@ -138,4 +138,5 @@ fileprivate struct ContentView: View {
 
 #Preview {
     AddNewWeddingView()
+        .environmentObject(WeddingViewModel())
 }
