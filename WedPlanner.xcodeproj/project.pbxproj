@@ -25,7 +25,6 @@
 		573174062C8C7CD000212D05 /* WeddingContactsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174052C8C7CD000212D05 /* WeddingContactsListView.swift */; };
 		573174082C8CBC7D00212D05 /* IdeaModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174072C8CBC7D00212D05 /* IdeaModel.swift */; };
 		5731740A2C8CDDBB00212D05 /* IdeaCellItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174092C8CDDBB00212D05 /* IdeaCellItemView.swift */; };
-		5731740C2C8CE4EB00212D05 /* UIIMage + Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731740B2C8CE4EB00212D05 /* UIIMage + Extensions.swift */; };
 		5731740E2C8CE84200212D05 /* IdeadAddOrEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731740D2C8CE84200212D05 /* IdeadAddOrEditView.swift */; };
 		573174102C8D11CA00212D05 /* IdeaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731740F2C8D11CA00212D05 /* IdeaDetailView.swift */; };
 		573174122C8DD39400212D05 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174112C8DD39400212D05 /* EventModel.swift */; };
@@ -97,7 +96,6 @@
 		573174052C8C7CD000212D05 /* WeddingContactsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingContactsListView.swift; sourceTree = "<group>"; };
 		573174072C8CBC7D00212D05 /* IdeaModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaModel.swift; sourceTree = "<group>"; };
 		573174092C8CDDBB00212D05 /* IdeaCellItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaCellItemView.swift; sourceTree = "<group>"; };
-		5731740B2C8CE4EB00212D05 /* UIIMage + Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIIMage + Extensions.swift"; sourceTree = "<group>"; };
 		5731740D2C8CE84200212D05 /* IdeadAddOrEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeadAddOrEditView.swift; sourceTree = "<group>"; };
 		5731740F2C8D11CA00212D05 /* IdeaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaDetailView.swift; sourceTree = "<group>"; };
 		573174112C8DD39400212D05 /* EventModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
@@ -249,7 +247,6 @@
 				5763A5432C805F5800B36190 /* UIApplication + Extensions.swift */,
 				5763A5452C805F7800B36190 /* UIView + Extenisons.swift */,
 				5763A57B2C820B0000B36190 /* Date + Extensions.swift */,
-				5731740B2C8CE4EB00212D05 /* UIIMage + Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -636,7 +633,6 @@
 				573174182C8DDF4100212D05 /* EventDetailView.swift in Sources */,
 				5763A55E2C80661000B36190 /* WPEmptyDataView.swift in Sources */,
 				5763A5622C808EB900B36190 /* WeddingViewModel.swift in Sources */,
-				5731740C2C8CE4EB00212D05 /* UIIMage + Extensions.swift in Sources */,
 				5763A5892C83AEB500B36190 /* WPAlertViewModifier.swift in Sources */,
 				5763A52B2C7F549400B36190 /* View+ Extensions.swift in Sources */,
 				571021D62C89AA7500FEAA24 /* WPContextMenu.swift in Sources */,

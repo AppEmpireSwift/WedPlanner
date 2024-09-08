@@ -8,7 +8,7 @@ struct IdeaCellItemView: View {
     }
     
     private var image: UIImage {
-        return images.first ?? UIImage(color: .tbUnselected)!
+        return images.first ?? UIImage(named: "EmptyCoverImg")!
     }
     
     var body: some View {
