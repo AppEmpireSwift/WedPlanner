@@ -4,6 +4,7 @@ import RealmSwift
 final class RealmManager: ObservableObject {
     @Published var weddingTasks: [WeddingTaskModel] = []
     @Published var weddings: [WeddingItemModel] = []
+    @Published var ideas: [IdeaModel] = []
     var realm: Realm?
     
     init() {

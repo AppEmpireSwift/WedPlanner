@@ -74,4 +74,22 @@ extension View {
     func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
+    
+    func getUIImageArray(from data: Data) -> [UIImage] {
+        var images: [UIImage] = []
+        
+        do {
+            let imageDataArray = try JSONSerialization.jsonObject(with: data, options: []) as? [Data] ?? []
+            
+            for imageData in imageDataArray {
+                if let image = UIImage(data: imageData) {
+                    images.append(image)
+                }
+            }
+        } catch {
+            print("Failed to deserialize image data: \(error)")
+        }
+        
+        return images
+    }
 }
