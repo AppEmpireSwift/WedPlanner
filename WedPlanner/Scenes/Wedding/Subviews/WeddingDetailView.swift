@@ -105,7 +105,9 @@ struct WeddingDetailView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)
                 }
-            
+            NavigationLink {
+                GuestListView(weddingModel: weddingModel)
+            } label: {
             RoundedRectangle(cornerRadius: 12)
                 .frame(height: 65)
                 .foregroundColor(.lightBejie)
@@ -134,6 +136,7 @@ struct WeddingDetailView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)
                 }
+            }
         }
     }
     

@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 final class WeddingItemModel: Object, ObjectKeyIdentifiable {
-    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var id: ObjectId = ObjectId.generate()
     @objc dynamic var title: String = ""
     @objc dynamic var date: Date = Date()
     @objc dynamic var location: String = ""

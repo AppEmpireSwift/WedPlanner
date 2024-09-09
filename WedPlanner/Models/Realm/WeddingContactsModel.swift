@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 final class WeddingContactsModel: Object, ObjectKeyIdentifiable {
-    @objc dynamic var id: String = UUID().uuidString
+    @objc dynamic var id: ObjectId = ObjectId.generate()
     @objc dynamic var name: String = ""
     @objc dynamic var phoneNum: String = ""
     @objc dynamic var email: String = ""

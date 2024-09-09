@@ -33,7 +33,7 @@ struct GuestListView: View {
                 LineSeparaterView()
                 
                 List {
-                    ForEach(weddingModel.guests) { guest in
+                    ForEach(filteredGuests, id: \.id) { guest in
                         guestItemView(for: guest)
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
@@ -42,7 +42,7 @@ struct GuestListView: View {
                     .onMove(perform: moveItems)
                 }
                 .environment(\.editMode, .constant(self.isNowEdditing ? EditMode.active : EditMode.inactive))
-                .listStyle(.plain)
+                .listStyle(PlainListStyle())
                 .background(Color.clear)
                 .padding(.horizontal, hPaddings)
             }
@@ -76,6 +76,17 @@ struct GuestListView: View {
         .wpGuestAlert(isPresented: $isAddPresented, guestName: $newGuestName, guestNote: $newGuestRole) {
             addNewGuest()
         }
+        .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.5), value: filteredGuests)
+    }
+    
+    private var filteredGuests: [WeddingGestListModel] {
+        if searchText.isEmpty {
+            return Array(weddingModel.guests)
+        } else {
+            return weddingModel.guests.filter { guest in
+                guest.name.localizedCaseInsensitiveContains(searchText)
+            }
+        }
     }
     
     @ViewBuilder
@@ -87,6 +98,7 @@ struct GuestListView: View {
                 size: 20,
                 weight: .regular
             )
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             WPTextView(
                 text: model.role,
@@ -103,20 +115,20 @@ struct GuestListView: View {
     
     private func deleteItems(at offsets: IndexSet) {
         for index in offsets {
-            let guest = weddingModel.guests[index]
+            let guest = filteredGuests[index]
             realmManager.deleteGuest(guest, from: weddingModel)
         }
     }
 
     private func moveItems(from source: IndexSet, to destination: Int) {
-        var reorderedGuests = Array(weddingModel.guests)
+        var reorderedGuests = filteredGuests
         reorderedGuests.move(fromOffsets: source, toOffset: destination)
         realmManager.updateGuestsOrder(in: weddingModel, with: reorderedGuests)
     }
     
     private func addNewGuest() {
         if !newGuestName.isEmpty && !newGuestRole.isEmpty {
-            realmManager.addGuest(name: newGuestName, role: newGuestRole, to: weddingModel) 
+            realmManager.addGuest(name: newGuestName, role: newGuestRole, to: weddingModel)
             newGuestName = ""
             newGuestRole = ""
         }
@@ -125,4 +137,5 @@ struct GuestListView: View {
 
 #Preview {
     GuestListView(weddingModel: WeddingItemModel())
+        .environmentObject(RealmManager())
 }
