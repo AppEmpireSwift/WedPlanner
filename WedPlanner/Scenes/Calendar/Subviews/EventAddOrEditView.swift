@@ -67,6 +67,7 @@ struct EventAddOrEditView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         WPTextField(text: $states.titleText, type: .simple, placeholder: "Title")
+                            .dismissKeyboardOnTap()
                     }
                     
                     VStack(spacing: 7) {
@@ -91,6 +92,7 @@ struct EventAddOrEditView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         WPTextEditor(text: $states.discrText, placeholder: "Notes")
+                            .dismissKeyboardOnTap()
                     }
                     
                     WPButtonView(title: buttonTitle) {
@@ -103,7 +105,6 @@ struct EventAddOrEditView: View {
             }
         }
         .animation(.snappy, value: isBtnDisabled)
-        .dismissKeyboardOnTap()
         .onAppear(perform: {
             loadDataFromModelToStates()
         })

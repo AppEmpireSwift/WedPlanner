@@ -17,6 +17,7 @@ struct WPDatePickerView: View {
         return formatter
     }()
     
+    @ViewBuilder
     private var timePicker: some View {
         VStack {
             GeometryReader { geometry in
@@ -58,6 +59,7 @@ struct WPDatePickerView: View {
         }
     }
     
+    @ViewBuilder
     private var datePicker: some View {
         VStack {
             DatePicker(
