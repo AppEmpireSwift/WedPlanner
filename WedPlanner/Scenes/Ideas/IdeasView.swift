@@ -1,78 +1,23 @@
-//import SwiftUI
-//
-//struct IdeasView: View {
-//    @EnvironmentObject var realmManager: RealmManager
-//    @State private var isFavoritsSelected: Bool = false
-//    @State private var searchText: String = ""
-//    
-//    var body: some View {
-//        ZStack(alignment: .top) {
-//            Color.mainBG.ignoresSafeArea()
-//            
-//            VStack(spacing: 15) {
-//                navBarView()
-//                WPSearchField(searchText: $searchText)
-//                    .padding(.horizontal)
-//                
-//                if realmManager.ideas.isEmpty {
-//                    WPEmptyDataView(
-//                        image: "EmptyIdiasImg",
-//                        title: "Nothing here yet",
-//                        discr: "Add your Ideas",
-//                        buttonTitle: "Add Idea",
-//                        destinationView: EmptyView()
-//                    )
-//                    .vSpacing(.center)
-//                } else {
-//                    
-//                }
-//            }
-//        }
-//    }
-//    
-//    @ViewBuilder
-//    private func navBarView() -> some View {
-//        HStack {
-//            WPTextView(
-//                text: "Ideas",
-//                color: .standartDarkText,
-//                size: 34,
-//                weight: .bold
-//            )
-//            
-//            Spacer()
-//            
-//            HStack(spacing: 16) {
-//                Button(action: {
-//                    withAnimation(.easeIn) {
-//                        isFavoritsSelected.toggle()
-//                    }
-//                }, label: {
-//                    Image("NavLike")
-//                        .resizable()
-//                        .frame(width: 27, height: 22)
-//                        .foregroundColor(isFavoritsSelected ? .accentColor : .tbUnselected)
-//                })
-//                
-//                NavigationLink(destination: EmptyView()) {
-//                   Image("NavBarAdd")
-//                }
-//            }
-//        }
-//        .padding(.horizontal)
-//    }
-//}
-//
-//#Preview {
-//    IdeasView()
-//}
-
 import SwiftUI
 
 struct IdeasView: View {
-    @EnvironmentObject var realmManager: RealmManager
     @State private var isFavoritsSelected: Bool = false
     @State private var searchText: String = ""
+    @StateObject private var realm = RealmIdeaManager()
+    
+    private var filteredIdeas: [IdeaModel] {
+        var ideas = realm.ideas
+        
+        if isFavoritsSelected {
+            ideas = ideas.filter { $0.isFavorite }
+        }
+        
+        if !searchText.isEmpty {
+            ideas = ideas.filter { $0.title.range(of: searchText, options: .caseInsensitive) != nil }
+        }
+        
+        return ideas
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -83,18 +28,43 @@ struct IdeasView: View {
                 WPSearchField(searchText: $searchText)
                     .padding(.horizontal)
                 
-                if realmManager.ideas.isEmpty {
+                if realm.ideas.isEmpty {
                     WPEmptyDataView(
                         image: "EmptyIdiasImg",
                         title: "Nothing here yet",
                         discr: "Add your Ideas",
                         buttonTitle: "Add Idea",
-                        destinationView: EmptyView()
+                        destinationView: IdeaAddOrEditView(type: .addNew)
+                            .environmentObject(realm)
                     )
                     .vSpacing(.center)
                 } else {
-                    ideasGridView()
-                        .padding(.horizontal)
+                    if filteredIdeas.isEmpty {
+                        emptyListView()
+                    } else {
+                        List {
+                            ForEach(filteredIdeas) { idea in
+                                NavigationLink {
+                                    IdeaDetailView(model: idea)
+                                        .navigationBarBackButtonHidden()
+                                        .environmentObject(realm)
+                                        .onAppear {
+                                            hiddenTabBar()
+                                        }
+                                } label: {
+                                    IdeaCellItemView(model: idea)
+                                        .environmentObject(realm)
+                                }
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                            }
+                        }
+                        .listStyle(.plain)
+                        .listRowSpacing(12)
+                        .background(Color.clear)
+                        .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity), removal: .move(edge: .top).combined(with: .opacity)))
+                        .animation(.snappy, value: filteredIdeas.count)
+                    }
                 }
             }
         }
@@ -114,7 +84,7 @@ struct IdeasView: View {
             
             HStack(spacing: 16) {
                 Button(action: {
-                    withAnimation(.easeIn) {
+                    withAnimation(.snappy) {
                         isFavoritsSelected.toggle()
                     }
                 }, label: {
@@ -124,7 +94,12 @@ struct IdeasView: View {
                         .foregroundColor(isFavoritsSelected ? .accentColor : .tbUnselected)
                 })
                 
-                NavigationLink(destination: EmptyView()) {
+                NavigationLink(destination: IdeaAddOrEditView(type: .addNew)
+                    .navigationBarBackButtonHidden()
+                    .onAppear(perform: {
+                        hiddenTabBar()
+                    })
+                    .environmentObject(realm)) {
                    Image("NavBarAdd")
                 }
             }
@@ -133,37 +108,14 @@ struct IdeasView: View {
     }
     
     @ViewBuilder
-    private func ideasGridView() -> some View {
-        ScrollView {
-            LazyVGrid(columns: generateGridColumns(), spacing: 12) {
-                ForEach(realmManager.ideas.indices, id: \.self) { index in
-                    IdeaCellItemView(model: realmManager.ideas[index])
-                        .frame(height: heightForItem(at: index))
-                }
-            }
+    private func emptyListView() -> some View {
+        VStack {
+            Spacer()
+            Text("No ideas found")
+                .foregroundColor(.gray)
+                .font(.headline)
+            Spacer()
         }
+        .background(Color.clear)
     }
-    
-    private func generateGridColumns() -> [GridItem] {
-        var gridColumns: [GridItem] = []
-        
-        for index in realmManager.ideas.indices {
-            if index % 3 == 1 {
-                gridColumns.append(GridItem(.flexible(), spacing: 12))
-                gridColumns.append(GridItem(.flexible(), spacing: 12))
-            } else if index % 3 == 2 {
-                gridColumns.append(GridItem(.flexible(), spacing: 0))
-            }
-        }
-        
-        return gridColumns
-    }
-    
-    private func heightForItem(at index: Int) -> CGFloat {
-        return index % 3 == 1 ? 188.5 : 188.5 * 2 + 12
-    }
-}
-
-#Preview {
-    IdeasView()
 }

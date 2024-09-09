@@ -17,8 +17,12 @@ struct IdeaAddOrEditViewStates {
 }
 
 struct IdeaAddOrEditView: View {
-    let type: IdeaAddOrEditViewType
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var realm: RealmIdeaManager
     @State private var states = IdeaAddOrEditViewStates()
+
+    let type: IdeaAddOrEditViewType
+
     
     private var isSaveDisabled: Bool {
         states.titleText.isEmpty || states.descrText.isEmpty
@@ -47,10 +51,18 @@ struct IdeaAddOrEditView: View {
             Color.mainBG.ignoresSafeArea()
             
             VStack(spacing: 16) {
-                SubNavBarView(
-                    type: .backAndTitle,
-                    title: navTitle
-                )
+                switch type {
+                case .addNew:
+                    SubNavBarView(
+                        type: .backAndTitle,
+                        title: navTitle
+                    )
+                case .editExisting(let ideaModel):
+                    SubNavBarView(type: .backTitleTitledButton, title: navTitle, rightBtnTitle: "Delete") {
+                        dismiss.callAsFunction()
+                        realm.deleteIdea(ideaModel)
+                    }
+                }
                 
                 LineSeparaterView()
                 
@@ -150,7 +162,7 @@ struct IdeaAddOrEditView: View {
                     .padding(.horizontal, -8)
                     
                     WPButtonView(title: btnTitle) {
-                        
+                        saveUpdateAction()
                     }
                     .disabled(isSaveDisabled)
                     .padding(.bottom, 12)
@@ -162,6 +174,7 @@ struct IdeaAddOrEditView: View {
                 }
             }
         }
+        .dismissKeyboardOnTap()
         .alert(isPresented: $states.showDeleteAlert) {
             Alert(
                 title: Text("Delete Image"),
@@ -189,8 +202,24 @@ struct IdeaAddOrEditView: View {
             states.mediaImages = getUIImageArray(from: idea.mediaData)
         }
     }
+    
+    private func saveUpdateAction() {
+        switch type {
+        case .addNew:
+            realm.addIdea(title: states.titleText, description: states.descrText, mediaData: convertToDataFrom(images: states.mediaImages))
+        case .editExisting(let ideaModel):
+            realm.updateIdea(ideaModel, title: states.titleText, description: states.descrText, mediaData: convertToDataFrom(images: states.mediaImages))
+        }
+        dismiss.callAsFunction()
+    }
+    
+    func convertToDataFrom(images: [UIImage]) -> Data {
+        let imageDataArray = images.compactMap { $0.jpegData(compressionQuality: 0.5) }
+        return try! NSKeyedArchiver.archivedData(withRootObject: imageDataArray, requiringSecureCoding: false)
+    }
 }
 
 #Preview {
     IdeaAddOrEditView(type: .addNew)
 }
+

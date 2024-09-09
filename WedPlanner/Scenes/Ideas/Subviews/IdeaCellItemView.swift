@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct IdeaCellItemView: View {
+    @EnvironmentObject var realm: RealmIdeaManager
     var model: IdeaModel
     
     private var images: [UIImage] {
@@ -20,13 +21,11 @@ struct IdeaCellItemView: View {
                                 .cornerRadius(12, corners: .allCorners)
                             
                             Button(action: {
-                                // Действие кнопки
+                                likeAction()
                             }) {
-                                Image(model.isFavorite ? "NavLike" : "NavLikeUnactive")
-                                    .foregroundColor(.black)
+                                Image(model.isFavorite ? "IdeaCellActiveLike" : "NavLikeUnactive")
+                                    .foregroundColor(.accentColor)
                                     .padding(8)
-                                    .background(Color.white.opacity(0.7))
-                                    .clipShape(Circle())
                             }
                             .padding(.trailing, 12)
                             .padding(.top, 12)
@@ -39,19 +38,23 @@ struct IdeaCellItemView: View {
                 weight: .semibold
             )
             .frame(maxWidth: .infinity, alignment: .leading)
+            .multilineTextAlignment(.leading)
             
-            WPTextView(
-                text: model.descriptionText,
-                color: .lbSecendary,
-                size: 15,
-                weight: .regular
-            )
-            .frame(maxWidth: .infinity, alignment: .leading)
+            Text(model.descriptionText)
+                .font(.system(size: 15, weight: .regular))
+                .foregroundColor(.lbSecendary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
+                .lineLimit(1)
         }
         .padding(8)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(.fieldsBG)
         )
+    }
+    
+    func likeAction() {
+        realm.updateIdeaLikeStatus(model)
     }
 }

@@ -76,20 +76,13 @@ extension View {
     }
     
     func getUIImageArray(from data: Data) -> [UIImage] {
-        var images: [UIImage] = []
-        
         do {
-            let imageDataArray = try JSONSerialization.jsonObject(with: data, options: []) as? [Data] ?? []
-            
-            for imageData in imageDataArray {
-                if let image = UIImage(data: imageData) {
-                    images.append(image)
-                }
+            if let imageDataArray = try NSKeyedUnarchiver.unarchivedObject(ofClasses: [NSArray.self, NSData.self], from: data) as? [Data] {
+                return imageDataArray.compactMap { UIImage(data: $0) }
             }
         } catch {
             print("Failed to deserialize image data: \(error)")
         }
-        
-        return images
+        return []
     }
 }
