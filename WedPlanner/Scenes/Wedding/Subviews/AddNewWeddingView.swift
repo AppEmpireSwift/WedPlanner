@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct AddNewWeddingView: View {
-    @EnvironmentObject var viewModel: WeddingViewModel
+    @StateObject var viewModel = WeddingViewModel()
     
     private var isContinueEnabled: Bool {
-        if viewModel.states.firstCreationScreen.titleText.isEmpty || viewModel.states.firstCreationScreen.locationText.isEmpty || viewModel.states.firstCreationScreen.budgetText.isEmpty {
+        if viewModel.firstAddStates.titleText.isEmpty || viewModel.firstAddStates.locationText.isEmpty || viewModel.firstAddStates.budgetText.isEmpty {
             return false
         } else {
             return true
@@ -39,12 +39,12 @@ struct AddNewWeddingView: View {
                     
                     ScrollView(showsIndicators: false) {
                         ContentView(
-                            titleText: $viewModel.states.firstCreationScreen.titleText,
-                            locationText: $viewModel.states.firstCreationScreen.locationText,
-                            budgetText: $viewModel.states.firstCreationScreen.budgetText,
-                            selectedImg: $viewModel.states.firstCreationScreen.selectedCoverImage,
-                            notesText: $viewModel.states.firstCreationScreen.notesText,
-                            selectedDate: $viewModel.states.firstCreationScreen.weddingDate
+                            titleText: $viewModel.firstAddStates.titleText,
+                            locationText: $viewModel.firstAddStates.locationText,
+                            budgetText: $viewModel.firstAddStates.budgetText,
+                            selectedImg: $viewModel.firstAddStates.selectedCoverImage,
+                            notesText: $viewModel.firstAddStates.notesText,
+                            selectedDate: $viewModel.firstAddStates.weddingDate
                         )
                         .padding(.bottom)
                     }
@@ -77,7 +77,6 @@ struct AddNewWeddingView: View {
         .ignoresSafeArea(.container, edges: .bottom)
         .animation(.easeInOut(duration: 0.5), value: viewModel.isWedDetailsClosed)
         .animation(.easeInOut, value: isContinueEnabled)
-        .dismissKeyboardOnTap()
     }
 }
 
@@ -97,6 +96,7 @@ fileprivate struct ContentView: View {
                 
                 WPTextField(text: $titleText, type: .simple, placeholder: "Whose wedding is this?")
             }
+            .dismissKeyboardOnTap()
             
             VStack(spacing: 7) {
                 WPTextView(text: "DATE", color: .standartDarkText, size: 15, weight: .regular)
@@ -111,6 +111,7 @@ fileprivate struct ContentView: View {
                 
                 WPTextField(text: $locationText, type: .simple, placeholder: "Wedding's Location")
             }
+            .dismissKeyboardOnTap()
             
             VStack(spacing: 7) {
                 WPTextView(text: "BUDGET", color: .standartDarkText, size: 15, weight: .regular)
@@ -118,6 +119,7 @@ fileprivate struct ContentView: View {
                 
                 WPTextField(text: $budgetText, type: .bujet, placeholder: "Total Budget")
             }
+            .dismissKeyboardOnTap()
             
             VStack(spacing: 7) {
                 WPTextView(text: "COVER PHOTO", color: .standartDarkText, size: 15, weight: .regular)
@@ -132,11 +134,11 @@ fileprivate struct ContentView: View {
                 
                 WPTextEditor(text: $notesText, placeholder: "Enter some text, if needed")
             }
+            .dismissKeyboardOnTap()
         }
     }
 }
 
 #Preview {
-    AddNewWeddingView()
-        .environmentObject(WeddingViewModel())
+    AddNewWeddingView(viewModel: WeddingViewModel())
 }

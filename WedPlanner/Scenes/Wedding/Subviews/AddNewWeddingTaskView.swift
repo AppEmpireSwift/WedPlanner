@@ -60,12 +60,12 @@ struct AddNewWeddingTaskView: View {
                     
                     WPButtonView(title: "Save") {
                         realmManager.addWeddingWith(
-                            title: viewModel.states.firstCreationScreen.titleText,
-                            date: viewModel.states.firstCreationScreen.weddingDate,
-                            location: viewModel.states.firstCreationScreen.locationText,
-                            budget: viewModel.states.firstCreationScreen.budgetText,
-                            coverPhoto: viewModel.convertToData(from: viewModel.states.firstCreationScreen.selectedCoverImage),
-                            notes: viewModel.states.firstCreationScreen.notesText
+                            title: viewModel.firstAddStates.titleText,
+                            date: viewModel.firstAddStates.weddingDate,
+                            location: viewModel.firstAddStates.locationText,
+                            budget: viewModel.firstAddStates.budgetText,
+                            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
+                            notes: viewModel.firstAddStates.notesText
                         )
                     }
                     .padding(.bottom)
