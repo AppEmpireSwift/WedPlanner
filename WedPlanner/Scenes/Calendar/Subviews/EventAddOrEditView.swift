@@ -8,10 +8,12 @@ enum EventAddOrEditViewType {
 struct EventAddOrEditViewStates {
     var titleText: String = ""
     var discrText: String = ""
-    var date: Date = Date()
+    var choosenDate: Date = Date()
 }
 
 struct EventAddOrEditView: View {
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var realm: RealmEventManager
     @State private var states = EventAddOrEditViewStates()
     
     let type: EventAddOrEditViewType
@@ -37,8 +39,10 @@ struct EventAddOrEditView: View {
                 switch type {
                 case .add:
                     SubNavBarView(type: .backAndTitle, title: "Add Event")
-                case .edit(_):
+                case .edit(let eventModel):
                     SubNavBarView(type: .backTitleTitledButton, title: "Edit Event", rightBtnTitle: "Delete") {
+                        dismiss.callAsFunction()
+                        realm.deleteEvent(eventModel)
                     }
                 }
                 
@@ -74,7 +78,7 @@ struct EventAddOrEditView: View {
                         )
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        WPDatePickerView(selectedDate: $states.date)
+                        WPDatePickerView(selectedDate: $states.choosenDate)
                     }
                     
                     VStack(spacing: 7) {
@@ -90,7 +94,7 @@ struct EventAddOrEditView: View {
                     }
                     
                     WPButtonView(title: buttonTitle) {
-                        
+                        buttonAction()
                     }
                     .vSpacing(.bottom)
                     .disabled(isBtnDisabled)
@@ -110,10 +114,20 @@ struct EventAddOrEditView: View {
         case .add:
             break
         case .edit(let eventModel):
-            states.date = eventModel.date
+            states.choosenDate = eventModel.date
             states.titleText = eventModel.title
             states.discrText = eventModel.descriptionText
         }
+    }
+    
+    private func buttonAction() {
+        switch type {
+        case .add:
+            realm.addEvent(title: states.titleText, description: states.discrText, date: states.choosenDate)
+        case .edit(let eventModel):
+            realm.updateEvent(eventModel, title: states.titleText, description: states.discrText, date: states.choosenDate)
+        }
+        dismiss.callAsFunction()
     }
 }
     

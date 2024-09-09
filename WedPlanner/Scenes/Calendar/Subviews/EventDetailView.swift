@@ -2,6 +2,8 @@ import SwiftUI
 
 struct EventDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var realm: RealmEventManager
+    @State private var isEditViewShown: Bool = false
     var model: EventModel
     
     var body: some View {
@@ -45,6 +47,12 @@ struct EventDetailView: View {
                 .padding(.horizontal, hPaddings)
             }
         }
+        .fullScreenCover(isPresented: $isEditViewShown) {
+            EventAddOrEditView(type: .edit(model))
+                .environmentObject(realm)
+                .navigationBarBackButtonHidden()
+        }
+        .dismissKeyboardOnTap()
     }
     
     @ViewBuilder
@@ -62,8 +70,9 @@ struct EventDetailView: View {
             )
             .frame(maxWidth: .infinity, alignment: .center)
             
-            NavigationLink {
-                //TODO: - прокинуть навигацию на редактирование
+            Button {
+                dismiss.callAsFunction()
+                isEditViewShown.toggle()
             } label: {
                 WPTextView(
                     text: "Edit",

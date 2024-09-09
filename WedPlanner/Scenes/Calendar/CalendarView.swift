@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @EnvironmentObject var realmManager: RealmManager
     @State var selectedDate: Date = Date()
+    @StateObject var realm = RealmEventManager()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -19,19 +19,30 @@ struct CalendarView: View {
                     )
                     .datePickerStyle(GraphicalDatePickerStyle())
                     .background(Color.white)
+                    .onChange(of: selectedDate) { _ in
+                        withAnimation(.snappy) {
+                        }
+                    }
                     
                     LineSeparaterView()
                     
-                    if realmManager.events.isEmpty {
+                    if realm.events(for: selectedDate).isEmpty {
                         emptyEventView()
                             .vSpacing(.center)
+                            .transition(.opacity)
                     } else {
                         List {
-                            ForEach(realmManager.events) { event in
+                            ForEach(realm.events(for: selectedDate)) { event in
                                 NavigationLink {
-                                    //TODO: Прокинуть навигацию на дитеилс
+                                    EventDetailView(model: event)
+                                        .navigationBarBackButtonHidden()
+                                        .environmentObject(realm)
+                                        .onAppear {
+                                            hiddenTabBar()
+                                        }
                                 } label: {
                                     CalendarEventCellItemView(model: event)
+                                        .environmentObject(realm)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                                 .listRowBackground(Color.clear)
@@ -42,9 +53,11 @@ struct CalendarView: View {
                         .listStyle(.plain)
                         .listRowSpacing(12)
                         .background(Color.clear)
+                        .transition(.opacity)
                     }
                 }
                 .padding(.horizontal, hPaddings)
+                .animation(.snappy, value: realm.events(for: selectedDate))
             }
         }
     }
@@ -62,7 +75,12 @@ struct CalendarView: View {
             Spacer()
             
             NavigationLink {
-                EmptyView()
+                EventAddOrEditView(type: .add)
+                    .navigationBarBackButtonHidden()
+                    .environmentObject(realm)
+                    .onAppear {
+                        hiddenTabBar()
+                    }
             } label: {
                 WPTextView(
                     text: "Add",
@@ -93,7 +111,12 @@ struct CalendarView: View {
             )
             
             NavigationLink {
-                //TODO: - Прокинуть ссылку
+                EventAddOrEditView(type: .add)
+                    .navigationBarBackButtonHidden()
+                    .environmentObject(realm)
+                    .onAppear {
+                        hiddenTabBar()
+                    }
             } label: {
                 RoundedRectangle(cornerRadius: 12)
                     .frame(width: 253, height: 50)

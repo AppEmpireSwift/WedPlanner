@@ -32,6 +32,7 @@
 		573174162C8DD7D100212D05 /* EventAddOrEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174152C8DD7D100212D05 /* EventAddOrEditView.swift */; };
 		573174182C8DDF4100212D05 /* EventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174172C8DDF4100212D05 /* EventDetailView.swift */; };
 		5731741A2C8F202600212D05 /* RealmIdeaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 573174192C8F202600212D05 /* RealmIdeaManager.swift */; };
+		5731741C2C8F633700212D05 /* RealmEventManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5731741B2C8F633700212D05 /* RealmEventManager.swift */; };
 		5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
@@ -104,6 +105,7 @@
 		573174152C8DD7D100212D05 /* EventAddOrEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventAddOrEditView.swift; sourceTree = "<group>"; };
 		573174172C8DDF4100212D05 /* EventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailView.swift; sourceTree = "<group>"; };
 		573174192C8F202600212D05 /* RealmIdeaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmIdeaManager.swift; sourceTree = "<group>"; };
+		5731741B2C8F633700212D05 /* RealmEventManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmEventManager.swift; sourceTree = "<group>"; };
 		5732D9C42C7F125200ACD609 /* WedPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WedPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WedPlannerApp.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -483,6 +485,7 @@
 			children = (
 				5763A5A02C85A78900B36190 /* RealmManager.swift */,
 				573174192C8F202600212D05 /* RealmIdeaManager.swift */,
+				5731741B2C8F633700212D05 /* RealmEventManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -668,6 +671,7 @@
 				5763A5692C80CA8400B36190 /* LineSeparaterView.swift in Sources */,
 				5763A54C2C80639700B36190 /* WeddingView.swift in Sources */,
 				5763A5672C8096E200B36190 /* SubNavBarView.swift in Sources */,
+				5731741C2C8F633700212D05 /* RealmEventManager.swift in Sources */,
 				5763A5552C80640F00B36190 /* CalendarView.swift in Sources */,
 				5763A5642C80906900B36190 /* AddNewWeddingView.swift in Sources */,
 				573174042C8B643B00212D05 /* AddNewContactView.swift in Sources */,

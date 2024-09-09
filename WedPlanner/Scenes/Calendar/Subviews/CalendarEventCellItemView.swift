@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct CalendarEventCellItemView: View {
+    @EnvironmentObject var realm: RealmEventManager
+    
     var model: EventModel
     
     var body: some View {
