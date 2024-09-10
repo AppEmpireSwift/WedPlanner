@@ -2,9 +2,11 @@ import SwiftUI
 
 struct CalendarView: View {
     @State var selectedDate: Date = Date()
-    @StateObject var realm = RealmEventManager()
-    
+    @StateObject var viewModel = EventsViewModel()
+
     var body: some View {
+        let eventsForSelectedDate = viewModel.events(for: selectedDate)
+        
         ZStack(alignment: .top) {
             Color.mainBG.ignoresSafeArea()
             
@@ -26,23 +28,23 @@ struct CalendarView: View {
                     
                     LineSeparaterView()
                     
-                    if realm.events(for: selectedDate).isEmpty {
+                    if eventsForSelectedDate.isEmpty {
                         emptyEventView()
                             .vSpacing(.center)
                             .transition(.opacity)
                     } else {
                         List {
-                            ForEach(realm.events(for: selectedDate)) { event in
+                            ForEach(eventsForSelectedDate, id: \.id) { event in
                                 NavigationLink {
                                     EventDetailView(model: event)
                                         .navigationBarBackButtonHidden()
-                                        .environmentObject(realm)
+                                        .environmentObject(viewModel)
                                         .onAppear {
                                             hiddenTabBar()
                                         }
                                 } label: {
                                     CalendarEventCellItemView(model: event)
-                                        .environmentObject(realm)
+                                        .environmentObject(viewModel)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                                 .listRowBackground(Color.clear)
@@ -57,7 +59,8 @@ struct CalendarView: View {
                     }
                 }
                 .padding(.horizontal, hPaddings)
-                .animation(.snappy, value: realm.events(for: selectedDate))
+                // Обновление анимации
+                .animation(.snappy, value: selectedDate)
             }
         }
     }
@@ -77,7 +80,7 @@ struct CalendarView: View {
             NavigationLink {
                 EventAddOrEditView(type: .add)
                     .navigationBarBackButtonHidden()
-                    .environmentObject(realm)
+                    .environmentObject(viewModel)
                     .onAppear {
                         hiddenTabBar()
                     }
@@ -113,7 +116,7 @@ struct CalendarView: View {
             NavigationLink {
                 EventAddOrEditView(type: .add)
                     .navigationBarBackButtonHidden()
-                    .environmentObject(realm)
+                    .environmentObject(viewModel)
                     .onAppear {
                         hiddenTabBar()
                     }
@@ -136,5 +139,5 @@ struct CalendarView: View {
 
 #Preview {
     CalendarView()
-        .environmentObject(RealmManager())
+        .environmentObject(EventsViewModel())
 }

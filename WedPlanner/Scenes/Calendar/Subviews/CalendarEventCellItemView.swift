@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct CalendarEventCellItemView: View {
-    @EnvironmentObject var realm: RealmEventManager
+    @EnvironmentObject var viewModel: EventsViewModel
     
-    var model: EventModel
+    var model: Event
     
     var body: some View {
         HStack(spacing: 8) {
@@ -30,5 +30,5 @@ struct CalendarEventCellItemView: View {
 }
 
 #Preview {
-    CalendarEventCellItemView(model: EventModel())
+    CalendarEventCellItemView(model: Event(title: "Sample", descriptionText: "Description", date: Date()))
 }

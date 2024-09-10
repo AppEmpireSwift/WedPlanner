@@ -2,7 +2,7 @@ import SwiftUI
 
 enum EventAddOrEditViewType {
     case add
-    case edit(EventModel)
+    case edit(Event)
 }
 
 struct EventAddOrEditViewStates {
@@ -13,7 +13,7 @@ struct EventAddOrEditViewStates {
 
 struct EventAddOrEditView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var realm: RealmEventManager
+    @EnvironmentObject var viewModel: EventsViewModel
     @State private var states = EventAddOrEditViewStates()
     
     let type: EventAddOrEditViewType
@@ -39,10 +39,10 @@ struct EventAddOrEditView: View {
                 switch type {
                 case .add:
                     SubNavBarView(type: .backAndTitle, title: "Add Event")
-                case .edit(let eventModel):
+                case .edit(let event):
                     SubNavBarView(type: .backTitleTitledButton, title: "Edit Event", rightBtnTitle: "Delete") {
                         dismiss.callAsFunction()
-                        realm.deleteEvent(eventModel)
+                        viewModel.deleteEvent(event)
                     }
                 }
                 
@@ -59,7 +59,7 @@ struct EventAddOrEditView: View {
                     
                     VStack(spacing: 7) {
                         WPTextView(
-                            text: "TITTLE",
+                            text: "TITLE",
                             color: .standartDarkText,
                             size: 15,
                             weight: .regular
@@ -114,24 +114,24 @@ struct EventAddOrEditView: View {
         switch type {
         case .add:
             break
-        case .edit(let eventModel):
-            states.choosenDate = eventModel.date
-            states.titleText = eventModel.title
-            states.discrText = eventModel.descriptionText
+        case .edit(let event):
+            states.choosenDate = event.date
+            states.titleText = event.title
+            states.discrText = event.descriptionText
         }
     }
     
     private func buttonAction() {
         switch type {
         case .add:
-            realm.addEvent(title: states.titleText, description: states.discrText, date: states.choosenDate)
-        case .edit(let eventModel):
-            realm.updateEvent(eventModel, title: states.titleText, description: states.discrText, date: states.choosenDate)
+            viewModel.addEvent(title: states.titleText, description: states.discrText, date: states.choosenDate)
+        case .edit(let event):
+            viewModel.updateEvent(event, title: states.titleText, description: states.discrText, date: states.choosenDate)
         }
         dismiss.callAsFunction()
     }
 }
     
-    #Preview {
-        EventAddOrEditView(type: .add)
-    }
+#Preview {
+    EventAddOrEditView(type: .add)
+}

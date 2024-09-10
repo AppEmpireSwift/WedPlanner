@@ -2,9 +2,9 @@ import SwiftUI
 
 struct EventDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var realm: RealmEventManager
+    @EnvironmentObject var viewModel: EventsViewModel 
     @State private var isEditViewShown: Bool = false
-    var model: EventModel
+    var model: Event
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -14,7 +14,7 @@ struct EventDetailView: View {
                 navView()
                 LineSeparaterView()
                 
-                VStack(alignment: .leading,spacing: 12) {
+                VStack(alignment: .leading, spacing: 12) {
                     WPTextView(
                         text: model.title,
                         color: .standartDarkText,
@@ -49,7 +49,7 @@ struct EventDetailView: View {
         }
         .fullScreenCover(isPresented: $isEditViewShown) {
             EventAddOrEditView(type: .edit(model))
-                .environmentObject(realm)
+                .environmentObject(viewModel)
                 .navigationBarBackButtonHidden()
         }
         .dismissKeyboardOnTap()
@@ -87,5 +87,5 @@ struct EventDetailView: View {
 }
 
 #Preview {
-    EventDetailView(model: EventModel())
+    EventDetailView(model: Event(title: "Sample", descriptionText: "Description", date: Date()))
 }
