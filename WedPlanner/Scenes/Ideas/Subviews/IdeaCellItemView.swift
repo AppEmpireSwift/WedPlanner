@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct IdeaCellItemView: View {
-    @EnvironmentObject var realm: RealmIdeaManager
-    var model: IdeaModel
+    @EnvironmentObject var viewModel: IdeasViewModel
+    var idea: Idea
     
     private var images: [UIImage] {
-        return getUIImageArray(from: model.mediaData)
+        return getUIImageArray(from: idea.mediaData)
     }
     
     private var image: UIImage {
@@ -15,36 +15,34 @@ struct IdeaCellItemView: View {
     var body: some View {
         VStack(spacing: 12) {
             ZStack(alignment: .topTrailing) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .frame(maxWidth: .infinity, maxHeight: 188.5)
-                                .cornerRadius(12, corners: .allCorners)
-                            
-                            Button(action: {
-                                likeAction()
-                            }) {
-                                Image(model.isFavorite ? "IdeaCellActiveLike" : "NavLikeUnactive")
-                                    .foregroundColor(.accentColor)
-                                    .padding(8)
-                            }
-                            .padding(.trailing, 12)
-                            .padding(.top, 12)
-                        }
+                Image(uiImage: image)
+                    .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: 188.5)
+                    .cornerRadius(12)
+                
+                Button(action: {
+                    viewModel.toggleFavorite(idea)
+                }) {
+                    Image(idea.isFavorite ? "IdeaCellActiveLike" : "NavLikeUnactive")
+                        .foregroundColor(.accentColor)
+                        .padding(8)
+                }
+                .padding(.trailing, 12)
+                .padding(.top, 12)
+            }
             
             WPTextView(
-                text: model.title,
+                text: idea.title,
                 color: .standartDarkText,
                 size: 17,
                 weight: .semibold
             )
             .frame(maxWidth: .infinity, alignment: .leading)
-            .multilineTextAlignment(.leading)
             
-            Text(model.descriptionText)
+            Text(idea.descriptionText)
                 .font(.system(size: 15, weight: .regular))
                 .foregroundColor(.lbSecendary)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .multilineTextAlignment(.leading)
                 .lineLimit(1)
         }
         .padding(8)
@@ -52,9 +50,5 @@ struct IdeaCellItemView: View {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(.fieldsBG)
         )
-    }
-    
-    func likeAction() {
-        realm.updateIdeaLikeStatus(model)
     }
 }

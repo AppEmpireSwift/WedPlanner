@@ -3,10 +3,10 @@ import SwiftUI
 struct IdeasView: View {
     @State private var isFavoritsSelected: Bool = false
     @State private var searchText: String = ""
-    @StateObject private var realm = RealmIdeaManager()
+    @StateObject private var viewModel = IdeasViewModel(repository: IdeaRepositoryService())
     
-    private var filteredIdeas: [IdeaModel] {
-        var ideas = realm.ideas
+    private var filteredIdeas: [Idea] {
+        var ideas = viewModel.ideas
         
         if isFavoritsSelected {
             ideas = ideas.filter { $0.isFavorite }
@@ -28,14 +28,14 @@ struct IdeasView: View {
                 WPSearchField(searchText: $searchText)
                     .padding(.horizontal)
                 
-                if realm.ideas.isEmpty {
+                if viewModel.ideas.isEmpty {
                     WPEmptyDataView(
                         image: "EmptyIdiasImg",
                         title: "Nothing here yet",
                         discr: "Add your Ideas",
                         buttonTitle: "Add Idea",
                         destinationView: IdeaAddOrEditView(type: .addNew)
-                            .environmentObject(realm)
+                            .environmentObject(viewModel)
                     )
                     .vSpacing(.center)
                 } else {
@@ -43,27 +43,24 @@ struct IdeasView: View {
                         emptyListView()
                     } else {
                         List {
-                            ForEach(filteredIdeas) { idea in
+                            ForEach(filteredIdeas, id: \.id) { idea in
                                 NavigationLink {
                                     IdeaDetailView(model: idea)
                                         .navigationBarBackButtonHidden()
-                                        .environmentObject(realm)
+                                        .environmentObject(viewModel)
                                         .onAppear {
                                             hiddenTabBar()
                                         }
                                 } label: {
-                                    IdeaCellItemView(model: idea)
-                                        .environmentObject(realm)
+                                    IdeaCellItemView(idea: idea)
+                                        .environmentObject(viewModel)
                                 }
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                             }
                         }
                         .listStyle(.plain)
-                        .listRowSpacing(12)
                         .background(Color.clear)
-                        .transition(.asymmetric(insertion: .move(edge: .bottom).combined(with: .opacity), removal: .move(edge: .top).combined(with: .opacity)))
-                        .animation(.snappy, value: filteredIdeas.count)
                     }
                 }
             }
@@ -84,7 +81,7 @@ struct IdeasView: View {
             
             HStack(spacing: 16) {
                 Button(action: {
-                    withAnimation(.snappy) {
+                    withAnimation {
                         isFavoritsSelected.toggle()
                     }
                 }, label: {
@@ -96,10 +93,7 @@ struct IdeasView: View {
                 
                 NavigationLink(destination: IdeaAddOrEditView(type: .addNew)
                     .navigationBarBackButtonHidden()
-                    .onAppear(perform: {
-                        hiddenTabBar()
-                    })
-                    .environmentObject(realm)) {
+                    .environmentObject(viewModel)) {
                    Image("NavBarAdd")
                 }
             }
@@ -116,6 +110,5 @@ struct IdeasView: View {
                 .font(.headline)
             Spacer()
         }
-        .background(Color.clear)
     }
 }

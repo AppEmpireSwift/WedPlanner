@@ -3,7 +3,7 @@ import PhotosUI
 
 enum IdeaAddOrEditViewType {
     case addNew
-    case editExisting(IdeaModel)
+    case editExisting(Idea)
 }
 
 struct IdeaAddOrEditViewStates {
@@ -18,12 +18,11 @@ struct IdeaAddOrEditViewStates {
 
 struct IdeaAddOrEditView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var realm: RealmIdeaManager
+    @EnvironmentObject var viewModel: IdeasViewModel
     @State private var states = IdeaAddOrEditViewStates()
 
     let type: IdeaAddOrEditViewType
 
-    
     private var isSaveDisabled: Bool {
         states.titleText.isEmpty || states.descrText.isEmpty
     }
@@ -59,8 +58,8 @@ struct IdeaAddOrEditView: View {
                     )
                 case .editExisting(let ideaModel):
                     SubNavBarView(type: .backTitleTitledButton, title: navTitle, rightBtnTitle: "Delete") {
-                        dismiss.callAsFunction()
-                        realm.deleteIdea(ideaModel)
+                        viewModel.deleteIdea(ideaModel)
+                        dismiss()
                     }
                 }
                 
@@ -198,28 +197,35 @@ struct IdeaAddOrEditView: View {
         if case let .editExisting(idea) = type {
             states.titleText = idea.title
             states.descrText = idea.descriptionText
-            
             states.mediaImages = getUIImageArray(from: idea.mediaData)
         }
     }
     
     private func saveUpdateAction() {
+        let mediaData = convertToDataFrom(images: states.mediaImages)
+        
         switch type {
         case .addNew:
-            realm.addIdea(title: states.titleText, description: states.descrText, mediaData: convertToDataFrom(images: states.mediaImages))
-        case .editExisting(let ideaModel):
-            realm.updateIdea(ideaModel, title: states.titleText, description: states.descrText, mediaData: convertToDataFrom(images: states.mediaImages))
+            viewModel.addIdea(
+                title: states.titleText,
+                description: states.descrText,
+                mediaData: mediaData
+            )
+        case .editExisting:
+            if let idea = viewModel.ideas.first(where: { $0.title == states.titleText }) {
+                viewModel.updateIdea(
+                    idea,
+                    title: states.titleText,
+                    description: states.descrText,
+                    mediaData: mediaData
+                )
+            }
         }
-        dismiss.callAsFunction()
+        dismiss()
     }
     
-    func convertToDataFrom(images: [UIImage]) -> Data {
+    private func convertToDataFrom(images: [UIImage]) -> Data {
         let imageDataArray = images.compactMap { $0.jpegData(compressionQuality: 0.5) }
         return try! NSKeyedArchiver.archivedData(withRootObject: imageDataArray, requiringSecureCoding: false)
     }
 }
-
-#Preview {
-    IdeaAddOrEditView(type: .addNew)
-}
-

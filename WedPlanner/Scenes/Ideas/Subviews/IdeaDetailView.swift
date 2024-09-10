@@ -2,11 +2,11 @@ import SwiftUI
 
 struct IdeaDetailView: View {
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var realm: RealmIdeaManager
+    @EnvironmentObject var viewModel: IdeasViewModel
     @State private var currentImgIndex: Int = 1
     @State private var isEditViewShown: Bool = false
     
-    var model: IdeaModel
+    var model: Idea
     
     private var images: [UIImage] {
         return getUIImageArray(from: model.mediaData)
@@ -86,7 +86,7 @@ struct IdeaDetailView: View {
         .animation(.snappy, value: currentImgIndex)
         .fullScreenCover(isPresented: $isEditViewShown) {
             IdeaAddOrEditView(type: .editExisting(model))
-                .environmentObject(realm)
+                .environmentObject(viewModel)
         }
     }
     
@@ -147,8 +147,8 @@ struct IdeaDetailView: View {
         }
     }
     
-    func likeAction() {
-        realm.updateIdeaLikeStatus(model)
+    private func likeAction() {
+        viewModel.toggleFavorite(model)
     }
 }
 
@@ -174,8 +174,4 @@ fileprivate struct ImageContentView: View {
             .cornerRadius(isiPhone ? 0 : 12, corners: .allCorners)
             .frame(maxWidth: .infinity, maxHeight: 546)
     }
-}
-
-#Preview {
-    IdeaDetailView(model: IdeaModel())
 }
