@@ -44,16 +44,20 @@ struct IdeasView: View {
                     } else {
                         List {
                             ForEach(filteredIdeas, id: \.id) { idea in
-                                NavigationLink {
-                                    IdeaDetailView(model: idea)
-                                        .navigationBarBackButtonHidden()
-                                        .environmentObject(viewModel)
-                                        .onAppear {
-                                            hiddenTabBar()
-                                        }
-                                } label: {
+                                ZStack {
                                     IdeaCellItemView(idea: idea)
                                         .environmentObject(viewModel)
+                                    
+                                    NavigationLink {
+                                        IdeaDetailView(model: idea)
+                                            .navigationBarBackButtonHidden()
+                                            .environmentObject(viewModel)
+                                            .onAppear {
+                                                hiddenTabBar()
+                                            }
+                                    } label: {}
+                                        .opacity(0)
+
                                 }
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)

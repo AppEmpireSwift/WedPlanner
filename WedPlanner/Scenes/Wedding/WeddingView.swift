@@ -7,8 +7,6 @@ struct WeddingViewStates {
 struct WeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
     @State private var states = WeddingViewStates()
-//    @StateObject private var weddingItemViewModel = WeddingItemsViewModel()
-//    @StateObject private var weddingTasksViewModel = WeddingTasksViewModel()
     @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
     @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     
@@ -42,7 +40,9 @@ struct WeddingView: View {
                 } else {
                     List {
                         ForEach(weddingItemViewModel.weddingItems) { wedModel in
-                            Group {
+                            ZStack {
+                                WeddingItemCellView(model: wedModel)
+                                
                                 NavigationLink {
                                     WeddingDetailView(weddingModel: wedModel)
                                         .environmentObject(weddingItemViewModel)
@@ -50,9 +50,8 @@ struct WeddingView: View {
                                         .onAppear {
                                             hiddenTabBar()
                                         }
-                                } label: {
-                                    WeddingItemCellView(model: wedModel)
-                                }
+                                } label: {}
+                                    .opacity(0)
                             }
                             .buttonStyle(PlainButtonStyle())
                             .listRowBackground(Color.clear)
