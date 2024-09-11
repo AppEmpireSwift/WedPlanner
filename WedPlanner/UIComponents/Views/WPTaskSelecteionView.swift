@@ -7,10 +7,10 @@ enum WPTaskSelecteionViewType {
 }
 
 struct WPTaskSelecteionView: View {
-    @ObservedObject var model: WeddingTaskModel
     @State private var isSelected: Bool
+    var model: WeddingTask
 
-    init(model: WeddingTaskModel) {
+    init(model: WeddingTask) {
         self.model = model
         _isSelected = State(initialValue: model.isSelected)
     }
@@ -56,25 +56,25 @@ struct WPTaskSelecteionView: View {
     }
 
     private func toggleSelection() {
-        isSelected.toggle()
-        let realm = try? Realm()
-        try? realm?.write {
-            model.isSelected = isSelected
-        }
+//        isSelected.toggle()
+//        let realm = try? Realm()
+//        try? realm?.write {
+//            model.isSelected = isSelected
+//        }
     }
 
     private func updateSpendText(_ newText: String) {
-        let realm = try? Realm()
-        try? realm?.write {
-            model.spendText = newText
-        }
+//        let realm = try? Realm()
+//        try? realm?.write {
+//            model.spendText = newText
+//        }
     }
 
     private func updateTotalText(_ newText: String) {
-        let realm = try? Realm()
-        try? realm?.write {
-            model.totalText = newText
-        }
+//        let realm = try? Realm()
+//        try? realm?.write {
+//            model.totalText = newText
+//        }
     }
 }
 

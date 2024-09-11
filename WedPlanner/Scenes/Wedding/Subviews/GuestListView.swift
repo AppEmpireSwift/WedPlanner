@@ -1,14 +1,14 @@
 import SwiftUI
 
 struct GuestListView: View {
-    @EnvironmentObject var realmManager: RealmManager
+    @EnvironmentObject var weddingViewModel: WeddingItemsViewModel
     @State private var searchText: String = ""
     @State private var isAddPresented: Bool = false
     @State private var isNowEdditing: Bool = false
     @State private var newGuestName: String = ""
     @State private var newGuestRole: String = ""
     
-    var weddingModel: WeddingItemModel
+    var weddingModel: WeddingItem
     
     @State private var isContextMenuVisible: Bool = false
     
@@ -33,13 +33,13 @@ struct GuestListView: View {
                 LineSeparaterView()
                 
                 List {
-                    ForEach(filteredGuests, id: \.id) { guest in
-                        guestItemView(for: guest)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparator(.hidden)
-                    }
-                    .onDelete(perform: deleteItems)
-                    .onMove(perform: moveItems)
+//                    ForEach(filteredGuests, id: \.id) { guest in
+//                        guestItemView(for: guest)
+//                            .listRowBackground(Color.clear)
+//                            .listRowSeparator(.hidden)
+//                    }
+//                    .onDelete(perform: deleteItems)
+//                    .onMove(perform: moveItems)
                 }
                 .environment(\.editMode, .constant(self.isNowEdditing ? EditMode.active : EditMode.inactive))
                 .listStyle(PlainListStyle())
@@ -76,10 +76,10 @@ struct GuestListView: View {
         .wpGuestAlert(isPresented: $isAddPresented, guestName: $newGuestName, guestNote: $newGuestRole) {
             addNewGuest()
         }
-        .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.5), value: filteredGuests)
+       // .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.5), value: filteredGuests)
     }
     
-    private var filteredGuests: [WeddingGestListModel] {
+    private var filteredGuests: [WeddingGuest] {
         if searchText.isEmpty {
             return Array(weddingModel.guests)
         } else {
@@ -90,7 +90,7 @@ struct GuestListView: View {
     }
     
     @ViewBuilder
-    private func guestItemView(for model: WeddingGestListModel) -> some View {
+    private func guestItemView(for model: WeddingGuest) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             WPTextView(
                 text: model.name,
@@ -114,28 +114,27 @@ struct GuestListView: View {
     }
     
     private func deleteItems(at offsets: IndexSet) {
-        for index in offsets {
-            let guest = filteredGuests[index]
-            realmManager.deleteGuest(guest, from: weddingModel)
-        }
+//        for index in offsets {
+//            let guest = filteredGuests[index]
+//            realmManager.deleteGuest(guest, from: weddingModel)
+//        }
     }
 
     private func moveItems(from source: IndexSet, to destination: Int) {
-        var reorderedGuests = filteredGuests
-        reorderedGuests.move(fromOffsets: source, toOffset: destination)
-        realmManager.updateGuestsOrder(in: weddingModel, with: reorderedGuests)
+//        var reorderedGuests = filteredGuests
+//        reorderedGuests.move(fromOffsets: source, toOffset: destination)
+//        realmManager.updateGuestsOrder(in: weddingModel, with: reorderedGuests)
     }
     
     private func addNewGuest() {
-        if !newGuestName.isEmpty && !newGuestRole.isEmpty {
-            realmManager.addGuest(name: newGuestName, role: newGuestRole, to: weddingModel)
-            newGuestName = ""
-            newGuestRole = ""
-        }
+//        if !newGuestName.isEmpty && !newGuestRole.isEmpty {
+//            realmManager.addGuest(name: newGuestName, role: newGuestRole, to: weddingModel)
+//            newGuestName = ""
+//            newGuestRole = ""
+//        }
     }
 }
 
 #Preview {
-    GuestListView(weddingModel: WeddingItemModel())
-        .environmentObject(RealmManager())
+    GuestListView(weddingModel: WeddingItem(title: "", location: "", budget: "", notes: "", order: 0))
 }

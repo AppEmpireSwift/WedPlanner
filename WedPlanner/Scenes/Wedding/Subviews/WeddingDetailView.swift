@@ -1,27 +1,29 @@
 import SwiftUI
 
 struct WeddingDetailView: View {
-    var weddingModel: WeddingItemModel
+    var weddingModel: WeddingItem
     
     private var totalSpended: Double {
-        let nonStandardTasks = weddingModel.tasks.filter { !$0.isTaskTypeStandart }
-        
-        let totalSpendedAmount = nonStandardTasks.reduce(0) { (result, task) in
-            let spendAmount = Double(task.spendText) ?? 0
-            return result + spendAmount
-        }
-        
-        return totalSpendedAmount
+//        let nonStandardTasks = weddingModel.tasks.filter { !$0.isTaskTypeStandart }
+//        
+//        let totalSpendedAmount = nonStandardTasks.reduce(0) { (result, task) in
+//            let spendAmount = Double(task.spendText) ?? 0
+//            return result + spendAmount
+//        }
+//        
+//        return totalSpendedAmount
+        return 0
     }
     
     private var totalAmount: Double {
-        let nonStandardTasks = weddingModel.tasks.filter { !$0.isTaskTypeStandart }
-        
-        let totalAmount = nonStandardTasks.reduce(0) { (result, task) in
-            let total = Double(task.totalText) ?? 0
-            return result + total
-        }
-        return totalAmount
+//        let nonStandardTasks = weddingModel.tasks.filter { !$0.isTaskTypeStandart }
+//        
+//        let totalAmount = nonStandardTasks.reduce(0) { (result, task) in
+//            let total = Double(task.totalText) ?? 0
+//            return result + total
+//        }
+//        return totalAmount
+        return 0
     }
     
     private var calculatePercentage: String {
@@ -270,15 +272,15 @@ struct WeddingDetailView: View {
             )
             
             VStack {
-                ForEach(weddingModel.tasks) { taskModel in
-                    WPTaskSelecteionView(model: taskModel)
-                        .disabled(true)
-                }
+//                ForEach(weddingModel.tasks) { taskModel in
+//                    WPTaskSelecteionView(model: taskModel)
+//                        .disabled(true)
+//                }
             }
         }
     }
 }
 
 #Preview {
-    WeddingDetailView(weddingModel: WeddingItemModel())
+    WeddingDetailView(weddingModel: WeddingItem(title: "dasd", location: "dada", budget: "asdas", notes: "dsfsd", order: 0))
 }

@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct WeddingItem {
+struct WeddingItem: Identifiable {
     let id: UUID
     var title: String
     var date: Date

@@ -3,7 +3,7 @@ import SwiftUI
 //TODO: - Добавить размытие ебаное
 
 struct WeddingItemCellView: View {
-    @ObservedObject var model: WeddingItemModel
+    var model: WeddingItem
     
     private var formattedDate: String {
         let dateFormatter = DateFormatter()
@@ -68,5 +68,5 @@ struct WeddingItemCellView: View {
 }
 
 #Preview {
-    WeddingItemCellView(model: WeddingItemModel())
+    WeddingItemCellView(model: WeddingItem(title: "a", location: "adf", budget: "asdf", notes: "fd", order: 0))
 }

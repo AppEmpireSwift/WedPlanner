@@ -6,8 +6,8 @@ struct WeddingViewStates {
 
 struct WeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
-    @EnvironmentObject private var realmManager: RealmManager
     @State private var states = WeddingViewStates()
+    @StateObject private var weddingItemViewModel = WeddingItemsViewModel()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -16,13 +16,14 @@ struct WeddingView: View {
             VStack {
                 NavView(
                     isNowEditing: $states.isNowEdditing,
-                    isDataEmpty: realmManager.weddings.isEmpty
+                    isDataEmpty: weddingItemViewModel.weddingItems.isEmpty
                 ) {
                     
                 }
                 .environmentObject(viewModel)
+                .environmentObject(weddingItemViewModel)
                 
-                if realmManager.weddings.isEmpty {
+                if weddingItemViewModel.weddingItems.isEmpty {
                     WPEmptyDataView(
                         image: "EmptyDataRingImg",
                         title: "Nothing here yet",
@@ -30,14 +31,16 @@ struct WeddingView: View {
                         buttonTitle: "Add Wedding",
                         destinationView: AddNewWeddingView()
                             .environmentObject(viewModel)
+                            .environmentObject(weddingItemViewModel)
                     )
                     .vSpacing(.center)
                 } else {
                     List {
-                        ForEach(realmManager.weddings) { wedModel in
+                        ForEach(weddingItemViewModel.weddingItems) { wedModel in
                             Group {
                                 NavigationLink {
                                     WeddingDetailView(weddingModel: wedModel)
+                                        .environmentObject(weddingItemViewModel)
                                         .onAppear {
                                             hiddenTabBar()
                                         }
@@ -65,21 +68,22 @@ struct WeddingView: View {
     }
     
     private func deleteItems(at offsets: IndexSet) {
-        let weddingsToDelete = offsets.map { realmManager.weddings[$0] }
-        
-        for wedding in weddingsToDelete {
-            realmManager.deleteWedding(wedding)
-        }
+//        let weddingsToDelete = offsets.map { realmManager.weddings[$0] }
+//        
+//        for wedding in weddingsToDelete {
+//            realmManager.deleteWedding(wedding)
+//        }
     }
     
     private func moveItems(from source: IndexSet, to destination: Int) {
-        realmManager.weddings.move(fromOffsets: source, toOffset: destination)
-        realmManager.updateWeddingsOrder(realmManager.weddings)
+//        realmManager.weddings.move(fromOffsets: source, toOffset: destination)
+//        realmManager.updateWeddingsOrder(realmManager.weddings)
     }
 }
 
 fileprivate struct NavView: View {
     @EnvironmentObject var viewModel: WeddingViewModel
+    @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
     @Binding var isNowEditing: Bool
     let isDataEmpty: Bool
     let editAction: () -> Void
@@ -117,6 +121,7 @@ fileprivate struct NavView: View {
                                         hiddenTabBar()
                                     }
                                     .environmentObject(viewModel)
+                                    .environmentObject(weddingItemViewModel)
                             ) {
                                     Color.clear
                                 }

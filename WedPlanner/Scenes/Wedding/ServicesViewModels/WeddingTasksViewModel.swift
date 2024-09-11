@@ -4,9 +4,9 @@ import Combine
 final class WeddingTasksViewModel: ObservableObject {
     @Published var tasks: [WeddingTask] = []
     
-    private let repository: WeddingTaskRepositoryService
+    private let repository: WeddingTaskRepositoryProtocol
     
-    init(repository: WeddingTaskRepositoryService) {
+    init(repository: WeddingTaskRepositoryProtocol = WeddingTaskRepositoryService()) {
         self.repository = repository
         fetchAllTasks()
     }

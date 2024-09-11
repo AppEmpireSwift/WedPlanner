@@ -3,9 +3,10 @@ import RealmSwift
 
 struct AddNewWeddingTaskView: View {
     @EnvironmentObject var viewModel: WeddingViewModel
+    @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
+    @StateObject private var weddingTasksViewModel: WeddingTasksViewModel = .init()
     @State private var isSelected: Bool = false
     @State private var isAddAlertShown: Bool = false
-    @EnvironmentObject private var realmManager: RealmManager
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -42,31 +43,31 @@ struct AddNewWeddingTaskView: View {
                     }
                     
                     List {
-                        ForEach(realmManager.weddingTasks) { wedTask in
-                            WPTaskSelecteionView(model: wedTask)
-                                .swipeActions {
-                                    Button(action: {
-                                        //realmManager.deleteTask(object: wedTask)
-                                    }, label: {
-                                        Text("Delete")
-                                    })
-                                }
-                                .listRowBackground(Color.clear)
-                                .listRowSeparator(.hidden)
-                        }
+//                        ForEach(realmManager.weddingTasks) { wedTask in
+//                            WPTaskSelecteionView(model: wedTask)
+//                                .swipeActions {
+//                                    Button(action: {
+//                                        //realmManager.deleteTask(object: wedTask)
+//                                    }, label: {
+//                                        Text("Delete")
+//                                    })
+//                                }
+//                                .listRowBackground(Color.clear)
+//                                .listRowSeparator(.hidden)
+//                        }
                     }
                     .listStyle(.plain)
                     .background(Color.clear)
                     
                     WPButtonView(title: "Save") {
-                        realmManager.addWeddingWith(
-                            title: viewModel.firstAddStates.titleText,
-                            date: viewModel.firstAddStates.weddingDate,
-                            location: viewModel.firstAddStates.locationText,
-                            budget: viewModel.firstAddStates.budgetText,
-                            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
-                            notes: viewModel.firstAddStates.notesText
-                        )
+//                        realmManager.addWeddingWith(
+//                            title: viewModel.firstAddStates.titleText,
+//                            date: viewModel.firstAddStates.weddingDate,
+//                            location: viewModel.firstAddStates.locationText,
+//                            budget: viewModel.firstAddStates.budgetText,
+//                            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
+//                            notes: viewModel.firstAddStates.notesText
+//                        )
                     }
                     .padding(.bottom)
                 }

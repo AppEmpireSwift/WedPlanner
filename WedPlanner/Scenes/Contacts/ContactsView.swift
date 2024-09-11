@@ -2,7 +2,7 @@ import SwiftUI
 
 struct ContactsView: View {
     @State private var searchText: String = ""
-    @EnvironmentObject private var realmManager: RealmManager
+    @EnvironmentObject private var weddingItemViewModel: WeddingItemsViewModel
     @Binding var selection: WPTabbarItemModel
     
     var body: some View {
@@ -23,14 +23,14 @@ struct ContactsView: View {
                 }
                 .padding()
                 
-                if realmManager.weddings.isEmpty {
+                if weddingItemViewModel.weddingItems.isEmpty {
                     emptyDataButtonView(action: {
                         selection = .wed
                     })
                     .vSpacing(.center)
                 } else {
                     List {
-                        ForEach(realmManager.weddings) { wedding in
+                        ForEach(weddingItemViewModel.weddingItems) { wedding in
                             NavigationLink(
                                 destination: WeddingContactsListView(wedding: wedding)
                                     .navigationBarBackButtonHidden()

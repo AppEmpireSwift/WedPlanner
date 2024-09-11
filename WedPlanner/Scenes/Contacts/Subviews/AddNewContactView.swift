@@ -11,7 +11,7 @@ struct AddNewContactViewStates {
 
 enum AddNewContactViewMode {
     case addNew
-    case edit(WeddingContactsModel)
+    case edit(WeddingContact)
 }
 
 struct AddNewContactView: View {
@@ -32,7 +32,7 @@ struct AddNewContactView: View {
                     nameText: contact.name,
                     phoneText: contact.phoneNum,
                     email: contact.email,
-                    adress: contact.adress,
+                    adress: contact.address,
                     birthDay: contact.birthDay,
                     notes: contact.notes
                 )
