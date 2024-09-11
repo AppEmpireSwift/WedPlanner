@@ -70,8 +70,11 @@ struct AddNewWeddingTaskView: View {
                             budget: viewModel.firstAddStates.budgetText,
                             coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
                             notes: viewModel.firstAddStates.notesText,
-                            order: weddingItemViewModel.weddingItems.count + 1
+                            order: weddingItemViewModel.weddingItems.count + 1,
+                            tasks: weddingTasksViewModel.fetchSelectedTasks()
                         )
+                        
+                        weddingTasksViewModel.deselectAllTasks()
                     }
                     .padding(.bottom)
                 }

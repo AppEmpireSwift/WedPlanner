@@ -3,6 +3,8 @@ import SwiftUI
 
 struct WPTabBar: View {
     @State private var selection: WPTabbarItemModel = .wed
+    @StateObject private var weddingItemViewModel = WeddingItemsViewModel()
+    @StateObject private var weddingTasksViewModel = WeddingTasksViewModel()
     
     init() {
         UITabBar.appearance().unselectedItemTintColor = UIColor.tbUnselected
@@ -16,6 +18,8 @@ struct WPTabBar: View {
                         TabBarItemView(itemModel: tab)
                     }
                     .tag(tab)
+                    .environmentObject(weddingItemViewModel)
+                    .environmentObject(weddingTasksViewModel)
             }
         }
         .accentColor(.accentColor)

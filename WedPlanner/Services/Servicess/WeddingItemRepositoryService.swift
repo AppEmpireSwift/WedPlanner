@@ -17,7 +17,15 @@ protocol WeddingItemRepositoryProtocol: AnyObject {
     func addContact(_ contact: WeddingContact, to weddingItem: WeddingItem) throws
     func removeContact(_ contact: WeddingContact, from weddingItem: WeddingItem) throws
     func updateContact(_ contact: WeddingContact, in weddingItem: WeddingItem) throws
+    
+    // Методы для работы с задачами
+    func addTask(_ task: WeddingTask, to weddingItem: WeddingItem) throws
+    func removeTask(_ task: WeddingTask, from weddingItem: WeddingItem) throws
+    func updateTask(_ task: WeddingTask, in weddingItem: WeddingItem) throws
 }
+
+
+import Foundation
 
 final class WeddingItemRepositoryService: WeddingItemRepositoryProtocol {
     private let database: DBManagerProtocol
@@ -98,6 +106,29 @@ final class WeddingItemRepositoryService: WeddingItemRepositoryProtocol {
         guard var item = try readBy(id: weddingItem.id) else { return }
         if let index = item.contacts.firstIndex(where: { $0.id == contact.id }) {
             item.contacts[index] = contact
+            try updateWeddingItem(item)
+        }
+    }
+
+    // Добавление задачи в свадьбу
+    func addTask(_ task: WeddingTask, to weddingItem: WeddingItem) throws {
+        guard var item = try readBy(id: weddingItem.id) else { return }
+        item.tasks.append(task)
+        try updateWeddingItem(item)
+    }
+    
+    // Удаление задачи из свадьбы
+    func removeTask(_ task: WeddingTask, from weddingItem: WeddingItem) throws {
+        guard var item = try readBy(id: weddingItem.id) else { return }
+        item.tasks.removeAll { $0.id == task.id }
+        try updateWeddingItem(item)
+    }
+    
+    // Обновление задачи в свадьбе
+    func updateTask(_ task: WeddingTask, in weddingItem: WeddingItem) throws {
+        guard var item = try readBy(id: weddingItem.id) else { return }
+        if let index = item.tasks.firstIndex(where: { $0.id == task.id }) {
+            item.tasks[index] = task
             try updateWeddingItem(item)
         }
     }

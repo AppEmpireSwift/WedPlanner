@@ -10,8 +10,9 @@ struct WeddingItem: Identifiable {
     var coverPhoto: Data
     var notes: String
     var order: Int
-    var guests: [WeddingGuest] // Массив гостей
-    var contacts: [WeddingContact] // Массив контактов
+    var guests: [WeddingGuest]
+    var contacts: [WeddingContact]
+    var tasks: [WeddingTask] // Добавлен массив задач
 
     init(id: UUID = UUID(),
          title: String,
@@ -21,8 +22,9 @@ struct WeddingItem: Identifiable {
          coverPhoto: Data = Data(),
          notes: String,
          order: Int,
-         guests: [WeddingGuest] = [], // Инициализатор с гостями
-         contacts: [WeddingContact] = []) { // Инициализатор с контактами
+         guests: [WeddingGuest] = [],
+         contacts: [WeddingContact] = [],
+         tasks: [WeddingTask] = []) { // Инициализатор с задачами
         self.id = id
         self.title = title
         self.date = date
@@ -33,6 +35,7 @@ struct WeddingItem: Identifiable {
         self.order = order
         self.guests = guests
         self.contacts = contacts
+        self.tasks = tasks
     }
 
     init(_ object: WeddingItemObject) {
@@ -44,8 +47,9 @@ struct WeddingItem: Identifiable {
         self.coverPhoto = object.coverPhoto
         self.notes = object.notes
         self.order = object.order
-        self.guests = object.guests.map { WeddingGuest($0) } // Преобразование гостей
-        self.contacts = object.contacts.map { WeddingContact($0) } // Преобразование контактов
+        self.guests = object.guests.map { WeddingGuest($0) }
+        self.contacts = object.contacts.map { WeddingContact($0) }
+        self.tasks = object.tasks.map { WeddingTask($0) } // Преобразование задач
     }
 }
 
@@ -58,8 +62,9 @@ class WeddingItemObject: Object, Identifiable {
     @Persisted var coverPhoto: Data
     @Persisted var notes: String
     @Persisted var order: Int
-    @Persisted var guests = List<WeddingGuestObject>() // Список гостей
-    @Persisted var contacts = List<WeddingContactObject>() // Список контактов
+    @Persisted var guests = List<WeddingGuestObject>()
+    @Persisted var contacts = List<WeddingContactObject>()
+    @Persisted var tasks = List<WeddingTaskObject>() // Добавлен список задач
 
     convenience init(_ weddingItem: WeddingItem) {
         self.init()
@@ -71,7 +76,8 @@ class WeddingItemObject: Object, Identifiable {
         self.coverPhoto = weddingItem.coverPhoto
         self.notes = weddingItem.notes
         self.order = weddingItem.order
-        self.guests.append(objectsIn: weddingItem.guests.map { WeddingGuestObject($0) }) // Преобразование гостей
-        self.contacts.append(objectsIn: weddingItem.contacts.map { WeddingContactObject($0) }) // Преобразование контактов
+        self.guests.append(objectsIn: weddingItem.guests.map { WeddingGuestObject($0) })
+        self.contacts.append(objectsIn: weddingItem.contacts.map { WeddingContactObject($0) })
+        self.tasks.append(objectsIn: weddingItem.tasks.map { WeddingTaskObject($0) }) // Преобразование задач
     }
 }

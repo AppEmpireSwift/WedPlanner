@@ -7,8 +7,10 @@ struct WeddingViewStates {
 struct WeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
     @State private var states = WeddingViewStates()
-    @StateObject private var weddingItemViewModel = WeddingItemsViewModel()
-    @StateObject private var weddingTasksViewModel = WeddingTasksViewModel()
+//    @StateObject private var weddingItemViewModel = WeddingItemsViewModel()
+//    @StateObject private var weddingTasksViewModel = WeddingTasksViewModel()
+    @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
+    @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     
     var body: some View {
         ZStack(alignment: .top) {

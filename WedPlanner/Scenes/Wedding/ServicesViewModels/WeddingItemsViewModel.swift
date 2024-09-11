@@ -19,8 +19,8 @@ final class WeddingItemsViewModel: ObservableObject {
         }
     }
     
-    func addWeddingItem(title: String, date: Date, location: String, budget: String, coverPhoto: Data, notes: String, order: Int) {
-        let newWeddingItem = WeddingItem(title: title, date: date, location: location, budget: budget, coverPhoto: coverPhoto, notes: notes, order: order)
+    func addWeddingItem(title: String, date: Date, location: String, budget: String, coverPhoto: Data, notes: String, order: Int, guests: [WeddingGuest] = [], contacts: [WeddingContact] = [], tasks: [WeddingTask] = []) {
+        let newWeddingItem = WeddingItem(title: title, date: date, location: location, budget: budget, coverPhoto: coverPhoto, notes: notes, order: order, guests: guests, contacts: contacts, tasks: tasks)
         do {
             try repository.addWeddingItem(newWeddingItem)
             fetchAllWeddingItems()
@@ -29,7 +29,7 @@ final class WeddingItemsViewModel: ObservableObject {
         }
     }
     
-    func updateWeddingItem(_ weddingItem: WeddingItem, title: String, date: Date, location: String, budget: String, coverPhoto: Data, notes: String, order: Int) {
+    func updateWeddingItem(_ weddingItem: WeddingItem, title: String, date: Date, location: String, budget: String, coverPhoto: Data, notes: String, order: Int, guests: [WeddingGuest] = [], contacts: [WeddingContact] = [], tasks: [WeddingTask] = []) {
         var updatedWeddingItem = weddingItem
         updatedWeddingItem.title = title
         updatedWeddingItem.date = date
@@ -38,6 +38,9 @@ final class WeddingItemsViewModel: ObservableObject {
         updatedWeddingItem.coverPhoto = coverPhoto
         updatedWeddingItem.notes = notes
         updatedWeddingItem.order = order
+        updatedWeddingItem.guests = guests
+        updatedWeddingItem.contacts = contacts
+        updatedWeddingItem.tasks = tasks
         
         do {
             try repository.updateWeddingItem(updatedWeddingItem)
@@ -122,6 +125,34 @@ final class WeddingItemsViewModel: ObservableObject {
             fetchAllWeddingItems()
         } catch {
             print("Ошибка при обновлении контакта: \(error.localizedDescription)")
+        }
+    }
+    
+    // Методы для управления задачами
+    func addTask(_ task: WeddingTask, to weddingItem: WeddingItem) {
+        do {
+            try repository.addTask(task, to: weddingItem)
+            fetchAllWeddingItems()
+        } catch {
+            print("Ошибка при добавлении задачи: \(error.localizedDescription)")
+        }
+    }
+    
+    func removeTask(_ task: WeddingTask, from weddingItem: WeddingItem) {
+        do {
+            try repository.removeTask(task, from: weddingItem)
+            fetchAllWeddingItems()
+        } catch {
+            print("Ошибка при удалении задачи: \(error.localizedDescription)")
+        }
+    }
+    
+    func updateTask(_ task: WeddingTask, in weddingItem: WeddingItem) {
+        do {
+            try repository.updateTask(task, in: weddingItem)
+            fetchAllWeddingItems()
+        } catch {
+            print("Ошибка при обновлении задачи: \(error.localizedDescription)")
         }
     }
 }
