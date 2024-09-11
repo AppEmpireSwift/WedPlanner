@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct WeddingItem: Identifiable {
+struct WeddingItem: Identifiable, Equatable {
     let id: UUID
     var title: String
     var date: Date
@@ -13,6 +13,10 @@ struct WeddingItem: Identifiable {
     var guests: [WeddingGuest]
     var contacts: [WeddingContact]
     var tasks: [WeddingTask] // Добавлен массив задач
+    
+    static func == (lhs: WeddingItem, rhs: WeddingItem) -> Bool {
+        return lhs.id == rhs.id && lhs.title == rhs.title
+    }
 
     init(id: UUID = UUID(),
          title: String,

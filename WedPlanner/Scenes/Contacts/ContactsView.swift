@@ -5,6 +5,18 @@ struct ContactsView: View {
     @EnvironmentObject private var weddingItemViewModel: WeddingItemsViewModel
     @Binding var selection: WPTabbarItemModel
     
+    var filteredWeddings: [WeddingItem] {
+        withAnimation(.snappy) {
+            if searchText.isEmpty {
+                return weddingItemViewModel.weddingItems
+            } else {
+                return weddingItemViewModel.weddingItems.filter { wedding in
+                    wedding.title.lowercased().contains(searchText.lowercased())
+                }
+            }
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             Color.mainBG.ignoresSafeArea()
@@ -21,16 +33,24 @@ struct ContactsView: View {
                     
                     WPSearchField(searchText: $searchText)
                 }
+                .dismissKeyboardOnTap()
                 .padding()
                 
-                if weddingItemViewModel.weddingItems.isEmpty {
-                    emptyDataButtonView(action: {
-                        selection = .wed
-                    })
-                    .vSpacing(.center)
+                if filteredWeddings.isEmpty {
+                    if searchText.isEmpty {
+                        emptyDataButtonView(action: {
+                            withAnimation(.snappy) {
+                                selection = .wed
+                            }
+                        })
+                        .vSpacing(.center)
+                    } else {
+                        noResultsView
+                            .vSpacing(.center)
+                    }
                 } else {
                     List {
-                        ForEach(weddingItemViewModel.weddingItems) { wedding in
+                        ForEach(filteredWeddings) { wedding in
                             NavigationLink(
                                 destination: WeddingContactsListView(wedding: wedding)
                                     .environmentObject(weddingItemViewModel)
@@ -56,9 +76,12 @@ struct ContactsView: View {
                     .listRowSpacing(12)
                     .background(Color.clear)
                     .padding(.horizontal, hPaddings)
+                    .animation(.snappy, value: filteredWeddings)
+                    .transition(.opacity)
                 }
             }
         }
+        .animation(.snappy, value: filteredWeddings.isEmpty)
         .navigationBarBackButtonHidden()
     }
     
@@ -89,6 +112,20 @@ struct ContactsView: View {
             .padding(.horizontal, 54)
         }
         .padding(.horizontal, hPaddings)
+        .transition(.opacity)
+    }
+    
+    private var noResultsView: some View {
+        VStack(spacing: 8) {
+            WPTextView(
+                text: "No results for '\(searchText)'",
+                color: .standartDarkText,
+                size: 17,
+                weight: .bold
+            )
+        }
+        .padding(.horizontal, hPaddings)
+        .transition(.opacity)
     }
 }
 
