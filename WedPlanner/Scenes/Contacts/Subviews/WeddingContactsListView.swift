@@ -1,12 +1,25 @@
 import SwiftUI
 
 struct WeddingContactsListView: View {
+    @EnvironmentObject var viewModel: WeddingItemsViewModel
     @State private var searchText: String = ""
     @State private var isContextMenuVisible: Bool = false
-    @State private var isNowEditing: Bool = false
+    @State private var isNowEditing: Bool = false {
+        didSet {
+            if !isNowEditing {
+                saveChanges()
+            }
+        }
+    }
     @State private var isAddContactPresented: Bool = false
-    
+    @State private var localContacts: [WeddingContact]
+
     var wedding: WeddingItem
+    
+    init(wedding: WeddingItem) {
+        self.wedding = wedding
+        _localContacts = State(initialValue: wedding.contacts)
+    }
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -24,21 +37,25 @@ struct WeddingContactsListView: View {
                 WPSearchField(searchText: $searchText)
                     .padding(.horizontal)
                 
-                if wedding.contacts.isEmpty {
+                if localContacts.isEmpty {
                     WPEmptyDataView(
                         image: "EmptyContactImg",
                         title: "Nothing here yet",
                         discr: "Add your Contacts",
                         buttonTitle: "Add New Contact",
-                        destinationView: AddNewContactView(type: .addNew)
+                        destinationView: AddNewContactView(type: .addNew, weddingItem: wedding)
+                            .environmentObject(viewModel)
                     )
                     .vSpacing(.center)
                 } else {
                     List {
-                        ForEach(wedding.contacts) { contact in
-//                            NavigationLink(destination: AddNewContactView(type: .edit(contact))) {
-//                                contactRowViewWith(contactModel: contact)
-//                            }
+                        ForEach(localContacts) { contact in
+                            NavigationLink {
+                                AddNewContactView(type: .edit(contact), weddingItem: wedding)
+                                    .environmentObject(viewModel)
+                            } label: {
+                                contactRowViewWith(contactModel: contact)
+                            }
                         }
                         .onDelete(perform: deleteContact)
                         .onMove(perform: reorderContacts)
@@ -89,49 +106,57 @@ struct WeddingContactsListView: View {
         .navigationBarBackButtonHidden()
         .dismissKeyboardOnTap()
         .fullScreenCover(isPresented: $isAddContactPresented, content: {
-            AddNewContactView(type: .addNew)
+            AddNewContactView(type: .addNew, weddingItem: wedding)
+                .environmentObject(viewModel)
         })
         .animation(.snappy, value: isNowEditing)
     }
     
     @ViewBuilder
-    private func contactRowViewWith(contactModel: WeddingItem) -> some View {
-//        NavigationLink(destination: AddNewContactView(type: .edit(contactModel.contacts))) {
-//            
-//            VStack(alignment: .leading, spacing: 5) {
-//                WPTextView(
-//                    text: contactModel.name,
-//                    color: .standartDarkText,
-//                    size: 17,
-//                    weight: .regular
-//                )
-//                
-//                WPTextView(
-//                    text: contactModel.phoneNum,
-//                    color: .lbSecendary,
-//                    size: 15,
-//                    weight: .regular
-//                )
-//                
-//                WPTextView(
-//                    text: contactModel.email,
-//                    color: .lbSecendary,
-//                    size: 15,
-//                    weight: .regular
-//                )
-//            }
-//        }
+    private func contactRowViewWith(contactModel: WeddingContact) -> some View {
+        VStack(alignment: .leading, spacing: 5) {
+            WPTextView(
+                text: contactModel.name,
+                color: .standartDarkText,
+                size: 17,
+                weight: .regular
+            )
+            
+            WPTextView(
+                text: contactModel.phoneNum,
+                color: .lbSecendary,
+                size: 15,
+                weight: .regular
+            )
+            
+            WPTextView(
+                text: contactModel.email,
+                color: .lbSecendary,
+                size: 15,
+                weight: .regular
+            )
+        }
     }
     
     private func deleteContact(at offsets: IndexSet) {
-
+        let contactsToDelete = offsets.map { localContacts[$0] }
+        
+        contactsToDelete.forEach { contact in
+            viewModel.removeContact(contact, from: wedding)
+        }
+        localContacts.remove(atOffsets: offsets)
     }
     
     private func reorderContacts(from source: IndexSet, to destination: Int) {
-
+        localContacts.move(fromOffsets: source, toOffset: destination)
+        saveChanges()
     }
-}
-
-#Preview {
- WeddingContactsListView(wedding: WeddingItem(title: "ds", location: "sad", budget: "dasd", notes: "sdaf", order: 0))
+    
+    private func saveChanges() {
+        viewModel.updateContactsOrder(in: wedding, with: localContacts)
+    }
+    
+    private func updateContacts() {
+        localContacts = wedding.contacts
+    }
 }

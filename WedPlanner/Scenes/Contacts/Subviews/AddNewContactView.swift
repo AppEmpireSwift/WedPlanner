@@ -15,14 +15,16 @@ enum AddNewContactViewMode {
 }
 
 struct AddNewContactView: View {
+    @EnvironmentObject var viewModel: WeddingItemsViewModel
     @State private var states = AddNewContactViewStates()
     let type: AddNewContactViewMode
+    var weddingItem: WeddingItem?
     
     private var isSaveDisabled: Bool {
         states.nameText.isEmpty || states.phoneText.isEmpty || states.email.isEmpty
     }
     
-    init(type: AddNewContactViewMode) {
+    init(type: AddNewContactViewMode, weddingItem: WeddingItem? = nil) {
         _states = State(initialValue: {
             switch type {
             case .addNew:
@@ -40,6 +42,7 @@ struct AddNewContactView: View {
         }())
         
         self.type = type
+        self.weddingItem = weddingItem
     }
     
     var body: some View {
@@ -65,7 +68,7 @@ struct AddNewContactView: View {
                 }
                 
                 WPButtonView(title: "Save") {
-                    
+                    buttonAction()
                 }
                 .disabled(isSaveDisabled)
                 .padding(.horizontal, hPaddings)
@@ -144,6 +147,38 @@ struct AddNewContactView: View {
             RoundedRectangle(cornerRadius: 12)
                 .foregroundColor(.mainBG)
         )
+    }
+    
+    private func buttonAction() {
+        switch type {
+        case .addNew:
+            if let wedding = weddingItem {
+                viewModel.addContact(WeddingContact(
+                    name: states.nameText,
+                    phoneNum: states.phoneText,
+                    email: states.email,
+                    address: states.adress,
+                    birthDay: states.birthDay,
+                    notes: states.notes,
+                    order: wedding.contacts.count + 1),
+                                     to: wedding
+                )
+            }
+        case .edit(let weddingContact):
+            if let wedding = weddingItem {
+                viewModel.updateContact(
+                    WeddingContact(
+                        name: states.nameText,
+                        phoneNum: states.phoneText,
+                        email: states.email,
+                        address: states.adress,
+                        birthDay: states.birthDay,
+                        notes: states.notes,
+                        order: weddingContact.order
+                    ), in: wedding
+                )
+            }
+        }
     }
 }
 

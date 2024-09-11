@@ -127,6 +127,8 @@ final class WeddingTasksViewModel: ObservableObject {
         let updatedTasks = allTasks.map { task -> WeddingTask in
             var updatedTask = task
             updatedTask.isSelected = false
+            updatedTask.spendText = ""
+            updatedTask.totalText = ""
             return updatedTask
         }
         

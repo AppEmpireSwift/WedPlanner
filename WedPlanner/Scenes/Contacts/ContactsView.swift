@@ -33,6 +33,7 @@ struct ContactsView: View {
                         ForEach(weddingItemViewModel.weddingItems) { wedding in
                             NavigationLink(
                                 destination: WeddingContactsListView(wedding: wedding)
+                                    .environmentObject(weddingItemViewModel)
                                     .navigationBarBackButtonHidden()
                                     .onAppear(perform: {
                                         hiddenTabBar()
