@@ -63,6 +63,7 @@ extension View {
     /// Модификатор кастомного алерта по добавлению Task
     func wpAlert(isPresented: Binding<Bool>) -> some View {
         self.modifier(WPAlertViewModifier(isPresented: isPresented))
+            .environmentObject(WeddingTasksViewModel())
     }
     
     /// Модификатор кастомного алерта по добавлению Гостей

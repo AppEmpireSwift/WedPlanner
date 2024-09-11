@@ -4,7 +4,7 @@ import RealmSwift
 struct AddNewWeddingTaskView: View {
     @EnvironmentObject var viewModel: WeddingViewModel
     @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
-    @StateObject private var weddingTasksViewModel: WeddingTasksViewModel = .init()
+    @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     @State private var isSelected: Bool = false
     @State private var isAddAlertShown: Bool = false
     
@@ -43,31 +43,35 @@ struct AddNewWeddingTaskView: View {
                     }
                     
                     List {
-//                        ForEach(realmManager.weddingTasks) { wedTask in
-//                            WPTaskSelecteionView(model: wedTask)
-//                                .swipeActions {
-//                                    Button(action: {
-//                                        //realmManager.deleteTask(object: wedTask)
-//                                    }, label: {
-//                                        Text("Delete")
-//                                    })
-//                                }
-//                                .listRowBackground(Color.clear)
-//                                .listRowSeparator(.hidden)
-//                        }
+                        ForEach(weddingTasksViewModel.tasks) { wedTask in
+                            WPTaskSelectionView(model: wedTask)
+                                .environmentObject(weddingTasksViewModel)
+                                .swipeActions {
+                                    if wedTask.isTaskCanBeDeleted {
+                                        Button(action: {
+                                            weddingTasksViewModel.deleteTask(wedTask)
+                                        }, label: {
+                                            Text("Delete")
+                                        })
+                                    }
+                                }
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                        }
                     }
                     .listStyle(.plain)
                     .background(Color.clear)
                     
                     WPButtonView(title: "Save") {
-//                        realmManager.addWeddingWith(
-//                            title: viewModel.firstAddStates.titleText,
-//                            date: viewModel.firstAddStates.weddingDate,
-//                            location: viewModel.firstAddStates.locationText,
-//                            budget: viewModel.firstAddStates.budgetText,
-//                            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
-//                            notes: viewModel.firstAddStates.notesText
-//                        )
+                        weddingItemViewModel.addWeddingItem(
+                            title: viewModel.firstAddStates.titleText,
+                            date: viewModel.firstAddStates.weddingDate,
+                            location: viewModel.firstAddStates.locationText,
+                            budget: viewModel.firstAddStates.budgetText,
+                            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
+                            notes: viewModel.firstAddStates.notesText,
+                            order: weddingItemViewModel.weddingItems.count + 1
+                        )
                     }
                     .padding(.bottom)
                 }

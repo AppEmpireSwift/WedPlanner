@@ -3,6 +3,7 @@ import SwiftUI
 struct AddNewWeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
     @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
+    @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     
     private var isContinueEnabled: Bool {
         if viewModel.firstAddStates.titleText.isEmpty || viewModel.firstAddStates.locationText.isEmpty || viewModel.firstAddStates.budgetText.isEmpty {
@@ -58,6 +59,7 @@ struct AddNewWeddingView: View {
                     destination: AddNewWeddingTaskView()
                         .environmentObject(viewModel)
                         .environmentObject(weddingItemViewModel)
+                        .environmentObject(weddingTasksViewModel)
                 ) {
                     RoundedRectangle(cornerRadius: 12)
                         .frame(height: 50)

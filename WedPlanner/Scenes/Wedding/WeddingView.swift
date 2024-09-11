@@ -8,6 +8,7 @@ struct WeddingView: View {
     @StateObject var viewModel = WeddingViewModel()
     @State private var states = WeddingViewStates()
     @StateObject private var weddingItemViewModel = WeddingItemsViewModel()
+    @StateObject private var weddingTasksViewModel = WeddingTasksViewModel()
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -22,6 +23,7 @@ struct WeddingView: View {
                 }
                 .environmentObject(viewModel)
                 .environmentObject(weddingItemViewModel)
+                .environmentObject(weddingTasksViewModel)
                 
                 if weddingItemViewModel.weddingItems.isEmpty {
                     WPEmptyDataView(
@@ -32,6 +34,7 @@ struct WeddingView: View {
                         destinationView: AddNewWeddingView()
                             .environmentObject(viewModel)
                             .environmentObject(weddingItemViewModel)
+                            .environmentObject(weddingTasksViewModel)
                     )
                     .vSpacing(.center)
                 } else {
@@ -41,6 +44,7 @@ struct WeddingView: View {
                                 NavigationLink {
                                     WeddingDetailView(weddingModel: wedModel)
                                         .environmentObject(weddingItemViewModel)
+                                        .environmentObject(weddingTasksViewModel)
                                         .onAppear {
                                             hiddenTabBar()
                                         }
@@ -84,6 +88,7 @@ struct WeddingView: View {
 fileprivate struct NavView: View {
     @EnvironmentObject var viewModel: WeddingViewModel
     @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
+    @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     @Binding var isNowEditing: Bool
     let isDataEmpty: Bool
     let editAction: () -> Void
@@ -122,6 +127,7 @@ fileprivate struct NavView: View {
                                     }
                                     .environmentObject(viewModel)
                                     .environmentObject(weddingItemViewModel)
+                                    .environmentObject(weddingTasksViewModel)
                             ) {
                                     Color.clear
                                 }

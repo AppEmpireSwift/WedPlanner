@@ -5,7 +5,7 @@ struct WPAlertViewModifier: ViewModifier {
     @State private var taskName: String = ""
     @State private var isBudgetIncluded: Bool = false
     @StateObject private var viewModel = WeddingViewModel()
-    @StateObject private var taskViewModel = WeddingTasksViewModel()
+    @EnvironmentObject var taskViewModel: WeddingTasksViewModel
     
     func body(content: Content) -> some View {
         ZStack {
