@@ -15,6 +15,7 @@ enum AddNewContactViewMode {
 }
 
 struct AddNewContactView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: WeddingItemsViewModel
     @State private var states = AddNewContactViewStates()
     let type: AddNewContactViewMode
@@ -153,20 +154,7 @@ struct AddNewContactView: View {
         switch type {
         case .addNew:
             if let wedding = weddingItem {
-                viewModel.addContact(WeddingContact(
-                    name: states.nameText,
-                    phoneNum: states.phoneText,
-                    email: states.email,
-                    address: states.adress,
-                    birthDay: states.birthDay,
-                    notes: states.notes,
-                    order: wedding.contacts.count + 1),
-                                     to: wedding
-                )
-            }
-        case .edit(let weddingContact):
-            if let wedding = weddingItem {
-                viewModel.updateContact(
+                viewModel.addContact(
                     WeddingContact(
                         name: states.nameText,
                         phoneNum: states.phoneText,
@@ -174,10 +162,30 @@ struct AddNewContactView: View {
                         address: states.adress,
                         birthDay: states.birthDay,
                         notes: states.notes,
-                        order: weddingContact.order
-                    ), in: wedding
+                        order: wedding.contacts.count + 1
+                    ),
+                    to: wedding
                 )
             }
+        case .edit(let weddingContact):
+            if let wedding = weddingItem {
+                let updatedContact = WeddingContact(
+                    id: weddingContact.id,
+                    name: states.nameText,
+                    phoneNum: states.phoneText,
+                    email: states.email,
+                    address: states.adress,
+                    birthDay: states.birthDay,
+                    notes: states.notes,
+                    order: weddingContact.order
+                )
+                viewModel.updateContact(updatedContact, in: wedding)
+            }
+        }
+        viewModel.fetchAllWeddingItems()
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            dismiss.callAsFunction()
         }
     }
 }

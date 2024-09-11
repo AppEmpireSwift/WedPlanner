@@ -13,6 +13,7 @@ struct WeddingContactsListView: View {
     }
     @State private var isAddContactPresented: Bool = false
     @State private var localContacts: [WeddingContact]
+    @State private var isSortedAlphabetically: Bool = false
 
     var wedding: WeddingItem
     
@@ -33,29 +34,42 @@ struct WeddingContactsListView: View {
                             isContextMenuVisible.toggle()
                         }
                     }
+                    .dismissKeyboardOnTap()
                 
                 WPSearchField(searchText: $searchText)
                     .padding(.horizontal)
+                    .animation(.snappy, value: searchText)
                 
-                if localContacts.isEmpty {
-                    WPEmptyDataView(
-                        image: "EmptyContactImg",
-                        title: "Nothing here yet",
-                        discr: "Add your Contacts",
-                        buttonTitle: "Add New Contact",
-                        destinationView: AddNewContactView(type: .addNew, weddingItem: wedding)
-                            .environmentObject(viewModel)
-                    )
-                    .vSpacing(.center)
+                if filteredContacts().isEmpty {
+                    if localContacts.isEmpty {
+                        WPEmptyDataView(
+                            image: "EmptyContactImg",
+                            title: "Nothing here yet",
+                            discr: "Add your Contacts",
+                            buttonTitle: "Add New Contact",
+                            destinationView: AddNewContactView(type: .addNew, weddingItem: wedding)
+                                .environmentObject(viewModel)
+                        )
+                        .vSpacing(.center)
+                        .transition(.opacity)
+                    } else {
+                        Text("No contacts match your search.")
+                            .font(.headline)
+                            .foregroundColor(.gray)
+                            .transition(.opacity)
+                    }
                 } else {
                     List {
-                        ForEach(localContacts) { contact in
-                            NavigationLink {
-                                AddNewContactView(type: .edit(contact), weddingItem: wedding)
-                                    .environmentObject(viewModel)
-                            } label: {
+                        ForEach(filteredContacts(), id: \.self) { contact in
+                            ZStack(alignment: .leading) {
                                 contactRowViewWith(contactModel: contact)
+                                NavigationLink {
+                                    AddNewContactView(type: .edit(contact), weddingItem: wedding)
+                                        .environmentObject(viewModel)
+                                } label: {}
+                                    .opacity(0)
                             }
+                            .transition(.slide)
                         }
                         .onDelete(perform: deleteContact)
                         .onMove(perform: reorderContacts)
@@ -66,6 +80,7 @@ struct WeddingContactsListView: View {
                     .environment(\.editMode, .constant(self.isNowEditing ? EditMode.active : EditMode.inactive))
                     .background(Color.clear)
                     .padding(.horizontal, hPaddings)
+                    .animation(.snappy, value: filteredContacts().count)
                 }
             }
             
@@ -88,8 +103,10 @@ struct WeddingContactsListView: View {
                             }
                         },
                         onFilterAction: {
-                            isContextMenuVisible.toggle()
-                            // Добавьте здесь логику для фильтрации контактов по алфавиту
+                            withAnimation {
+                                isContextMenuVisible.toggle()
+                                toggleSortOrder()
+                            }
                         }
                     )
                     .frame(width: 250)
@@ -104,12 +121,19 @@ struct WeddingContactsListView: View {
             }
         }
         .navigationBarBackButtonHidden()
-        .dismissKeyboardOnTap()
         .fullScreenCover(isPresented: $isAddContactPresented, content: {
             AddNewContactView(type: .addNew, weddingItem: wedding)
                 .environmentObject(viewModel)
         })
         .animation(.snappy, value: isNowEditing)
+        .onChange(of: isAddContactPresented) { newValue in
+            if !newValue {
+                updateContacts()
+            }
+        }
+        .onAppear {
+            updateContacts()
+        }
     }
     
     @ViewBuilder
@@ -139,17 +163,21 @@ struct WeddingContactsListView: View {
     }
     
     private func deleteContact(at offsets: IndexSet) {
-        let contactsToDelete = offsets.map { localContacts[$0] }
-        
-        contactsToDelete.forEach { contact in
-            viewModel.removeContact(contact, from: wedding)
+        withAnimation(.snappy) {
+            let contactsToDelete = offsets.map { localContacts[$0] }
+            
+            contactsToDelete.forEach { contact in
+                viewModel.removeContact(contact, from: wedding)
+            }
+            localContacts.remove(atOffsets: offsets)
         }
-        localContacts.remove(atOffsets: offsets)
     }
     
     private func reorderContacts(from source: IndexSet, to destination: Int) {
-        localContacts.move(fromOffsets: source, toOffset: destination)
-        saveChanges()
+        withAnimation(.snappy) {
+            localContacts.move(fromOffsets: source, toOffset: destination)
+            saveChanges()
+        }
     }
     
     private func saveChanges() {
@@ -158,5 +186,27 @@ struct WeddingContactsListView: View {
     
     private func updateContacts() {
         localContacts = wedding.contacts
+        if isSortedAlphabetically {
+            sortContactsAlphabetically()
+        }
+    }
+    
+    private func toggleSortOrder() {
+        withAnimation(.snappy) {
+            isSortedAlphabetically.toggle()
+            updateContacts()
+        }
+    }
+    
+    private func sortContactsAlphabetically() {
+        localContacts.sort { $0.name.lowercased() < $1.name.lowercased() }
+    }
+    
+    private func filteredContacts() -> [WeddingContact] {
+        if searchText.isEmpty {
+            return localContacts
+        } else {
+            return localContacts.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        }
     }
 }

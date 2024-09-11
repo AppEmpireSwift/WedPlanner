@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct WeddingContact: Identifiable {
+struct WeddingContact: Identifiable, Hashable {
     let id: UUID
     var name: String
     var phoneNum: String
