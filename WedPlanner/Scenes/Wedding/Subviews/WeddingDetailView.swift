@@ -1,6 +1,11 @@
 import SwiftUI
 
 struct WeddingDetailView: View {
+    @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
+    @EnvironmentObject var weddingTaskViewModel: WeddingTasksViewModel
+    
+    @State private var isEditShown: Bool = false
+    
     var weddingModel: WeddingItem
     
     private var totalSpended: Double {
@@ -36,7 +41,9 @@ struct WeddingDetailView: View {
                     title: "Wedding Details",
                     rightBtnTitle: "Edit",
                     isRightBtnEnabled: true) {
-                        
+                        withAnimation(.snappy) {
+                            isEditShown.toggle()
+                        }
                     }
                 
                 LineSeparaterView()
@@ -72,6 +79,11 @@ struct WeddingDetailView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .fullScreenCover(isPresented: $isEditShown, content: {
+            UpdateWeddingView(weddingItem: weddingModel)
+                .environmentObject(weddingItemViewModel)
+                .environmentObject(weddingTaskViewModel)
+        })
     }
     
     private func firstLineHStackView() -> some View {
