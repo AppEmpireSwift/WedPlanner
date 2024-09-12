@@ -2,11 +2,13 @@ import SwiftUI
 import RealmSwift
 
 struct AddNewWeddingTaskView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: WeddingViewModel
     @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
     @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     @State private var isSelected: Bool = false
     @State private var isAddAlertShown: Bool = false
+    @Binding var isParentViewActive: Bool
         
     var body: some View {
         ZStack(alignment: .top) {
@@ -93,5 +95,8 @@ struct AddNewWeddingTaskView: View {
         )
         
         weddingTasksViewModel.deselectAllTasks()
+        
+        dismiss.callAsFunction()
+        isParentViewActive = false
     }
 }

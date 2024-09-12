@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct AddNewWeddingView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var viewModel = WeddingViewModel()
     @EnvironmentObject var weddingItemViewModel: WeddingItemsViewModel
     @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
+    @State var isPresented: Bool = true
     
     private var isContinueEnabled: Bool {
         if viewModel.firstAddStates.titleText.isEmpty || viewModel.firstAddStates.locationText.isEmpty || viewModel.firstAddStates.budgetText.isEmpty {
@@ -56,7 +58,7 @@ struct AddNewWeddingView: View {
                 .padding(.vertical)
                 
                 NavigationLink(
-                    destination: AddNewWeddingTaskView()
+                    destination: AddNewWeddingTaskView(isParentViewActive: $isPresented)
                         .environmentObject(viewModel)
                         .environmentObject(weddingItemViewModel)
                         .environmentObject(weddingTasksViewModel)
@@ -76,6 +78,11 @@ struct AddNewWeddingView: View {
                 .padding(.horizontal, hPaddings)
                 .padding(.bottom, 33)
                 .disabled(!isContinueEnabled)
+            }
+        }
+        .onAppear{
+            if !isPresented {
+                dismiss.callAsFunction()
             }
         }
         .ignoresSafeArea(.container, edges: .bottom)
