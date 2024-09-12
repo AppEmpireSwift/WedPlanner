@@ -101,6 +101,18 @@ final class WeddingItemsViewModel: ObservableObject {
         }
     }
     
+    func updateGuestsOrder(in weddingItem: WeddingItem, with updatedGuests: [WeddingGuest]) {
+        var updatedWeddingItem = weddingItem
+        updatedWeddingItem.guests = updatedGuests
+        
+        do {
+            try repository.updateWeddingItem(updatedWeddingItem)
+            fetchAllWeddingItems()
+        } catch {
+            print("Ошибка при обновлении порядка гостей: \(error.localizedDescription)")
+        }
+    }
+    
     // Методы для управления контактами
     func addContact(_ contact: WeddingContact, to weddingItem: WeddingItem) {
         do {

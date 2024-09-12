@@ -4,47 +4,62 @@ struct GuestListView: View {
     @EnvironmentObject var weddingViewModel: WeddingItemsViewModel
     @State private var searchText: String = ""
     @State private var isAddPresented: Bool = false
-    @State private var isNowEdditing: Bool = false
+    @State private var isNowEditing: Bool = false
     @State private var newGuestName: String = ""
     @State private var newGuestRole: String = ""
-    
-    var weddingModel: WeddingItem
-    
     @State private var isContextMenuVisible: Bool = false
-    
+
+    var weddingModel: WeddingItem
+
+    var filteredGuests: [WeddingGuest] {
+        var guests = weddingModel.guests
+        if !searchText.isEmpty {
+            guests = guests.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+        }
+        return guests
+    }
+
     var body: some View {
         ZStack(alignment: .top) {
             Color.mainBG.ignoresSafeArea()
             
             VStack(spacing: 11) {
-                SubNavBarView(
-                    type: .backTitleImageBtn(rtBtnType: .threeDotsInCircle),
-                    title: "Guest List",
-                    isRightBtnEnabled: true) {
-                        withAnimation {
-                            isContextMenuVisible.toggle()
+                VStack {
+                    SubNavBarView(
+                        type: .backTitleImageBtn(rtBtnType: .threeDotsInCircle),
+                        title: "Guest List",
+                        isRightBtnEnabled: true) {
+                            withAnimation {
+                                isContextMenuVisible.toggle()
+                            }
                         }
-                    }
-                
-                WPSearchField(searchText: $searchText)
-                    .padding(.horizontal, hPaddings)
-                    .padding(.vertical, 4)
-                
-                LineSeparaterView()
-                
-                List {
-//                    ForEach(filteredGuests, id: \.id) { guest in
-//                        guestItemView(for: guest)
-//                            .listRowBackground(Color.clear)
-//                            .listRowSeparator(.hidden)
-//                    }
-//                    .onDelete(perform: deleteItems)
-//                    .onMove(perform: moveItems)
+                    
+                    WPSearchField(searchText: $searchText)
+                        .padding(.horizontal, hPaddings)
+                        .padding(.vertical, 4)
+                    
+                    LineSeparaterView()
                 }
-                .environment(\.editMode, .constant(self.isNowEdditing ? EditMode.active : EditMode.inactive))
-                .listStyle(PlainListStyle())
-                .background(Color.clear)
-                .padding(.horizontal, hPaddings)
+                .dismissKeyboardOnTap()
+                
+               
+                if filteredGuests.isEmpty {
+                    emptyListView()
+                } else {
+                    List {
+                        ForEach(filteredGuests, id: \.id) { guest in
+                            guestItemView(for: guest)
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                        }
+                        .onDelete(perform: deleteGuest)
+                        .onMove(perform: moveItems)
+                    }
+                    .environment(\.editMode, .constant(self.isNowEditing ? EditMode.active : EditMode.inactive))
+                    .listStyle(PlainListStyle())
+                    .background(Color.clear)
+                    .padding(.horizontal, hPaddings)
+                }
             }
             
             if isContextMenuVisible {
@@ -53,11 +68,13 @@ struct GuestListView: View {
                     
                     WPContextMenu(style: .editAndAddContact) {
                         withAnimation {
-                            isNowEdditing.toggle()
+                            isNowEditing.toggle()
+                            isContextMenuVisible.toggle()
                         }
                     } onAddGuestAction: {
                         withAnimation {
                             isAddPresented.toggle()
+                            isContextMenuVisible.toggle()
                         }
                     }
                     .frame(width: 250, height: 94)
@@ -72,23 +89,20 @@ struct GuestListView: View {
             }
         }
         .navigationBarBackButtonHidden()
-        .dismissKeyboardOnTap()
+
         .wpGuestAlert(isPresented: $isAddPresented, guestName: $newGuestName, guestNote: $newGuestRole) {
             addNewGuest()
         }
-       // .animation(.spring(response: 0.5, dampingFraction: 0.8, blendDuration: 0.5), value: filteredGuests)
-    }
-    
-    private var filteredGuests: [WeddingGuest] {
-        if searchText.isEmpty {
-            return Array(weddingModel.guests)
-        } else {
-            return weddingModel.guests.filter { guest in
-                guest.name.localizedCaseInsensitiveContains(searchText)
-            }
+        
+        .onAppear {
+            weddingViewModel.fetchAllWeddingItems()
+        }
+        
+        .onChange(of: isAddPresented) { _ in
+            weddingViewModel.fetchAllWeddingItems()
         }
     }
-    
+
     @ViewBuilder
     private func guestItemView(for model: WeddingGuest) -> some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -112,29 +126,44 @@ struct GuestListView: View {
             )
         }
     }
-    
-    private func deleteItems(at offsets: IndexSet) {
-//        for index in offsets {
-//            let guest = filteredGuests[index]
-//            realmManager.deleteGuest(guest, from: weddingModel)
-//        }
+
+    private func deleteGuest(at offsets: IndexSet) {
+        guard let index = offsets.first else { return }
+        let guestToDelete = filteredGuests[index]
+        weddingViewModel.removeGuest(guestToDelete, from: weddingModel)
+        weddingViewModel.fetchAllWeddingItems()
     }
 
     private func moveItems(from source: IndexSet, to destination: Int) {
-//        var reorderedGuests = filteredGuests
-//        reorderedGuests.move(fromOffsets: source, toOffset: destination)
-//        realmManager.updateGuestsOrder(in: weddingModel, with: reorderedGuests)
+        var updatedGuests = filteredGuests
+        updatedGuests.move(fromOffsets: source, toOffset: destination)
+        weddingViewModel.updateGuestsOrder(in: weddingModel, with: updatedGuests)
+        weddingViewModel.fetchAllWeddingItems()
     }
-    
-    private func addNewGuest() {
-//        if !newGuestName.isEmpty && !newGuestRole.isEmpty {
-//            realmManager.addGuest(name: newGuestName, role: newGuestRole, to: weddingModel)
-//            newGuestName = ""
-//            newGuestRole = ""
-//        }
-    }
-}
 
-#Preview {
-    GuestListView(weddingModel: WeddingItem(title: "", location: "", budget: "", notes: "", order: 0))
+    private func addNewGuest() {
+        guard !newGuestName.isEmpty else { return }
+        
+        let newGuest = WeddingGuest(
+            name: newGuestName,
+            role: newGuestRole,
+            order: weddingModel.guests.count + 1
+        )
+        weddingViewModel.addGuest(newGuest, to: weddingModel)
+        weddingViewModel.fetchAllWeddingItems()
+        
+        newGuestName = ""
+        newGuestRole = ""
+    }
+
+    @ViewBuilder
+    private func emptyListView() -> some View {
+        VStack {
+            Spacer()
+            Text("No guests found")
+                .foregroundColor(.gray)
+                .font(.headline)
+            Spacer()
+        }
+    }
 }

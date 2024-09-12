@@ -2,7 +2,7 @@ import Foundation
 import RealmSwift
 
 // Модель Swift
-struct WeddingGuest {
+struct WeddingGuest: Identifiable, Equatable {
     let id: UUID
     var name: String
     var role: String

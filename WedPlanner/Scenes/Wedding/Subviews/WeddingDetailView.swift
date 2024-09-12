@@ -112,6 +112,7 @@ struct WeddingDetailView: View {
                 }
             NavigationLink {
                 GuestListView(weddingModel: weddingModel)
+                    .environmentObject(weddingItemViewModel)
             } label: {
             RoundedRectangle(cornerRadius: 12)
                 .frame(height: 65)
