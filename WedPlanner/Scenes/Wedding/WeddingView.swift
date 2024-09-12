@@ -73,16 +73,14 @@ struct WeddingView: View {
     }
     
     private func deleteItems(at offsets: IndexSet) {
-//        let weddingsToDelete = offsets.map { realmManager.weddings[$0] }
-//        
-//        for wedding in weddingsToDelete {
-//            realmManager.deleteWedding(wedding)
-//        }
+        for index in offsets {
+            let weddingToDelete = weddingItemViewModel.weddingItems[index]
+            weddingItemViewModel.deleteWeddingItem(weddingToDelete)
+        }
     }
     
     private func moveItems(from source: IndexSet, to destination: Int) {
-//        realmManager.weddings.move(fromOffsets: source, toOffset: destination)
-//        realmManager.updateWeddingsOrder(realmManager.weddings)
+        weddingItemViewModel.reorderWeddingItems(from: source, to: destination)
     }
 }
 

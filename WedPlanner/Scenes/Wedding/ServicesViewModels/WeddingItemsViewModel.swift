@@ -13,7 +13,7 @@ final class WeddingItemsViewModel: ObservableObject {
     
     func fetchAllWeddingItems() {
         do {
-            weddingItems = try repository.fetchAll()
+            weddingItems = try repository.fetchAll().sorted(by: { $0.order < $1.order })
         } catch {
             print("Ошибка при получении элементов свадьбы: \(error.localizedDescription)")
         }
@@ -60,17 +60,18 @@ final class WeddingItemsViewModel: ObservableObject {
     }
     
     func reorderWeddingItems(from source: IndexSet, to destination: Int) {
-        weddingItems.move(fromOffsets: source, toOffset: destination)
-        do {
-            for (index, item) in weddingItems.enumerated() {
-                var updatedItem = item
-                updatedItem.order = index
-                try repository.updateWeddingItem(updatedItem)
-            }
-        } catch {
-            print("Ошибка при изменении порядка элементов свадьбы: \(error.localizedDescription)")
-        }
-    }
+         weddingItems.move(fromOffsets: source, toOffset: destination)
+         
+         do {
+             for (index, item) in weddingItems.enumerated() {
+                 var updatedItem = item
+                 updatedItem.order = index
+                 try repository.updateWeddingItem(updatedItem)
+             }
+         } catch {
+             print("Ошибка при изменении порядка элементов свадьбы: \(error.localizedDescription)")
+         }
+     }
     
     // Методы для управления гостями
     func addGuest(_ guest: WeddingGuest, to weddingItem: WeddingItem) {

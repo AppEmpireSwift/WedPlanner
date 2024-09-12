@@ -69,6 +69,7 @@ struct IdeasView: View {
                 }
             }
         }
+        .animation(.snappy, value: filteredIdeas)
     }
     
     @ViewBuilder

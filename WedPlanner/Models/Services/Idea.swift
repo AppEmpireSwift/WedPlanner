@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct Idea {
+struct Idea: Identifiable ,Equatable {
     let id: UUID
     var title: String
     var descriptionText: String
