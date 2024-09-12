@@ -99,6 +99,7 @@ struct WeddingDetailView: View {
                             size: isiPhone ? 16 : 20,
                             weight: .regular
                         )
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         WPTextView(
                             text: weddingModel.location,
@@ -106,6 +107,7 @@ struct WeddingDetailView: View {
                             size: 13,
                             weight: .semibold
                         )
+                        .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     .padding(.horizontal, 12)
                     .padding(.vertical, 10)
