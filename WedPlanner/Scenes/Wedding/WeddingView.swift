@@ -44,7 +44,7 @@ struct WeddingView: View {
                                 WeddingItemCellView(model: wedModel)
                                 
                                 NavigationLink {
-                                    WeddingDetailView(weddingModel: wedModel)
+                                    WeddingDetailView(weddingModel: $weddingItemViewModel.weddingItems[weddingItemViewModel.weddingItems.firstIndex(where: { $0.id == wedModel.id })!])
                                         .environmentObject(weddingItemViewModel)
                                         .environmentObject(weddingTasksViewModel)
                                         .onAppear {

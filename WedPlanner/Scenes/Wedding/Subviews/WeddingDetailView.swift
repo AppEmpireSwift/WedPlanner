@@ -6,7 +6,7 @@ struct WeddingDetailView: View {
     
     @State private var isEditShown: Bool = false
     
-    var weddingModel: WeddingItem
+    @Binding var weddingModel: WeddingItem
     
     private var totalSpended: Double {
         let tasksWithValues = weddingModel.tasks.filter {$0.isTaskTypeStandart == false}
@@ -111,7 +111,7 @@ struct WeddingDetailView: View {
                     .padding(.vertical, 10)
                 }
             NavigationLink {
-                GuestListView(weddingModel: weddingModel)
+                GuestListView(weddingModel: $weddingModel)
                     .environmentObject(weddingItemViewModel)
             } label: {
             RoundedRectangle(cornerRadius: 12)
@@ -283,8 +283,4 @@ struct WeddingDetailView: View {
             }
         }
     }
-}
-
-#Preview {
-    WeddingDetailView(weddingModel: WeddingItem(title: "dasd", location: "dada", budget: "asdas", notes: "dsfsd", order: 0))
 }

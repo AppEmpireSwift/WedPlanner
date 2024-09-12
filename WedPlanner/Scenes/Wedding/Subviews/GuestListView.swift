@@ -9,7 +9,7 @@ struct GuestListView: View {
     @State private var newGuestRole: String = ""
     @State private var isContextMenuVisible: Bool = false
 
-    var weddingModel: WeddingItem
+    @Binding var weddingModel: WeddingItem
 
     var filteredGuests: [WeddingGuest] {
         var guests = weddingModel.guests
@@ -89,6 +89,7 @@ struct GuestListView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .animation(.snappy, value: filteredGuests)
 
         .wpGuestAlert(isPresented: $isAddPresented, guestName: $newGuestName, guestNote: $newGuestRole) {
             addNewGuest()
