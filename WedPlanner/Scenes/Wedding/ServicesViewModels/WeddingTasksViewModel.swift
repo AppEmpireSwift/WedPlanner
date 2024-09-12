@@ -14,7 +14,6 @@ final class WeddingTasksViewModel: ObservableObject {
     func fetchAllTasks() {
         do {
             tasks = try repository.fetchAll()
-            // Проверяем, если tasks пустой, добавляем дефолтные задачи
             if tasks.isEmpty {
                 addDefaultTasks()
             }
@@ -63,8 +62,6 @@ final class WeddingTasksViewModel: ObservableObject {
                 print("Ошибка при добавлении дефолтных задач: \(error.localizedDescription)")
             }
         }
-        
-        // Обновляем список задач после добавления дефолтных
         fetchAllTasks()
     }
     
@@ -116,12 +113,10 @@ final class WeddingTasksViewModel: ObservableObject {
         }
     }
     
-    // Метод для получения всех выбранных задач
     func fetchSelectedTasks() -> [WeddingTask] {
         return tasks.filter { $0.isSelected }
     }
     
-    // Метод для сброса всех задач (установить isSelected в false)
     func deselectAllTasks() {
         let allTasks = tasks
         let updatedTasks = allTasks.map { task -> WeddingTask in
@@ -132,7 +127,6 @@ final class WeddingTasksViewModel: ObservableObject {
             return updatedTask
         }
         
-        // Обновляем все задачи в репозитории
         for task in updatedTasks {
             do {
                 try repository.updateTask(task)

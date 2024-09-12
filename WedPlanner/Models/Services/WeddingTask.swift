@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-struct WeddingTask: Identifiable {
+struct WeddingTask: Identifiable, Codable {
     let id: UUID
     var name: String
     var isSelected: Bool

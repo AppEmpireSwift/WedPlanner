@@ -7,7 +7,7 @@ struct AddNewWeddingTaskView: View {
     @EnvironmentObject var weddingTasksViewModel: WeddingTasksViewModel
     @State private var isSelected: Bool = false
     @State private var isAddAlertShown: Bool = false
-    
+        
     var body: some View {
         ZStack(alignment: .top) {
             Color.mainBG.ignoresSafeArea()
@@ -63,18 +63,7 @@ struct AddNewWeddingTaskView: View {
                     .background(Color.clear)
                     
                     WPButtonView(title: "Save") {
-                        weddingItemViewModel.addWeddingItem(
-                            title: viewModel.firstAddStates.titleText,
-                            date: viewModel.firstAddStates.weddingDate,
-                            location: viewModel.firstAddStates.locationText,
-                            budget: viewModel.firstAddStates.budgetText,
-                            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
-                            notes: viewModel.firstAddStates.notesText,
-                            order: weddingItemViewModel.weddingItems.count + 1,
-                            tasks: weddingTasksViewModel.fetchSelectedTasks()
-                        )
-                        
-                        weddingTasksViewModel.deselectAllTasks()
+                        saveAction()
                     }
                     .padding(.bottom)
                 }
@@ -89,5 +78,20 @@ struct AddNewWeddingTaskView: View {
         .wpAlert(
             isPresented: $isAddAlertShown
         )
+    }
+    
+    private func saveAction() {
+        weddingItemViewModel.addWeddingItem(
+            title: viewModel.firstAddStates.titleText,
+            date: viewModel.firstAddStates.weddingDate,
+            location: viewModel.firstAddStates.locationText,
+            budget: viewModel.firstAddStates.budgetText,
+            coverPhoto: viewModel.convertToData(from: viewModel.firstAddStates.selectedCoverImage),
+            notes: viewModel.firstAddStates.notesText,
+            order: weddingItemViewModel.weddingItems.count + 1,
+            tasks: weddingTasksViewModel.fetchSelectedTasks()
+        )
+        
+        weddingTasksViewModel.deselectAllTasks()
     }
 }

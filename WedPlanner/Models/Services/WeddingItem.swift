@@ -12,8 +12,8 @@ struct WeddingItem: Identifiable, Equatable {
     var order: Int
     var guests: [WeddingGuest]
     var contacts: [WeddingContact]
-    var tasks: [WeddingTask] // Добавлен массив задач
-    
+    var tasksData: Data // Изменено с [WeddingTask] на Data
+
     static func == (lhs: WeddingItem, rhs: WeddingItem) -> Bool {
         return lhs.id == rhs.id && lhs.title == rhs.title
     }
@@ -28,7 +28,7 @@ struct WeddingItem: Identifiable, Equatable {
          order: Int,
          guests: [WeddingGuest] = [],
          contacts: [WeddingContact] = [],
-         tasks: [WeddingTask] = []) { // Инициализатор с задачами
+         tasksData: Data = Data()) { // Инициализатор с Data для задач
         self.id = id
         self.title = title
         self.date = date
@@ -39,7 +39,7 @@ struct WeddingItem: Identifiable, Equatable {
         self.order = order
         self.guests = guests
         self.contacts = contacts
-        self.tasks = tasks
+        self.tasksData = tasksData
     }
 
     init(_ object: WeddingItemObject) {
@@ -53,9 +53,10 @@ struct WeddingItem: Identifiable, Equatable {
         self.order = object.order
         self.guests = object.guests.map { WeddingGuest($0) }
         self.contacts = object.contacts.map { WeddingContact($0) }
-        self.tasks = object.tasks.map { WeddingTask($0) } // Преобразование задач
+        self.tasksData = object.tasksData // Преобразование задач из Data
     }
 }
+
 
 class WeddingItemObject: Object, Identifiable {
     @Persisted(primaryKey: true) var id: UUID
@@ -68,7 +69,7 @@ class WeddingItemObject: Object, Identifiable {
     @Persisted var order: Int
     @Persisted var guests = List<WeddingGuestObject>()
     @Persisted var contacts = List<WeddingContactObject>()
-    @Persisted var tasks = List<WeddingTaskObject>() // Добавлен список задач
+    @Persisted var tasksData: Data = Data() // Хранение задач как Data
 
     convenience init(_ weddingItem: WeddingItem) {
         self.init()
@@ -82,6 +83,7 @@ class WeddingItemObject: Object, Identifiable {
         self.order = weddingItem.order
         self.guests.append(objectsIn: weddingItem.guests.map { WeddingGuestObject($0) })
         self.contacts.append(objectsIn: weddingItem.contacts.map { WeddingContactObject($0) })
-        self.tasks.append(objectsIn: weddingItem.tasks.map { WeddingTaskObject($0) }) // Преобразование задач
+        self.tasksData = weddingItem.tasksData // Сохранение задач как Data
     }
 }
+

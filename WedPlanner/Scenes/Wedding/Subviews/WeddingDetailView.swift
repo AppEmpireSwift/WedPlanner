@@ -8,17 +8,22 @@ struct WeddingDetailView: View {
     
     @Binding var weddingModel: WeddingItem
     
+    // Десериализованные задач
+    private var deserializedTasks: [WeddingTask] {
+        deserializeTasks(from: weddingModel.tasksData) ?? []
+    }
+    
     private var totalSpended: Double {
-        let tasksWithValues = weddingModel.tasks.filter {$0.isTaskTypeStandart == false}
+        let tasksWithValues = deserializedTasks.filter { !$0.isTaskTypeStandart }
         return tasksWithValues.reduce(0) { (result, task) in
-            Double(task.spendText) ?? 0
+            result + (Double(task.spendText) ?? 0)
         }
     }
     
     private var totalAmount: Double {
-        let tasksWithValues = weddingModel.tasks.filter {$0.isTaskTypeStandart == false}
+        let tasksWithValues = deserializedTasks.filter { !$0.isTaskTypeStandart }
         return tasksWithValues.reduce(0) { (result, task) in
-            Double(task.totalText) ?? 0
+            result + (Double(task.totalText) ?? 0)
         }
     }
     
@@ -40,11 +45,12 @@ struct WeddingDetailView: View {
                     type: .backTitleTitledButton,
                     title: "Wedding Details",
                     rightBtnTitle: "Edit",
-                    isRightBtnEnabled: true) {
-                        withAnimation(.snappy) {
-                            isEditShown.toggle()
-                        }
+                    isRightBtnEnabled: true
+                ) {
+                    withAnimation(.snappy) {
+                        isEditShown.toggle()
                     }
+                }
                 
                 LineSeparaterView()
                 
@@ -116,34 +122,34 @@ struct WeddingDetailView: View {
                 GuestListView(weddingModel: $weddingModel)
                     .environmentObject(weddingItemViewModel)
             } label: {
-            RoundedRectangle(cornerRadius: 12)
-                .frame(height: 65)
-                .foregroundColor(.lightBejie)
-                .overlay {
-                    HStack {
-                        VStack(alignment: .leading ,spacing: 0) {
-                            WPTextView(
-                                text: String(weddingModel.guests.count),
-                                color: .standartDarkText,
-                                size: 25,
-                                weight: .semibold
-                            )
+                RoundedRectangle(cornerRadius: 12)
+                    .frame(height: 65)
+                    .foregroundColor(.lightBejie)
+                    .overlay {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 0) {
+                                WPTextView(
+                                    text: String(weddingModel.guests.count),
+                                    color: .standartDarkText,
+                                    size: 25,
+                                    weight: .semibold
+                                )
+                                
+                                WPTextView(
+                                    text: "Guests",
+                                    color: .mainBG,
+                                    size: 15,
+                                    weight: .semibold
+                                )
+                            }
                             
-                            WPTextView(
-                                text: "Guests",
-                                color: .mainBG,
-                                size: 15,
-                                weight: .semibold
-                            )
+                            Spacer()
+                            
+                            Image("ChevRight")
                         }
-                        
-                        Spacer()
-                        
-                        Image("ChevRight")
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
                     }
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 10)
-                }
             }
         }
     }
@@ -278,11 +284,17 @@ struct WeddingDetailView: View {
             )
             
             VStack {
-                ForEach(weddingModel.tasks) { taskModel in
+                ForEach(deserializedTasks) { taskModel in
                     WPTaskSelectionView(model: taskModel)
                         .disabled(true)
                 }
             }
         }
+    }
+    
+    // Приватные методы для сериализации/десериализации
+    private func deserializeTasks(from data: Data) -> [WeddingTask]? {
+        let decoder = JSONDecoder()
+        return try? decoder.decode([WeddingTask].self, from: data)
     }
 }

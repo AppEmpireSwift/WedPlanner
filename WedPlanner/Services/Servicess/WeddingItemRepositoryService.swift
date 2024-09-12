@@ -25,8 +25,6 @@ protocol WeddingItemRepositoryProtocol: AnyObject {
 }
 
 
-import Foundation
-
 final class WeddingItemRepositoryService: WeddingItemRepositoryProtocol {
     private let database: DBManagerProtocol
     
@@ -110,26 +108,83 @@ final class WeddingItemRepositoryService: WeddingItemRepositoryProtocol {
         }
     }
 
-    // Добавление задачи в свадьбу
+//    // Добавление задачи в свадьбу
+//    func addTask(_ task: WeddingTask, to weddingItem: WeddingItem) throws {
+//        guard var item = try readBy(id: weddingItem.id) else { return }
+//        item.tasks.append(task)
+//        try updateWeddingItem(item)
+//    }
+//    
+//    // Удаление задачи из свадьбы
+//    func removeTask(_ task: WeddingTask, from weddingItem: WeddingItem) throws {
+//        guard var item = try readBy(id: weddingItem.id) else { return }
+//        item.tasks.removeAll { $0.id == task.id }
+//        try updateWeddingItem(item)
+//    }
+//    
+//    // Обновление задачи в свадьбе
+//    func updateTask(_ task: WeddingTask, in weddingItem: WeddingItem) throws {
+//        guard var item = try readBy(id: weddingItem.id) else { return }
+//        if let index = item.tasks.firstIndex(where: { $0.id == task.id }) {
+//            item.tasks[index] = task
+//            try updateWeddingItem(item)
+//        }
+//    }
+    
     func addTask(_ task: WeddingTask, to weddingItem: WeddingItem) throws {
-        guard var item = try readBy(id: weddingItem.id) else { return }
-        item.tasks.append(task)
-        try updateWeddingItem(item)
-    }
-    
-    // Удаление задачи из свадьбы
-    func removeTask(_ task: WeddingTask, from weddingItem: WeddingItem) throws {
-        guard var item = try readBy(id: weddingItem.id) else { return }
-        item.tasks.removeAll { $0.id == task.id }
-        try updateWeddingItem(item)
-    }
-    
-    // Обновление задачи в свадьбе
-    func updateTask(_ task: WeddingTask, in weddingItem: WeddingItem) throws {
-        guard var item = try readBy(id: weddingItem.id) else { return }
-        if let index = item.tasks.firstIndex(where: { $0.id == task.id }) {
-            item.tasks[index] = task
+            guard var item = try readBy(id: weddingItem.id) else { return }
+            
+            // Десериализуем существующие задачи
+            var tasks = deserializeTasks(from: item.tasksData) ?? []
+            
+            // Добавляем новую задачу
+            tasks.append(task)
+            
+            // Сериализуем обратно и обновляем объект
+            item.tasksData = serializeTasks(tasks) ?? Data()
             try updateWeddingItem(item)
         }
+        
+        // Удаление задачи из свадьбы
+        func removeTask(_ task: WeddingTask, from weddingItem: WeddingItem) throws {
+            guard var item = try readBy(id: weddingItem.id) else { return }
+            
+            // Десериализуем существующие задачи
+            var tasks = deserializeTasks(from: item.tasksData) ?? []
+            
+            // Удаляем задачу по ID
+            tasks.removeAll { $0.id == task.id }
+            
+            // Сериализуем обратно и обновляем объект
+            item.tasksData = serializeTasks(tasks) ?? Data()
+            try updateWeddingItem(item)
+        }
+        
+        // Обновление задачи в свадьбе
+        func updateTask(_ task: WeddingTask, in weddingItem: WeddingItem) throws {
+            guard var item = try readBy(id: weddingItem.id) else { return }
+            
+            // Десериализуем существующие задачи
+            var tasks = deserializeTasks(from: item.tasksData) ?? []
+            
+            // Находим индекс задачи и обновляем её
+            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+                tasks[index] = task
+            }
+            
+            // Сериализуем обратно и обновляем объект
+            item.tasksData = serializeTasks(tasks) ?? Data()
+            try updateWeddingItem(item)
+        }
+    
+    func serializeTasks(_ tasks: [WeddingTask]) -> Data? {
+        let encoder = JSONEncoder()
+        return try? encoder.encode(tasks)
+    }
+
+    // Функция для десериализации Data обратно в массив WeddingTask
+    func deserializeTasks(from data: Data) -> [WeddingTask]? {
+        let decoder = JSONDecoder()
+        return try? decoder.decode([WeddingTask].self, from: data)
     }
 }
