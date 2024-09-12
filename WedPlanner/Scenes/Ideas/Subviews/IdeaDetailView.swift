@@ -48,8 +48,8 @@ struct IdeaDetailView: View {
                                                 .resizable()
                                                 .frame(width: 40, height: 50)
                                         })
-                                        .opacity(currentImgIndex == 1 ? 1 : 0)
-                                        
+                                        .opacity((currentImgIndex > 1 && images.count > 1) ? 1 : 0) // Измененное условие
+
                                         Button(action: {
                                             chevronRightAction()
                                         }, label: {
@@ -57,9 +57,9 @@ struct IdeaDetailView: View {
                                                 .resizable()
                                                 .frame(width: 40, height: 50)
                                         })
-                                        .opacity(currentImgIndex == images.count ? 1 : 0)
+                                        .opacity((currentImgIndex < images.count && images.count > 1) ? 1 : 0) // Измененное условие
                                     }
-                                    .foregroundColor(images.count <= 1 ? .clear : .mainBG.opacity(0.5))
+                                    .foregroundColor(images.count <= 1 ? .clear : .mainBG.opacity(0.5)) // Оставляем без изменений
                                     
                                     imageCounterView(current: currentImgIndex, total: images.count)
                                         .frame(maxWidth: .infinity, alignment: .trailing)
@@ -80,6 +80,10 @@ struct IdeaDetailView: View {
                     isEditViewShown.toggle()
                 }
             }
+            .background(
+                Color.white.opacity(0.4)
+                    .padding(.horizontal, 12)
+            )
             .padding(.top, 65)
         }
         .ignoresSafeArea()

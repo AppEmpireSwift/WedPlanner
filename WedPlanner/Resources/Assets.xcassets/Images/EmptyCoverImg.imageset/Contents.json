@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Дизайн без названия.jpg",
+      "filename" : "timthumb.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Дизайн без названия@2x.jpg",
+      "filename" : "timthumb@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Дизайн без названия@3x.jpg",
+      "filename" : "timthumb@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

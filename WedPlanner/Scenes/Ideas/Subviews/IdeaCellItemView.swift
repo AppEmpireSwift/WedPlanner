@@ -19,14 +19,10 @@ struct IdeaCellItemView: View {
                     .resizable()
                     .frame(maxWidth: .infinity, maxHeight: 188.5)
                     .cornerRadius(12)
-                
-                Button(action: {
-                    viewModel.toggleFavorite(idea)
-                }) {
-                    Image(idea.isFavorite ? "IdeaCellActiveLike" : "NavLikeUnactive")
-                        .foregroundColor(.accentColor)
-                        .padding(8)
-                }
+            
+                Image(idea.isFavorite ? "IdeaCellActiveLike" : "NavLikeUnactive")
+                    .foregroundColor(.accentColor)
+                    .padding(8)
                 .padding(.trailing, 12)
                 .padding(.top, 12)
             }
