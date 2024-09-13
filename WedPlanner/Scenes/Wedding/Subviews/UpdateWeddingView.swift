@@ -29,9 +29,7 @@ struct UpdateWeddingView: View {
             Color.mainBG.ignoresSafeArea()
             
             VStack(spacing: 16) {
-                SubNavBarView(type: .backTitleTitledButton, title: "Update Wedding", rightBtnTitle: "Add Task") {
-                    // Ваш код для добавления новой задачи
-                }
+                SubNavBarView(type: .backAndTitle, title: "Update Wedding") 
                 
                 LineSeparaterView()
                 
