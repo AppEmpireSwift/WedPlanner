@@ -80,6 +80,11 @@ struct AddNewWeddingTaskView: View {
         .wpAlert(
             isPresented: $isAddAlertShown
         )
+        .onChange(of: isAddAlertShown) { bool in
+            if !bool {
+                weddingTasksViewModel.fetchAllTasks()
+            }
+        }
     }
     
     private func saveAction() {

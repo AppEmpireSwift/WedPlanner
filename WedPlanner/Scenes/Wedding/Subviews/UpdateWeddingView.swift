@@ -1,123 +1,3 @@
-//import SwiftUI
-//
-//struct UpdateWeddingView: View {
-//    @Environment(\.dismiss) var dismiss
-//    @EnvironmentObject var viewModel: WeddingItemsViewModel
-//    @EnvironmentObject var taskViewModel: WeddingTasksViewModel
-//    var weddingItem: WeddingItem
-//    
-//    @State private var titleText: String
-//    @State private var locationText: String
-//    @State private var budgetText: String
-//    @State private var selectedImage: UIImage?
-//    @State private var notesText: String
-//    @State private var selectedDate: Date
-//    @State private var allExistingTasks: [WeddingTask] = []
-//    
-//    init(weddingItem: WeddingItem) {
-//        self.weddingItem = weddingItem
-//        _titleText = State(initialValue: weddingItem.title)
-//        _locationText = State(initialValue: weddingItem.location)
-//        _budgetText = State(initialValue: weddingItem.budget)
-//        _selectedImage = State(initialValue: UIImage(data: weddingItem.coverPhoto))
-//        _notesText = State(initialValue: weddingItem.notes)
-//        _selectedDate = State(initialValue: weddingItem.date)
-//    }
-//    
-//    var body: some View {
-//        ZStack(alignment: .top) {
-//            Color.mainBG.ignoresSafeArea()
-//            
-//            VStack(spacing: 16) {
-//                SubNavBarView(type: .backTitleTitledButton, title: "Update Wedding", rightBtnTitle: "Add Task") {
-//                    
-//                }
-//                
-//                LineSeparaterView()
-//                
-//                VStack(spacing: 16) {
-//                    ScrollView(showsIndicators: false) {
-//                        VStack {
-//                            CreateWeddingContentView(
-//                                titleText: $titleText,
-//                                locationText: $locationText,
-//                                budgetText: $budgetText,
-//                                selectedImg: $selectedImage,
-//                                notesText: $notesText,
-//                                selectedDate: $selectedDate
-//                            )
-//                        }
-//                        .padding(.bottom)
-//                        
-//                        VStack {
-//                            WPTextView(
-//                                text: "Wedding Tasks",
-//                                color: .standartDarkText,
-//                                size: 20,
-//                                weight: .semibold
-//                            )
-//                            .padding(.bottom, 20)
-//                            
-//                            ForEach(allExistingTasks) { wedTask in
-//                                WPTaskSelectionView(model: wedTask)
-//                                    .environmentObject(taskViewModel)
-//                                    .swipeActions {
-//                                        if wedTask.isTaskCanBeDeleted {
-//                                            Button(action: {
-//                                                taskViewModel.deleteTask(wedTask)
-//                                            }, label: {
-//                                                Text("Delete")
-//                                            })
-//                                        }
-//                                    }
-//                                    .listRowBackground(Color.clear)
-//                                    .listRowSeparator(.hidden)
-//                            }
-//                        }
-//                        .padding(.bottom)
-//                        
-//                        
-//                        WPButtonView(title: "Update & Close") {
-//                            viewModel.updateWeddingItem(
-//                                viewModel.weddingItems.first(where: { dbModel in
-//                                    dbModel.id == weddingItem.id
-//                                })!,
-//                                title: titleText,
-//                                date: selectedDate,
-//                                location: locationText,
-//                                budget: budgetText,
-//                                coverPhoto: convertToData(),
-//                                notes: notesText,
-//                                order: weddingItem.order
-//                            )
-//                            
-//                            dismiss.callAsFunction()
-//                        }
-//                        .frame(height: 50)
-//                        
-//                    }
-//                    .padding(.horizontal, hPaddings)
-//                }
-//            }
-//        }
-//        .onAppear(perform: {
-//            getAllTasks()
-//        })
-//    }
-//    
-//    private func getAllTasks() {
-//        allExistingTasks = taskViewModel.tasks
-//    }
-//    
-//    func convertToData() -> Data {
-//        if let img = selectedImage {
-//            if let data = img.jpegData(compressionQuality: 1) {
-//                return data
-//            }
-//        }
-//        return Data()
-//    }
-//}
 import SwiftUI
 
 struct UpdateWeddingView: View {
@@ -178,9 +58,24 @@ struct UpdateWeddingView: View {
                             )
                             .padding(.bottom, 20)
                             
-                            ForEach(allExistingTasks) { wedTask in
+                            ForEach($allExistingTasks) { $wedTask in
                                 WPTaskSelectionView(model: wedTask)
                                     .environmentObject(taskViewModel)
+                                    .onChange(of: wedTask.isSelected) { newValue in
+                                        if let index = taskViewModel.tasks.firstIndex(where: { $0.id == wedTask.id }) {
+                                            taskViewModel.tasks[index].isSelected = newValue
+                                        }
+                                    }
+                                    .onChange(of: wedTask.spendText) { newValue in
+                                        if let index = taskViewModel.tasks.firstIndex(where: { $0.id == wedTask.id }) {
+                                            taskViewModel.tasks[index].spendText = newValue
+                                        }
+                                    }
+                                    .onChange(of: wedTask.totalText) { newValue in
+                                        if let index = taskViewModel.tasks.firstIndex(where: { $0.id == wedTask.id }) {
+                                            taskViewModel.tasks[index].totalText = newValue
+                                        }
+                                    }
                                     .swipeActions {
                                         if wedTask.isTaskCanBeDeleted {
                                             Button(action: {
@@ -210,6 +105,9 @@ struct UpdateWeddingView: View {
         .onAppear(perform: {
             getAllTasks()
         })
+        .onDisappear {
+            taskViewModel.deselectAllTasks()
+        }
     }
     
     private func getAllTasks() {
@@ -227,12 +125,39 @@ struct UpdateWeddingView: View {
                     allExistingTasks[i].totalText = savedTask.totalText
                 }
             }
+            taskViewModel.tasks = allExistingTasks
         }
     }
     
     private func saveWeddingChanges() {
-        let selectedTasks = allExistingTasks.filter { $0.isSelected }
+        // Извлекаем выбранные задачи
+        let selectedTasks = taskViewModel.tasks.filter { $0.isSelected }
         
+        // Получаем старые сохранённые задачи
+        var savedTasks: [WeddingTask] = []
+        if let oldTasks = try? JSONDecoder().decode([WeddingTask].self, from: weddingItem.tasksData) {
+            savedTasks = oldTasks
+        }
+        
+        // Объединяем старые задачи с новыми выбранными
+        var updatedTasks: [WeddingTask] = []
+        
+        for task in savedTasks {
+            if let updatedTask = selectedTasks.first(where: { $0.id == task.id }) {
+                // Если задача уже есть в выбранных, обновляем её состояние
+                updatedTasks.append(updatedTask)
+            } else {
+                // Если задача не выбрана в новом списке, оставляем её состояние
+                updatedTasks.append(task)
+            }
+        }
+        
+        // Добавляем новые задачи, которые ещё не были сохранены
+        for task in selectedTasks where !updatedTasks.contains(where: { $0.id == task.id }) {
+            updatedTasks.append(task)
+        }
+        
+        // Обновляем свадебный элемент с объединенными задачами
         viewModel.updateWeddingItem(
             weddingItem,
             title: titleText,
@@ -244,8 +169,11 @@ struct UpdateWeddingView: View {
             order: weddingItem.order,
             guests: weddingItem.guests,
             contacts: weddingItem.contacts,
-            tasks: selectedTasks // Сохраняем задачи
+            tasks: updatedTasks // Сохраняем объединённый список задач
         )
+        
+        // После сохранения изменений сбрасываем все задачи
+        taskViewModel.deselectAllTasks()
     }
     
     func convertToData() -> Data {
