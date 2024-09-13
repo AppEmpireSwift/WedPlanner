@@ -137,3 +137,4 @@ final class WeddingTasksViewModel: ObservableObject {
         fetchAllTasks()
     }
 }
+

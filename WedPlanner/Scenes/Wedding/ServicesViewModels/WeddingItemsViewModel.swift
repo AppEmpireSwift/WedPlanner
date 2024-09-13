@@ -11,6 +11,21 @@ final class WeddingItemsViewModel: ObservableObject {
         fetchAllWeddingItems()
     }
     
+    // Приватные методы для сериализации и десериализации задач
+    private func serializeTasks(_ tasks: [WeddingTask]) -> Data? {
+        let encoder = JSONEncoder()
+        return try? encoder.encode(tasks)
+    }
+    
+    private func deserializeTasks(from data: Data) -> [WeddingTask]? {
+        let decoder = JSONDecoder()
+        return try? decoder.decode([WeddingTask].self, from: data)
+    }
+}
+
+// MARK: - WeddingItem CRUD Section
+
+extension WeddingItemsViewModel {
     func fetchAllWeddingItems() {
         do {
             weddingItems = try repository.fetchAll().sorted(by: { $0.order < $1.order })
@@ -83,8 +98,11 @@ final class WeddingItemsViewModel: ObservableObject {
             print("Ошибка при изменении порядка элементов свадьбы: \(error.localizedDescription)")
         }
     }
-    
-    // Методы для управления гостями
+}
+
+// MARK: - WeddingGUest CRUD Section
+
+extension WeddingItemsViewModel {
     func addGuest(_ guest: WeddingGuest, to weddingItem: WeddingItem) {
         do {
             try repository.addGuest(guest, to: weddingItem)
@@ -123,8 +141,11 @@ final class WeddingItemsViewModel: ObservableObject {
             print("Ошибка при обновлении порядка гостей: \(error.localizedDescription)")
         }
     }
+}
     
-    // Методы для управления контактами
+// MARK: - WeddingContact CRUD Section
+
+extension WeddingItemsViewModel {
     func addContact(_ contact: WeddingContact, to weddingItem: WeddingItem) {
         do {
             try repository.addContact(contact, to: weddingItem)
@@ -163,8 +184,11 @@ final class WeddingItemsViewModel: ObservableObject {
             print("Ошибка при обновлении порядка контактов: \(error.localizedDescription)")
         }
     }
-    
-    // Методы для управления задачами
+}
+
+// MARK: - WeddingTask CRUD Section
+
+extension WeddingItemsViewModel {
     func addTask(_ task: WeddingTask, to weddingItem: WeddingItem) {
         do {
             var updatedWeddingItem = weddingItem
@@ -207,16 +231,5 @@ final class WeddingItemsViewModel: ObservableObject {
         } catch {
             print("Ошибка при обновлении задачи: \(error.localizedDescription)")
         }
-    }
-    
-    // Приватные методы для сериализации и десериализации задач
-    private func serializeTasks(_ tasks: [WeddingTask]) -> Data? {
-        let encoder = JSONEncoder()
-        return try? encoder.encode(tasks)
-    }
-    
-    private func deserializeTasks(from data: Data) -> [WeddingTask]? {
-        let decoder = JSONDecoder()
-        return try? decoder.decode([WeddingTask].self, from: data)
     }
 }

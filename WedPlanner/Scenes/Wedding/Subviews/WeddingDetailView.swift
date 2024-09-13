@@ -8,7 +8,6 @@ struct WeddingDetailView: View {
     
     @Binding var weddingModel: WeddingItem
     
-    // Десериализованные задач
     private var deserializedTasks: [WeddingTask] {
         deserializeTasks(from: weddingModel.tasksData) ?? []
     }
@@ -86,7 +85,7 @@ struct WeddingDetailView: View {
         }
         .navigationBarBackButtonHidden()
         .fullScreenCover(isPresented: $isEditShown, content: {
-            UpdateWeddingView(weddingItem: weddingModel)
+            UpdateWeddingView(weddingItem: $weddingModel)
                 .environmentObject(weddingItemViewModel)
                 .environmentObject(weddingTaskViewModel)
         })
@@ -260,7 +259,7 @@ struct WeddingDetailView: View {
                         WPTextView(
                             text: calculatePercentage,
                             color: .standartDarkText,
-                            size: 64,
+                            size: 50,
                             weight: .bold
                         )
                         
