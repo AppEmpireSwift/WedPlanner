@@ -59,7 +59,6 @@ struct CalendarView: View {
                     }
                 }
                 .padding(.horizontal, hPaddings)
-                // Обновление анимации
                 .animation(.snappy, value: selectedDate)
             }
         }

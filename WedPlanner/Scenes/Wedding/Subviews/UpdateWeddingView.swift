@@ -29,7 +29,7 @@ struct UpdateWeddingView: View {
             Color.mainBG.ignoresSafeArea()
             
             VStack(spacing: 16) {
-                SubNavBarView(type: .backAndTitle, title: "Update Wedding") 
+                SubNavBarView(type: .backAndTitle, title: "Update Wedding")
                 
                 LineSeparaterView()
                 
@@ -57,21 +57,21 @@ struct UpdateWeddingView: View {
                             .padding(.bottom, 20)
                             
                             ForEach($allExistingTasks) { $wedTask in
-                                WPTaskSelectionView(model: wedTask)
+                                WPExistingTaskSelectionView(model: $wedTask)
                                     .environmentObject(taskViewModel)
                                     .onChange(of: wedTask.isSelected) { newValue in
-                                        if let index = taskViewModel.tasks.firstIndex(where: { $0.id == wedTask.id }) {
-                                            taskViewModel.tasks[index].isSelected = newValue
+                                        if let index = allExistingTasks.firstIndex(where: { $0.id == wedTask.id }) {
+                                            allExistingTasks[index].isSelected = newValue
                                         }
                                     }
                                     .onChange(of: wedTask.spendText) { newValue in
-                                        if let index = taskViewModel.tasks.firstIndex(where: { $0.id == wedTask.id }) {
-                                            taskViewModel.tasks[index].spendText = newValue
+                                        if let index = allExistingTasks.firstIndex(where: { $0.id == wedTask.id }) {
+                                            allExistingTasks[index].spendText = newValue
                                         }
                                     }
                                     .onChange(of: wedTask.totalText) { newValue in
-                                        if let index = taskViewModel.tasks.firstIndex(where: { $0.id == wedTask.id }) {
-                                            taskViewModel.tasks[index].totalText = newValue
+                                        if let index = allExistingTasks.firstIndex(where: { $0.id == wedTask.id }) {
+                                            allExistingTasks[index].totalText = newValue
                                         }
                                     }
                                     .swipeActions {
@@ -109,53 +109,24 @@ struct UpdateWeddingView: View {
     }
     
     private func getAllTasks() {
-        // Извлекаем все задачи из общего репозитория
+        taskViewModel.fetchAllTasks()
         allExistingTasks = taskViewModel.tasks
-
-        // Декодируем сохранённые задачи из tasksData в модели свадьбы
+        
         if let savedTasks = try? JSONDecoder().decode([WeddingTask].self, from: weddingItem.tasksData) {
-            // Обновляем задачи в общем списке задач
             for i in 0..<allExistingTasks.count {
                 if let savedTask = savedTasks.first(where: { $0.id == allExistingTasks[i].id }) {
-                    // Обновляем параметры задачи в общем списке задач
                     allExistingTasks[i].isSelected = savedTask.isSelected
                     allExistingTasks[i].spendText = savedTask.spendText
                     allExistingTasks[i].totalText = savedTask.totalText
                 }
             }
-            taskViewModel.tasks = allExistingTasks
+            taskViewModel.updateNewTaskStorage(with: allExistingTasks)
         }
     }
     
     private func saveWeddingChanges() {
-        // Извлекаем выбранные задачи
-        let selectedTasks = taskViewModel.tasks.filter { $0.isSelected }
+        let selectedTasks = allExistingTasks.filter { $0.isSelected }
         
-        // Получаем старые сохранённые задачи
-        var savedTasks: [WeddingTask] = []
-        if let oldTasks = try? JSONDecoder().decode([WeddingTask].self, from: weddingItem.tasksData) {
-            savedTasks = oldTasks
-        }
-        
-        // Объединяем старые задачи с новыми выбранными
-        var updatedTasks: [WeddingTask] = []
-        
-        for task in savedTasks {
-            if let updatedTask = selectedTasks.first(where: { $0.id == task.id }) {
-                // Если задача уже есть в выбранных, обновляем её состояние
-                updatedTasks.append(updatedTask)
-            } else {
-                // Если задача не выбрана в новом списке, оставляем её состояние
-                updatedTasks.append(task)
-            }
-        }
-        
-        // Добавляем новые задачи, которые ещё не были сохранены
-        for task in selectedTasks where !updatedTasks.contains(where: { $0.id == task.id }) {
-            updatedTasks.append(task)
-        }
-        
-        // Обновляем свадебный элемент с объединенными задачами
         viewModel.updateWeddingItem(
             weddingItem,
             title: titleText,
@@ -167,10 +138,9 @@ struct UpdateWeddingView: View {
             order: weddingItem.order,
             guests: weddingItem.guests,
             contacts: weddingItem.contacts,
-            tasks: updatedTasks // Сохраняем объединённый список задач
+            tasks: selectedTasks
         )
         
-        // После сохранения изменений сбрасываем все задачи
         taskViewModel.deselectAllTasks()
     }
     
@@ -181,5 +151,71 @@ struct UpdateWeddingView: View {
             }
         }
         return Data()
+    }
+}
+
+fileprivate struct WPExistingTaskSelectionView: View {
+    @Binding var model: WeddingTask
+    
+    var body: some View {
+        VStack(spacing: 14.5) {
+            HStack(spacing: 17) {
+                Image(model.isSelected ? "SelectedItem" : "UnselectedItem")
+
+                WPTextView(
+                    text: model.isTaskTypeStandart ? model.name : "\(model.name) ($)",
+                    color: .standartDarkText,
+                    size: 15,
+                    weight: .regular
+                )
+
+                Spacer()
+            }
+            .onTapGesture {
+                withAnimation(.easeInOut(duration: 0.5)) {
+                    model.isSelected.toggle()
+                }
+            }
+
+            if !model.isTaskTypeStandart && model.isSelected {
+                ContentFieldView(
+                    spentText: $model.spendText,
+                    totalText: $model.totalText
+                )
+            }
+        }
+        .animation(.easeInOut(duration: 0.5), value: model.isSelected)
+    }
+}
+
+fileprivate struct ContentFieldView: View {
+    @Binding var spentText: String
+    @Binding var totalText: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            vStackView(fieldText: $spentText, placeHolder: "0", titleText: "Amount Spent")
+            vStackView(fieldText: $totalText, placeHolder: "1.000", titleText: "Total Budget")
+        }
+        .padding(.leading, 36)
+    }
+
+    @ViewBuilder
+    private func vStackView(fieldText: Binding<String>, placeHolder: String, titleText: String) -> some View {
+        VStack(spacing: 5) {
+            WPTextField(
+                text: fieldText,
+                type: .bujet,
+                placeholder: placeHolder
+            )
+
+            WPTextView(
+                text: titleText,
+                color: .lbSecendary,
+                size: 13,
+                weight: .regular
+            )
+            .padding(.leading)
+        }
     }
 }

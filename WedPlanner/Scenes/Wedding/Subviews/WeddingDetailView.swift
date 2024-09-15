@@ -291,7 +291,6 @@ struct WeddingDetailView: View {
         }
     }
     
-    // Приватные методы для сериализации/десериализации
     private func deserializeTasks(from data: Data) -> [WeddingTask]? {
         let decoder = JSONDecoder()
         return try? decoder.decode([WeddingTask].self, from: data)

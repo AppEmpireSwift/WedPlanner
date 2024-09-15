@@ -3,12 +3,14 @@ import Combine
 
 final class WeddingTasksViewModel: ObservableObject {
     @Published var tasks: [WeddingTask] = []
+    @Published var newTaskStorage: [WeddingTask] = []
     
     private let repository: WeddingTaskRepositoryProtocol
     
     init(repository: WeddingTaskRepositoryProtocol = WeddingTaskRepositoryService()) {
         self.repository = repository
         fetchAllTasks()
+        fetchNewTaskStorage()
     }
     
     func fetchAllTasks() {
@@ -20,6 +22,10 @@ final class WeddingTasksViewModel: ObservableObject {
         } catch {
             print("Ошибка при получении задач: \(error.localizedDescription)")
         }
+    }
+    
+    func fetchNewTaskStorage() {
+        newTaskStorage = tasks
     }
     
     private func addDefaultTasks() {
@@ -91,6 +97,22 @@ final class WeddingTasksViewModel: ObservableObject {
             print("Ошибка при обновлении задачи: \(error.localizedDescription)")
         }
     }
+    
+    func updateTask(_ task: WeddingTask) {
+        do {
+            if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+                tasks[index] = task
+                try repository.updateTask(task)
+            }
+            fetchNewTaskStorage()
+        } catch {
+            print("Ошибка при обновлении задачи: \(error.localizedDescription)")
+        }
+    }
+    
+    func updateNewTaskStorage(with tasks: [WeddingTask]) {
+         newTaskStorage = tasks
+     }
     
     func deleteTask(_ task: WeddingTask) {
         do {
