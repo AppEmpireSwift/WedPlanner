@@ -56,23 +56,21 @@ struct SettingsView: View {
         .sheet(isPresented: $states.isContentShareViewShown) {
             WPShareView(activityItems: ["https://apps.apple.com/app/id6535686112"])
         }
-        //TODO: - добавить почту разработчика
         .alert(
             "Unable to open the mail application",
             isPresented: $states.isErrorContactAlertShown,
             actions: {},
             message: {
                 WPTextView(
-                    text: "To avoid this error, you can change the default application in your device settings for sending emails. Or contact us at this email address: ",
+                    text: "To avoid this error, you can change the default application in your device settings for sending emails. Or contact us at this email address: ismaellotan31@outlook.com",
                     color: .standartDarkText,
                     size: 12,
                     weight: .regular
                 )
             }
         )
-        //TODO: - добавить почту разработчика
         .alert("Oops, there was an failure", isPresented: $states.isErrorRateAlertShown, actions: {}) {
-            Text("Errors occurred when trying to navigate to the application page. Please try again later. In case of repeated errors, please contact us at: ")
+            Text("Errors occurred when trying to navigate to the application page. Please try again later. In case of repeated errors, please contact us at: ismaellotan31@outlook.com")
         }
         .alert("Application version", isPresented: $states.isVersionSHown) {
             Button("OK", role: .cancel) { }
@@ -152,9 +150,8 @@ struct SettingsView: View {
         }
     }
     
-    //TODO: - добавить почту разработчика
     private func helpAction() {
-        if let url = URL(string: "mailto: "),
+        if let url = URL(string: "mailto: ismaellotan31@outlook.com"),
            UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         } else {
