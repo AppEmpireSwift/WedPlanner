@@ -46,6 +46,7 @@
 		5732D9C82C7F125200ACD609 /* WedPlannerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */; };
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
+		5741B0082CBFFE4500988BA5 /* codemagic.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 5741B0072CBFFE4500988BA5 /* codemagic.yaml */; };
 		5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5763A51B2C7F25A400B36190 /* Colors.xcassets */; };
 		5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */; };
 		5763A5222C7F500300B36190 /* WPButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5212C7F500300B36190 /* WPButtonView.swift */; };
@@ -128,6 +129,7 @@
 		5732D9C72C7F125200ACD609 /* WedPlannerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WedPlannerApp.swift; sourceTree = "<group>"; };
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5741B0072CBFFE4500988BA5 /* codemagic.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codemagic.yaml; sourceTree = "<group>"; };
 		5763A51B2C7F25A400B36190 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardinItemModel.swift; sourceTree = "<group>"; };
 		5763A5212C7F500300B36190 /* WPButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPButtonView.swift; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		5732D9BB2C7F125200ACD609 = {
 			isa = PBXGroup;
 			children = (
+				5741B0072CBFFE4500988BA5 /* codemagic.yaml */,
 				5732D9C62C7F125200ACD609 /* WedPlanner */,
 				5732D9C52C7F125200ACD609 /* Products */,
 				A98AEBEE0D5F99A9F4F53114 /* Pods */,
@@ -623,6 +626,7 @@
 				5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */,
 				5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */,
 				5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */,
+				5741B0082CBFFE4500988BA5 /* codemagic.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -888,6 +892,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WedPlanner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WedPlanner;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -925,6 +930,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WedPlanner/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WedPlanner;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
