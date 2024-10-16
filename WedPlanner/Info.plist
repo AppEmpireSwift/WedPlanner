@@ -8,5 +8,7 @@
 	<string>WedPlanner use speech recognition to convert your voice input into text for a smoother app experience.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>WedPlanner requests access to your file library so that you can upload and set cover images to your posts.</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 </dict>
 </plist>

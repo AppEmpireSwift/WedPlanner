@@ -47,6 +47,7 @@
 		5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CB2C7F125300ACD609 /* Assets.xcassets */; };
 		5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */; };
 		5741B0082CBFFE4500988BA5 /* codemagic.yaml in Resources */ = {isa = PBXBuildFile; fileRef = 5741B0072CBFFE4500988BA5 /* codemagic.yaml */; };
+		5741B00B2CC0000800988BA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5741B00A2CC0000800988BA5 /* LaunchScreen.storyboard */; };
 		5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5763A51B2C7F25A400B36190 /* Colors.xcassets */; };
 		5763A51F2C7F4E8E00B36190 /* OnboardinItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */; };
 		5763A5222C7F500300B36190 /* WPButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763A5212C7F500300B36190 /* WPButtonView.swift */; };
@@ -130,6 +131,7 @@
 		5732D9CB2C7F125300ACD609 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5732D9CE2C7F125300ACD609 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		5741B0072CBFFE4500988BA5 /* codemagic.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codemagic.yaml; sourceTree = "<group>"; };
+		5741B00A2CC0000800988BA5 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5763A51B2C7F25A400B36190 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		5763A51E2C7F4E8E00B36190 /* OnboardinItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardinItemModel.swift; sourceTree = "<group>"; };
 		5763A5212C7F500300B36190 /* WPButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WPButtonView.swift; sourceTree = "<group>"; };
@@ -322,6 +324,7 @@
 		5732D9D92C7F12A100ACD609 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				5741B0092CBFFFD400988BA5 /* Launch */,
 				5763A51D2C7F4E5A00B36190 /* Onboarding */,
 				5763A5492C80635600B36190 /* Tabbar */,
 				5763A54A2C80638500B36190 /* Wedding */,
@@ -355,6 +358,14 @@
 				5763A51B2C7F25A400B36190 /* Colors.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		5741B0092CBFFFD400988BA5 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				5741B00A2CC0000800988BA5 /* LaunchScreen.storyboard */,
+			);
+			path = Launch;
 			sourceTree = "<group>";
 		};
 		5763A51D2C7F4E5A00B36190 /* Onboarding */ = {
@@ -626,6 +637,7 @@
 				5763A51C2C7F25A400B36190 /* Colors.xcassets in Resources */,
 				5732D9CF2C7F125300ACD609 /* Preview Assets.xcassets in Resources */,
 				5732D9CC2C7F125300ACD609 /* Assets.xcassets in Resources */,
+				5741B00B2CC0000800988BA5 /* LaunchScreen.storyboard in Resources */,
 				5741B0082CBFFE4500988BA5 /* codemagic.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
