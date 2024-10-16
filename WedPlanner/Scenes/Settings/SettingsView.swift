@@ -52,9 +52,8 @@ struct SettingsView: View {
                 .padding(.horizontal, hPaddings)
             }
         }
-        //TODO: - Поменять ID приложения
         .sheet(isPresented: $states.isContentShareViewShown) {
-            WPShareView(activityItems: ["https://apps.apple.com/app/id6535686112"])
+            WPShareView(activityItems: ["https://apps.apple.com/app/id6736988454"])
         }
         .alert(
             "Unable to open the mail application",
@@ -160,7 +159,7 @@ struct SettingsView: View {
     }
     
     private func rateAction() {
-        let AppID = 6621260599
+        let AppID = 6736988454
         let link = "https://apps.apple.com/app/id\(AppID)?action=write-review"
         if let url = URL(string: link) {
             UIApplication.shared.open(url, options: [:], completionHandler: { success in

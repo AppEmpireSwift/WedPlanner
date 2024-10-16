@@ -1,7 +1,5 @@
 import SwiftUI
 
-//TODO: - Добавить размытие ебаное
-
 struct WeddingItemCellView: View {
     var model: WeddingItem
     
